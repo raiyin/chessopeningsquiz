@@ -4,33 +4,35 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:background="@color/cardview_dark_background">
 
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button_training"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="132dp"
-        android:text="Training"
+        android:text="@string/training"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/my_button" />
 
 
-
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button_quiz"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="game"
+        android:text="@string/game"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_training" />
-
+        app:layout_constraintTop_toBottomOf="@+id/button_training"
+        app:layout_constraintVertical_bias="0.047"
+        android:background="@drawable/my_button" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/button_buy"
@@ -42,6 +44,7 @@
         app:icon="@drawable/ic_buy"
         app:iconPadding="5dp"
         app:iconTint="#f00"
+        android:contentDescription="@string/buy"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -53,6 +56,7 @@
         android:textAllCaps="true"
         app:backgroundTint="#fc0"
         app:icon="@drawable/ic_like"
+        android:contentDescription="@string/like"
         app:iconPadding="5dp"
         app:iconSize="24dp"
         app:iconTint="#f00"
@@ -71,6 +75,7 @@
         app:iconPadding="5dp"
         app:iconSize="24dp"
         app:iconTint="#f00"
+        android:contentDescription="@string/settings"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/button_like"
         app:layout_constraintTop_toTopOf="parent" />
