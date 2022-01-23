@@ -56,6 +56,22 @@ class ExampleUnitTest {
     }
 
     @Test
+    fun pgn_parser_isBenkoAcceptedCorrect() {
+        val parser = PgnParser()
+        val actualResult = parser.parse("1.d4 Nf6 2.c4 c5 3.d5 b5 4.cxb5")
+        val expectedResult: List<List<Square>> =
+            listOf(
+                listOf(Square(1, 3),Square(3, 3)),
+                listOf(Square(7, 6),Square(5, 5)),
+                listOf(Square(1, 2),Square(3, 2)),
+                listOf(Square(6, 2),Square(4, 2)),
+                listOf(Square(3, 3),Square(4, 3)),
+                listOf(Square(6, 1),Square(4, 1)),
+                listOf(Square(3, 2),Square(4, 1)))
+        assertEquals(expectedResult, actualResult)
+    }
+
+    @Test
     fun column_to_digit_isCorrect() {
         val parser = PgnParser()
         var actualResult = parser.columnToDigit('a').toString()

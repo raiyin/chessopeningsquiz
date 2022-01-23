@@ -69,6 +69,18 @@ object BoardState {
         addPiece(ChessPiece(7, 4, Player.BLACK, Chessman.KING, R.drawable.ic_chess_bk))
     }
 
+    fun pop_piece(row: Int, col: Int): ChessPiece
+    {
+        val piece = piecesBox.filter { piece -> piece.row==row && piece.col==col }[0]
+        piecesBox.remove(piece)
+        return piece
+    }
+
+    fun push_piece(piece: ChessPiece)
+    {
+        piecesBox.add(piece)
+    }
+
     private fun getPieceFrom(square: Square): ChessPiece? {
         for (piece in piecesBox) {
             if (piece.col == square.col && piece.row == square.row) {
@@ -583,7 +595,7 @@ object BoardState {
     }
 
     fun movePiece(from: Square, to: Square) {
-        if (BoardState.canMove(from, to)) {
+        if (canMove(from, to)) {
             movePiece(from.row, from.col, to.row, to.col)
         }
     }

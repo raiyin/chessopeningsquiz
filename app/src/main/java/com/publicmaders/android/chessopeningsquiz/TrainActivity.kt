@@ -42,9 +42,13 @@ class TrainActivity : AppCompatActivity(), ChessDelegate {
 
     private fun drawOpening(pgn: String)
     {
-        val from = Square(1,0)
-        val to = Square(3,0)
-        movePiece(from, to)
+        BoardState.reset()
+        trainView.mustDrawMoves = true
+        trainView.openingMoves = pgn
+        // Создаем список матриц ходов.
+        trainView.initMovesPathsFromPgn(pgn)
+        BoardState.reset()
+        trainView.invalidate()
     }
 
     //override fun pieceAt(square: Square): ChessPiece? = ChessGame.pieceAt(square)
@@ -63,7 +67,10 @@ class TrainActivity : AppCompatActivity(), ChessDelegate {
     //    trainView.invalidate()
     //}
     override fun movePiece(from: Square, to: Square) {
-        BoardState.movePiece(from, to)
+        //BoardState.movePiece(from, to)
+
+
+
         //ObjectAnimator.ofFloat(trainView.movingPieceBitmap, "x", 100f).apply {
         //    duration = 2000
         //    start()

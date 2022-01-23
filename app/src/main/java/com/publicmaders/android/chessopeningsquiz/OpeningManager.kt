@@ -8,7 +8,7 @@ class OpeningManager
         openings.add(Opening("Alekhine’s Defense","1.e4 Nf6"))
         openings.add(Opening("Alekhine’s Defense Modern Variation","1.e4 Nf6 2.e5 Nd5 3.d4 d6 4.Nf3"))
         openings.add(Opening("Benko Gambit","1.d4 Nf6 2.c4 c5 3.d5 b5"))
-        openings.add(Opening("Benko Gambit Accepted","1.d4 Nf6 2.c4 c5 3.d5 b5 cxb5"))
+        openings.add(Opening("Benko Gambit Accepted","1.d4 Nf6 2.c4 c5 3.d5 b5 4.cxb5"))
         openings.add(Opening("Benoni Defense","1.e4 Nf6"))
         openings.add(Opening("Benoni Defense Modern Variation","1.d4 Nf6 2.c4 c5 3.d5 e6"))
         openings.add(Opening("Bird’s Opening","1.f4"))

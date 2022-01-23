@@ -48,8 +48,11 @@ class PgnParser {
         if (query[0].isLowerCase()) {
             if (query.contains('x')) {
                 // Взятие.
-                val startSquare = Square(query[1].digitToInt() - 1, columnToDigit(query[0]))
-                val endSquare = Square(query[1].digitToInt() - 1, columnToDigit(query[2]))
+                var startSquare: Square = if(player==Player.WHITE)
+                    Square(query[3].digitToInt() - 2, columnToDigit(query[0]))
+                else
+                    Square(query[3].digitToInt(), columnToDigit(query[0]))
+                val endSquare = Square(query[3].digitToInt() - 1, columnToDigit(query[2]))
                 result.add(startSquare)
                 result.add(endSquare)
             }
