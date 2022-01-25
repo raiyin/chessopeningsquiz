@@ -18,7 +18,7 @@ class OpeningManager
         openings.add(Opening("Budapest Gambit","1.d4 Nf6 2.c4 e5"))
         openings.add(Opening("Budapest Gambit Rubinstein Variation","1.d4 Nf6 2.c4 e5 3.dxe5 Ng4 4.Bf4 Nc6"))
         openings.add(Opening("Catalan Opening","1.d4 Nf6 2.c4 e6 3.g3"))
-        openings.add(Opening("Catalan Opening Open Defense","1.d4 Nf6 2.c4 e6 3.g3 e6 4.Nc3 dxc4 5.Bg2"))
+        openings.add(Opening("Catalan Opening Open Defense","1.d4 Nf6 2.c4 e6 3.g3 d5 4.Bg2 dxc4 5.Qa4+"))
         openings.add(Opening("Caro-Kann Defense","1.e4 c6"))
         openings.add(Opening("Caro-Kann Defense Advance Variation","1.e4 c6 2.e5 Bf5"))
         openings.add(Opening("Colle System","1.d4 d5 2.Nf3 Nf6 3.e3"))

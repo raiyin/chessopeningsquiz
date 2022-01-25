@@ -16,8 +16,8 @@ class TrainView(context: Context?, attrs: AttributeSet?) : View(context, attrs) 
     private var originX = 20f
     private var originY = 200f
     private var cellSide = 130f
-    private val lightColor = Color.parseColor("#EEEEEE")
-    private val darkColor = Color.parseColor("#BBBBBB")
+    private val lightColor = Color.parseColor("#b6ac9d")
+    private val darkColor = Color.parseColor("#70503a")
     var mustDrawMoves = false
     var openingMoves = ""
 
@@ -25,6 +25,7 @@ class TrainView(context: Context?, attrs: AttributeSet?) : View(context, attrs) 
 
     private var animStepIndex = 0
     private var moveIndex = 0
+    private lateinit var curMovingPiece: ChessPiece
 
     private var pathMoveAlong = Path()
     private val imgResIDs = setOf(
@@ -50,7 +51,9 @@ class TrainView(context: Context?, attrs: AttributeSet?) : View(context, attrs) 
     private var fromRow: Int = -1
     private var movingPieceX = -1f
     private var movingPieceY = -1f
-    private lateinit var movesPaths: MutableList<Pair<Int, Path>>
+
+    // Piece resId, move path, start and finish squares.
+    private lateinit var movesPaths: MutableList<Triple<Int, Path, List<Square>>>
 
     var chessDelegate: ChessDelegate? = null
 
@@ -97,7 +100,13 @@ class TrainView(context: Context?, attrs: AttributeSet?) : View(context, attrs) 
             var path = Path()
             path.moveTo(xStart, yStart)
             path.lineTo(xEnd, yEnd)
-            movesPaths.add(Pair(piece.resID, path))
+            movesPaths.add(
+                Triple(
+                    piece.resID,
+                    path,
+                    listOf(Square(move[0].row, move[0].col), Square(move[1].row, move[1].col))
+                )
+            )
 
             BoardState.movePiece(Square(move[0].row, move[0].col), Square(move[1].row, move[1].col))
         }
@@ -108,7 +117,13 @@ class TrainView(context: Context?, attrs: AttributeSet?) : View(context, attrs) 
             moveIndex = 0
             return
         }
-        
+
+        if (animStepIndex == 0) {
+            curMovingPiece = BoardState.pop_piece(
+                movesPaths[moveIndex].third[0].row,
+                movesPaths[moveIndex].third[0].col
+            )
+        }
 
         val mxTransform = Matrix()
         val pm = PathMeasure(movesPaths[moveIndex].second, false)
@@ -121,6 +136,8 @@ class TrainView(context: Context?, attrs: AttributeSet?) : View(context, attrs) 
             animStepIndex++
             invalidate()
         } else {
+            BoardState.push_piece(curMovingPiece)
+            BoardState.movePiece(movesPaths[moveIndex].third[0], movesPaths[moveIndex].third[1])
             animStepIndex = 0
             moveIndex++
             invalidate()

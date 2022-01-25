@@ -6,6 +6,7 @@ import android.graphics.*
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.animation.TranslateAnimation
 import android.widget.*
 import java.io.PrintWriter
@@ -31,50 +32,27 @@ class TrainActivity : AppCompatActivity(), ChessDelegate {
             openingManager.openings
         )
         lvOpening.adapter = adapter
-        lvOpening.setOnItemClickListener { parent, view, position, id -> drawOpening((lvOpening.getItemAtPosition(position) as Opening).pgn)
-            //Toast.makeText(
-            //    this,
-            //    "Clicked item : " + position,
-            //    Toast.LENGTH_SHORT
-            //).show()
+        lvOpening.setOnItemClickListener { parent, view, position, id ->
+            drawOpening((lvOpening.getItemAtPosition(position) as Opening).pgn)
         }
     }
 
-    private fun drawOpening(pgn: String)
-    {
+    private fun drawOpening(pgn: String) {
         BoardState.reset()
         trainView.mustDrawMoves = true
         trainView.openingMoves = pgn
+
         // Создаем список матриц ходов.
         trainView.initMovesPathsFromPgn(pgn)
         BoardState.reset()
         trainView.invalidate()
     }
 
-    //override fun pieceAt(square: Square): ChessPiece? = ChessGame.pieceAt(square)
-    override fun pieceAt(square: Square): ChessPiece?
-    {
+    override fun pieceAt(square: Square): ChessPiece? {
         return BoardState.pieceAt(square)
     }
 
-
-    //override fun movePiece(from: Square, to: Square) {
-    //    ChessGame.movePiece(from, to)
-    //    //ObjectAnimator.ofFloat(trainView.movingPieceBitmap, "x", 100f).apply {
-    //    //    duration = 2000
-    //    //    start()
-    //    //}
-    //    trainView.invalidate()
-    //}
     override fun movePiece(from: Square, to: Square) {
-        //BoardState.movePiece(from, to)
-
-
-
-        //ObjectAnimator.ofFloat(trainView.movingPieceBitmap, "x", 100f).apply {
-        //    duration = 2000
-        //    start()
-        //}
         trainView.invalidate()
     }
 }

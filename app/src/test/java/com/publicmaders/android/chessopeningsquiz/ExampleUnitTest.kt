@@ -72,6 +72,36 @@ class ExampleUnitTest {
     }
 
     @Test
+    fun pgn_parser_isCatalanOpeningOpenDefenseCorrect() {
+        val parser = PgnParser()
+        val actualResult = parser.parse("1.d4 Nf6 2.c4 e6 3.g3 e6 4.Nc3 dxc4 5.Bg2")
+        val expectedResult: List<List<Square>> =
+            listOf(
+                listOf(Square(1, 3),Square(3, 3)),
+                listOf(Square(7, 6),Square(5, 5)),
+                listOf(Square(1, 2),Square(3, 2)),
+                listOf(Square(6, 4),Square(4, 5)),
+                listOf(Square(1, 6),Square(2, 6)),
+                listOf(Square(6, 1),Square(4, 1)),
+                listOf(Square(3, 2),Square(4, 1)))
+        assertEquals(expectedResult, actualResult)
+    }
+
+    @Test
+    fun pgn_parser_isLondonSystemCorrect() {
+        val parser = PgnParser()
+        val actualResult = parser.parse("1.d4 Nf6 2.Nf3 d5 3.Bf4")
+        val expectedResult: List<List<Square>> =
+            listOf(
+                listOf(Square(1, 3),Square(3, 3)),
+                listOf(Square(7, 6),Square(5, 5)),
+                listOf(Square(0, 6),Square(2, 5)),
+                listOf(Square(6, 3),Square(4, 3)),
+                listOf(Square(0, 2),Square(3, 5)))
+        assertEquals(expectedResult, actualResult)
+    }
+
+    @Test
     fun column_to_digit_isCorrect() {
         val parser = PgnParser()
         var actualResult = parser.columnToDigit('a').toString()

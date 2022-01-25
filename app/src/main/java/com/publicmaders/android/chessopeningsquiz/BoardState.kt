@@ -69,15 +69,13 @@ object BoardState {
         addPiece(ChessPiece(7, 4, Player.BLACK, Chessman.KING, R.drawable.ic_chess_bk))
     }
 
-    fun pop_piece(row: Int, col: Int): ChessPiece
-    {
-        val piece = piecesBox.filter { piece -> piece.row==row && piece.col==col }[0]
+    fun pop_piece(row: Int, col: Int): ChessPiece {
+        val piece = piecesBox.filter { piece -> piece.row == row && piece.col == col }[0]
         piecesBox.remove(piece)
         return piece
     }
 
-    fun push_piece(piece: ChessPiece)
-    {
+    fun push_piece(piece: ChessPiece) {
         piecesBox.add(piece)
     }
 
@@ -219,7 +217,7 @@ object BoardState {
 
         // Диагональ вправо вверх.
         var index = 1
-        while (square.row + index < 8&& square.col + index < 8 ) {
+        while (square.row + index < 8 && square.col + index < 8) {
             val tempSquare = Square(square.row + index, square.col + index)
             val tempPiece = getPieceFrom(tempSquare)
             if (tempPiece?.chessman == Chessman.BISHOP &&
@@ -234,7 +232,7 @@ object BoardState {
 
         // Диагональ вправо вниз.
         index = 1
-        while (square.row - index >= 0&& square.col + index < 8 ) {
+        while (square.row - index >= 0 && square.col + index < 8) {
             val tempSquare = Square(square.row - index, square.col + index)
             val tempPiece = getPieceFrom(tempSquare)
             if (tempPiece?.chessman == Chessman.BISHOP &&
@@ -423,7 +421,7 @@ object BoardState {
     }
 
     private fun isDiagonalCleanBetween(squareOne: Square, squareTwo: Square): Boolean {
-        if (squareOne.row == squareTwo.row&& squareOne.col == squareTwo.col ) {
+        if (squareOne.row == squareTwo.row && squareOne.col == squareTwo.col) {
             return true
         }
 
@@ -568,15 +566,20 @@ object BoardState {
         return false
     }
 
-    private fun canPawnMove(from: Square, to: Square): Boolean {
-        if (from.col == to.col) {
+    private fun canPawnMove(from: Square, to: Square, player: Player): Boolean {
+        return if (player == Player.WHITE) {
             if (from.row == 1) {
-                return to.row == 2 || to.row == 3
-            } else if (from.row == 6) {
-                return to.row == 5 || to.row == 4
+                to.row == 2 || to.row == 3
+            } else {
+                to.row == from.row + 1
+            }
+        } else {
+            if (from.row == 6) {
+                to.row == 5 || to.row == 4
+            } else {
+                to.row == from.row - 1
             }
         }
-        return false
     }
 
     fun canMove(from: Square, to: Square): Boolean {
@@ -590,7 +593,7 @@ object BoardState {
             Chessman.BISHOP -> canBishopMove(from, to)
             Chessman.QUEEN -> canQueenMove(from, to)
             Chessman.KING -> canKingMove(from, to)
-            Chessman.PAWN -> canPawnMove(from, to)
+            Chessman.PAWN -> canPawnMove(from, to, movingPiece.player)
         }
     }
 
@@ -600,7 +603,7 @@ object BoardState {
         }
     }
 
-    private fun movePiece(fromRow: Int, fromCol: Int, toRow: Int,  toCol: Int) {
+    private fun movePiece(fromRow: Int, fromCol: Int, toRow: Int, toCol: Int) {
         if (fromCol == toCol && fromRow == toRow) return
         val movingPiece = pieceAt(fromRow, fromCol) ?: return
 
@@ -612,6 +615,6 @@ object BoardState {
         }
 
         piecesBox.remove(movingPiece)
-        addPiece(movingPiece.copy( row = toRow, col = toCol))
+        addPiece(movingPiece.copy(row = toRow, col = toCol))
     }
 }

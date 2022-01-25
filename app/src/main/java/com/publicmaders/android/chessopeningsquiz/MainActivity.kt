@@ -12,16 +12,9 @@ import android.widget.ImageView
 import kotlin.math.round
 import android.widget.FrameLayout
 import android.view.animation.ScaleAnimation
-
 import android.view.animation.Animation
-
 import android.view.animation.TranslateAnimation
-
 import android.view.animation.AnimationSet
-
-
-
-
 
 class MainActivity : AppCompatActivity() {
 
@@ -50,44 +43,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         testButton.setOnClickListener { view: View ->
-            //var matrix = Matrix()
-//
-            //var dWidth = testImageView.drawable.intrinsicWidth
-            //val dHeight = testImageView.drawable.intrinsicHeight
-            //val vWidth = testImageView.measuredWidth
-            //val vHeight = testImageView.measuredHeight
-//
-            //matrix.setTranslate(
-            //        round((vWidth - dWidth) * 0.5f),
-            //        round((vHeight - dHeight) * 0.5f)
-            //    )
 
-            //val mParams = testImageView.animationMatrix
-            //mParams.height = mParams.height + 100
-            //testImageView.layoutParams = mParams
-
-            var mZoomIn = AnimationSet(true)
-
-            var mTranslate = TranslateAnimation(
-                Animation.ABSOLUTE,0.0f, Animation.ABSOLUTE,
-                -testImageView.x / (this.window.decorView.width / testImageView.width),
-                Animation.ABSOLUTE,0.0f, Animation.ABSOLUTE,
-                -testImageView.y / (this.window.decorView.width / testImageView.width)
-            )
-            mTranslate.duration = 2000
-
-            var mScale = ScaleAnimation(
-                1F, (this.window.decorView.width / 100).toFloat(),
-                1F, (this.window.decorView.width / 100).toFloat()
-            )
-            mScale.duration = 200
-
-            mZoomIn.addAnimation(mTranslate)
-            mZoomIn.addAnimation(mScale)
-            mZoomIn.fillAfter = true
-            mZoomIn.isFillEnabled = true
-
-            testImageView.startAnimation(mZoomIn)
         }
     }
 }
