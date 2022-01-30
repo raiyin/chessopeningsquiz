@@ -1,45 +1,60 @@
 package com.publicmaders.android.chessopeningsquiz
 
-import android.animation.ObjectAnimator
-import android.content.Intent
-import android.graphics.*
-import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.view.animation.TranslateAnimation
-import android.widget.*
-import java.io.PrintWriter
-import java.net.ServerSocket
-import kotlin.math.min
+import android.text.Editable
+import android.text.TextWatcher
+import android.widget.ArrayAdapter
+import android.widget.EditText
+import android.widget.ListView
+import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.textfield.TextInputLayout
 
 
 class TrainActivity : AppCompatActivity(), ChessDelegate {
     private lateinit var trainView: TrainView
     private var openingManager = OpeningManager()
     private lateinit var lvOpening: ListView
+    private lateinit var tilOpeningFilter: TextInputLayout
+    private lateinit var ietOpeningFilter: EditText
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_train)
         trainView = findViewById(R.id.train_view)
         lvOpening = findViewById(R.id.lv_train_openings)
-        trainView.chessDelegate = this
+        tilOpeningFilter = findViewById(R.id.tilOpeningFilter);
+        ietOpeningFilter = findViewById(R.id.ietOpeningFilter);
 
-        val adapter: ListAdapter = ArrayAdapter(
+        trainView.chessDelegate = this
+        trainView.lvOpening = lvOpening
+        trainView.isFocusableInTouchMode = true;
+        trainView.requestFocus()
+
+        val adapter = ArrayAdapter(
             this,
             android.R.layout.simple_list_item_1,
             openingManager.openings
         )
         lvOpening.adapter = adapter
         lvOpening.setOnItemClickListener { parent, view, position, id ->
-            drawOpening((lvOpening.getItemAtPosition(position) as Opening).pgn)
+            if (trainView.animStepIndex == 0 && trainView.moveIndex == 0) {
+                trainView.needDrawOpening = true
+                drawOpening((lvOpening.getItemAtPosition(position) as Opening).pgn)
+            }
         }
+
+        ietOpeningFilter.addTextChangedListener(object : TextWatcher {
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+                adapter.filter.filter(s.toString())
+            }
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
+            override fun afterTextChanged(s: Editable) {}
+        })
     }
 
     private fun drawOpening(pgn: String) {
         BoardState.reset()
-        trainView.mustDrawMoves = true
+        lvOpening.isEnabled = false
         trainView.openingMoves = pgn
 
         // Создаем список матриц ходов.

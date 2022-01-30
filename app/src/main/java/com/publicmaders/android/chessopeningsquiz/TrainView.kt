@@ -8,8 +8,8 @@ import kotlin.math.min
 import androidx.core.graphics.drawable.toBitmap
 import android.graphics.Bitmap
 import android.graphics.PathMeasure
+import android.widget.ListView
 
-//import androidx.core.content.res.ResourcesCompat
 
 class TrainView(context: Context?, attrs: AttributeSet?) : View(context, attrs) {
     private val scaleFactor = 1.0f
@@ -18,16 +18,17 @@ class TrainView(context: Context?, attrs: AttributeSet?) : View(context, attrs) 
     private var cellSide = 130f
     private val lightColor = Color.parseColor("#b6ac9d")
     private val darkColor = Color.parseColor("#70503a")
-    var mustDrawMoves = false
     var openingMoves = ""
 
     private var view: View? = null
 
-    private var animStepIndex = 0
-    private var moveIndex = 0
+    // Для разблокировки после отрисовки дебюта.
+    lateinit var lvOpening: ListView
+
+    var animStepIndex = 0
+    var moveIndex = 0
     private lateinit var curMovingPiece: ChessPiece
 
-    private var pathMoveAlong = Path()
     private val imgResIDs = setOf(
         R.drawable.ic_chess_bb,
         R.drawable.ic_chess_wb,
@@ -44,15 +45,12 @@ class TrainView(context: Context?, attrs: AttributeSet?) : View(context, attrs) 
     )
     private val bitmaps = mutableMapOf<Int, Bitmap>()
     private val paint = Paint()
+    var needDrawOpening: Boolean = false
 
     private var movingPieceBitmap: Bitmap? = null
     private var movingPiece: ChessPiece? = null
-    private var fromCol: Int = -1
-    private var fromRow: Int = -1
     private var movingPieceX = -1f
     private var movingPieceY = -1f
-
-    // Piece resId, move path, start and finish squares.
     private lateinit var movesPaths: MutableList<Triple<Int, Path, List<Square>>>
 
     var chessDelegate: ChessDelegate? = null
@@ -60,6 +58,7 @@ class TrainView(context: Context?, attrs: AttributeSet?) : View(context, attrs) 
     init {
         loadBitmaps()
         view = this
+        movesPaths = mutableListOf()
     }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
@@ -78,13 +77,13 @@ class TrainView(context: Context?, attrs: AttributeSet?) : View(context, attrs) 
 
         drawChessboard(canvas)
         drawPieces(canvas)
-        if (mustDrawMoves) {
+        if (needDrawOpening) {
             drawPgn(canvas)
         }
     }
 
     fun initMovesPathsFromPgn(pgn: String) {
-        var pgnParser = PgnParser()
+        val pgnParser = PgnParser()
         val moves = pgnParser.parse(pgn)
         BoardState.reset()
         movesPaths = mutableListOf()
@@ -97,7 +96,7 @@ class TrainView(context: Context?, attrs: AttributeSet?) : View(context, attrs) 
             val xEnd = originX + move[1].col * cellSide
             val yEnd = originY + (7 - move[1].row) * cellSide
 
-            var path = Path()
+            val path = Path()
             path.moveTo(xStart, yStart)
             path.lineTo(xEnd, yEnd)
             movesPaths.add(
@@ -113,8 +112,14 @@ class TrainView(context: Context?, attrs: AttributeSet?) : View(context, attrs) 
     }
 
     private fun drawPgn(canvas: Canvas) {
+        if (movesPaths == null)
+            return
+
         if (moveIndex >= movesPaths.count()) {
             moveIndex = 0
+            lvOpening.isEnabled = true
+            needDrawOpening = false
+            BoardState.reset()
             return
         }
 
@@ -143,99 +148,6 @@ class TrainView(context: Context?, attrs: AttributeSet?) : View(context, attrs) 
             invalidate()
         }
     }
-
-    private fun movePiece(canvas: Canvas, rowStart: Int, colStart: Int, rowEnd: Int, colEnd: Int) {
-        // Получить битмап фигуры.
-        // var bitmapPiece: Bitmap = bitmaps[imgResIDs.elementAt(1)]!!
-        val piece = BoardState.pieceAt(Square(rowStart, colStart)) ?: return
-        val bitmapPiece: Bitmap = bitmaps[piece.resID]!!
-
-        // Удалить фигуру в классе состояния доски и отрисовать изменения.
-        //BoardState.pop_piece(rowStart, colStart)
-        //drawPieces(canvas)
-
-        // Произвести отрисовку ее движения.
-        val xStart = originX + colStart * cellSide
-        val yStart = originY + (7 - rowStart) * cellSide
-        val xEnd = originX + colEnd * cellSide
-        val yEnd = originY + (7 - rowEnd) * cellSide
-
-        pathMoveAlong.moveTo(xStart, yStart)
-        pathMoveAlong.lineTo(xEnd, yEnd)
-
-        val mxTransform = Matrix()
-        val pm = PathMeasure(pathMoveAlong, false)
-        val fSegmentLen = pm.length / 40
-        if (animStepIndex <= 40) {
-            pm.getMatrix(fSegmentLen * animStepIndex, mxTransform, PathMeasure.POSITION_MATRIX_FLAG)
-            canvas.drawBitmap(bitmapPiece, mxTransform, null)
-            animStepIndex++
-            invalidate()
-        } else {
-            animStepIndex = 0
-        }
-
-        // Вернуть фигуру на доску и сделать ею ход в классе доски и отрисовать.
-        //BoardState.push_piece(piece)
-        //BoardState.movePiece(Square(rowStart, colStart), Square(rowEnd, colEnd))
-        //drawPieces(canvas)
-    }
-
-    private fun movePiece(canvas: Canvas) {
-        val bitmapPiece: Bitmap = bitmaps[imgResIDs.elementAt(1)]!!
-
-        val xStart = originX + 0 * cellSide
-        val yStart = originY + (7 - 1) * cellSide
-        val xEnd = originX + 0 * cellSide
-        val yEnd = originY + (7 - 3) * cellSide
-
-        pathMoveAlong.moveTo(xStart, yStart)
-        pathMoveAlong.lineTo(xEnd, yEnd)
-
-        val mxTransform = Matrix()
-        val pm = PathMeasure(pathMoveAlong, false)
-        val fSegmentLen = pm.length / 40
-        if (animStepIndex <= 40) {
-            pm.getMatrix(fSegmentLen * animStepIndex, mxTransform, PathMeasure.POSITION_MATRIX_FLAG)
-            canvas.drawBitmap(bitmapPiece, mxTransform, null)
-            animStepIndex++
-            invalidate()
-        } else {
-            animStepIndex = 0
-        }
-    }
-
-    //override fun onTouchEvent(event: MotionEvent?): Boolean {
-    //    event ?: return false
-    //
-    //    when (event.action) {
-    //        MotionEvent.ACTION_DOWN -> {
-    //            fromCol = ((event.x - originX) / cellSide).toInt()
-    //            fromRow = 7 - ((event.y - originY) / cellSide).toInt()
-    //
-    //            chessDelegate?.pieceAt(Square(fromCol, fromRow))?.let {
-    //                movingPiece = it
-    //                movingPieceBitmap = bitmaps[it.resID]
-    //            }
-    //        }
-    //        MotionEvent.ACTION_MOVE -> {
-    //            movingPieceX = event.x
-    //            movingPieceY = event.y
-    //            invalidate()
-    //        }
-    //        MotionEvent.ACTION_UP -> {
-    //            val col = ((event.x - originX) / cellSide).toInt()
-    //            val row = 7 - ((event.y - originY) / cellSide).toInt()
-    //            if (fromCol != col || fromRow != row) {
-    //                chessDelegate?.movePiece(Square(fromCol, fromRow), Square(col, row))
-    //            }
-    //            movingPiece = null
-    //            movingPieceBitmap = null
-    //            invalidate()
-    //        }
-    //    }
-    //    return true
-    //}
 
     private fun drawPieces(canvas: Canvas) {
         for (row in 0 until 8)
