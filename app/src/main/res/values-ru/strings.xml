@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Chess openings quiz</string>
+    <string name="start">Начать</string>
+    <string name="buy">Купить</string>
+    <string name="settings">Настройки</string>
+    <string name="like">Оценить</string>
+    <string name="training">Тренировка</string>
+    <string name="game">Игра</string>
+    <string name="test">Тест</string>
+</resources>

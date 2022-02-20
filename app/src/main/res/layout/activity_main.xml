@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -10,22 +11,24 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button_training"
-        android:layout_width="wrap_content"
+        android:layout_width="120sp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="132dp"
+        android:layout_marginTop="130dp"
+        android:background="@drawable/my_button"
+        android:fontFamily="@font/roboto"
         android:text="@string/training"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:background="@drawable/my_button" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button_quiz"
-        android:layout_width="wrap_content"
+        android:layout_width="120sp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:text="@string/game"
+        android:fontFamily="@font/roboto"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.501"
@@ -35,72 +38,19 @@
         android:background="@drawable/my_button" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/button_buy"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
-        android:layout_margin="16dp"
-        android:textAllCaps="true"
-        app:backgroundTint="#fc0"
-        app:icon="@drawable/ic_buy"
-        app:iconPadding="5dp"
-        app:iconTint="#f00"
-        android:contentDescription="@string/buy"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/button_like"
-        android:layout_width="70dp"
-        android:layout_height="56dp"
-        android:layout_margin="16dp"
-        android:textAllCaps="true"
-        app:backgroundTint="#fc0"
-        app:icon="@drawable/ic_like"
-        android:contentDescription="@string/like"
-        app:iconPadding="5dp"
-        app:iconSize="24dp"
-        app:iconTint="#f00"
-        app:layout_constraintStart_toEndOf="@+id/button_buy"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <com.google.android.material.button.MaterialButton
         android:id="@+id/button_settings"
         android:layout_width="70dp"
-        android:layout_height="56dp"
-        android:layout_margin="16dp"
-        android:layout_marginTop="28dp"
-        android:textAllCaps="true"
-        app:backgroundTint="#fc0"
-        app:icon="@drawable/ic_settings"
-        app:iconPadding="5dp"
-        app:iconSize="24dp"
-        app:iconTint="#f00"
+        android:layout_height="50dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
         android:contentDescription="@string/settings"
+        android:backgroundTint="@color/cardview_dark_background"
+        app:icon = "@mipmap/ic_action_settings"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/button_like"
-        app:layout_constraintTop_toTopOf="parent" />
-
-
-    <Button
-        android:id="@+id/test_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/test"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.72" />
-
-    <ImageView
-        android:id="@+id/test_iv"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        app:layout_constraintBottom_toTopOf="@+id/test_button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_quiz"
-        app:srcCompat="@drawable/my_button" />
+        android:stateListAnimator="@null"  />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

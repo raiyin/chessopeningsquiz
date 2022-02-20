@@ -460,23 +460,26 @@ object BoardState {
     }
 
     fun makeMove(move: MutableList<Square>) {
-        if (getPieceFrom(move[1]) != null) {
-            deletePieceFromField(move[1])
-        }
+        // В случае с рокировкой move имеет 4 элемента, делаем два хода.
+        for (i in 0 until move.size/2) {
+            if (getPieceFrom(move[i * 2 + 1]) != null) {
+                deletePieceFromField(move[1])
+            }
 
-        val tempPiece = piecesBox.find { it.row == move[0].row && it.col == move[0].col }
-        piecesBox.removeIf { it.row == move[0].row && it.col == move[0].col }
-        val piece = tempPiece?.let {
-            ChessPiece(
-                move[1].row,
-                move[1].col,
-                tempPiece.player,
-                tempPiece.chessman,
-                tempPiece.resID
-            )
-        }
-        if (piece != null) {
-            piecesBox.add(piece)
+            val tempPiece = piecesBox.find { it.row == move[i * 2 + 0].row && it.col == move[i * 2 + 0].col }
+            piecesBox.removeIf { it.row == move[i * 2 + 0].row && it.col == move[i * 2 + 0].col }
+            val piece = tempPiece?.let {
+                ChessPiece(
+                    move[i * 2 + 1].row,
+                    move[i * 2 + 1].col,
+                    tempPiece.player,
+                    tempPiece.chessman,
+                    tempPiece.resID
+                )
+            }
+            if (piece != null) {
+                piecesBox.add(piece)
+            }
         }
     }
 

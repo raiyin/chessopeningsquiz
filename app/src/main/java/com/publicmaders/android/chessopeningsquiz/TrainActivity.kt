@@ -22,12 +22,12 @@ class TrainActivity : AppCompatActivity(), ChessDelegate {
         setContentView(R.layout.activity_train)
         trainView = findViewById(R.id.train_view)
         lvOpening = findViewById(R.id.lv_train_openings)
-        tilOpeningFilter = findViewById(R.id.tilOpeningFilter);
-        ietOpeningFilter = findViewById(R.id.ietOpeningFilter);
+        tilOpeningFilter = findViewById(R.id.tilOpeningFilter)
+        ietOpeningFilter = findViewById(R.id.ietOpeningFilter)
 
         trainView.chessDelegate = this
         trainView.lvOpening = lvOpening
-        trainView.isFocusableInTouchMode = true;
+        trainView.isFocusableInTouchMode = true
         trainView.requestFocus()
 
         val adapter = ArrayAdapter(
@@ -36,10 +36,10 @@ class TrainActivity : AppCompatActivity(), ChessDelegate {
             openingManager.openings
         )
         lvOpening.adapter = adapter
-        lvOpening.setOnItemClickListener { parent, view, position, id ->
+        lvOpening.setOnItemClickListener { _, _, position, _ ->
             if (trainView.animStepIndex == 0 && trainView.moveIndex == 0) {
                 trainView.needDrawOpening = true
-                drawOpening((lvOpening.getItemAtPosition(position) as Opening).pgn)
+                drawOpening((lvOpening.getItemAtPosition(position) as Opening).en_pgn)
             }
         }
 

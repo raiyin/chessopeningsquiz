@@ -6,11 +6,7 @@ import java.security.InvalidParameterException
 
 class PgnParser {
 
-    //private val boardState: BoardState = BoardState()
-
-    fun reset()
-    {
-        //boardState.reset()
+    fun reset() {
         BoardState.reset()
     }
 
@@ -24,7 +20,6 @@ class PgnParser {
             val move = analyzeMove(splits[i], i)
             moves.add(move)
             // Делаем ход, чтобы состояние доски изменилось.
-            //boardState.makeMove(move)
             BoardState.makeMove(move)
         }
 
@@ -48,21 +43,18 @@ class PgnParser {
         if (query[0].isLowerCase()) {
             if (query.contains('x')) {
                 // Взятие.
-                var startSquare: Square = if(player==Player.WHITE)
+                var startSquare: Square = if (player == Player.WHITE)
                     Square(query[3].digitToInt() - 2, columnToDigit(query[0]))
                 else
                     Square(query[3].digitToInt(), columnToDigit(query[0]))
                 val endSquare = Square(query[3].digitToInt() - 1, columnToDigit(query[2]))
                 result.add(startSquare)
                 result.add(endSquare)
-            }
-            else
-            {
+            } else {
                 // Обычный ход.
                 val row: Int = query[1].digitToInt() - 1
                 val column: Int = columnToDigit(query[0])
                 val pawn: ChessPiece? =
-                    //boardState.getPawnThatCanGoTo(Square(row, column), player)
                     BoardState.getPawnThatCanGoTo(Square(row, column), player)
                 if (pawn != null) {
                     result.add(Square(pawn.row, pawn.col))
@@ -71,15 +63,12 @@ class PgnParser {
                     throw Exception("Wrong pgn parsing")
                 }
             }
-        }
-        else if (query[0] == 'R')
-        {
+        } else if (query[0] == 'R') {
             val cleanQuery = query.replace("x", "").replace("+", "").replace("#", "")
             val endColumn = columnToDigit(cleanQuery.takeLast(2)[0])
-            val endRow = query.last().code - 1
+            val endRow = cleanQuery.last().digitToInt() - 1
             val endSquare = Square(endRow, endColumn)
 
-            //val rooks = boardState.getRookThatCanGoTo(endSquare, player)
             val rooks = BoardState.getRookThatCanGoTo(endSquare, player)
 
             when {
@@ -94,14 +83,16 @@ class PgnParser {
                 cleanQuery[1].isLetter() -> {
                     // Неоднозначность по столбцу.
                     val startColumn = columnToDigit(cleanQuery[1])
-                    val startSquare = Square(endRow, startColumn)
+                    val startRow = rooks.filter { it.col == startColumn }[0].row
+                    val startSquare = Square(startRow, startColumn)
                     result.add(startSquare)
                     result.add(endSquare)
                 }
                 cleanQuery[1].isDigit() -> {
                     // Неоднозначность по строке.
                     val startRow = cleanQuery[1].digitToInt() - 1
-                    val startSquare = Square(startRow, endColumn)
+                    val startColumn = rooks.filter { it.row == startRow }[0].col
+                    val startSquare = Square(startRow, startColumn)
                     result.add(startSquare)
                     result.add(endSquare)
                 }
@@ -109,15 +100,12 @@ class PgnParser {
                     throw Exception("Error pgn parsing: $cleanQuery")
                 }
             }
-        }
-        else if (query[0] == 'N')
-        {
+        } else if (query[0] == 'N') {
             val cleanQuery = query.replace("x", "").replace("+", "").replace("#", "")
             val endColumn = columnToDigit(cleanQuery.takeLast(2)[0])
-            val endRow = query.last().digitToInt() - 1
+            val endRow = cleanQuery.last().digitToInt() - 1
             val endSquare = Square(endRow, endColumn)
 
-            //val knights = boardState.getKnightThatCanGoTo(endSquare, player)
             val knights = BoardState.getKnightThatCanGoTo(endSquare, player)
 
             when {
@@ -132,14 +120,16 @@ class PgnParser {
                 cleanQuery[1].isLetter() -> {
                     // Неоднозначность по столбцу.
                     val startColumn = columnToDigit(cleanQuery[1])
-                    val startSquare = Square(endRow, startColumn)
+                    val startRow = knights.filter { it.col == startColumn }[0].row
+                    val startSquare = Square(startRow, startColumn)
                     result.add(startSquare)
                     result.add(endSquare)
                 }
                 cleanQuery[1].isDigit() -> {
                     // Неоднозначность по строке.
                     val startRow = cleanQuery[1].digitToInt() - 1
-                    val startSquare = Square(startRow, endColumn)
+                    val startColumn = knights.filter { it.row == startRow }[0].col
+                    val startSquare = Square(startRow, startColumn)
                     result.add(startSquare)
                     result.add(endSquare)
                 }
@@ -147,15 +137,12 @@ class PgnParser {
                     throw Exception("Error pgn parsing: $cleanQuery")
                 }
             }
-        }
-        else if (query[0] == 'B')
-        {
+        } else if (query[0] == 'B') {
             val cleanQuery = query.replace("x", "").replace("+", "").replace("#", "")
             val endColumn = columnToDigit(cleanQuery.takeLast(2)[0])
-            val endRow = query.last().digitToInt() - 1
+            val endRow = cleanQuery.last().digitToInt() - 1
             val endSquare = Square(endRow, endColumn)
 
-            //val bishops = boardState.getBishopThatCanGoTo(endSquare, player)
             val bishops = BoardState.getBishopThatCanGoTo(endSquare, player)
 
             when {
@@ -170,14 +157,16 @@ class PgnParser {
                 cleanQuery[1].isLetter() -> {
                     // Неоднозначность по столбцу.
                     val startColumn = columnToDigit(cleanQuery[1])
-                    val startSquare = Square(endRow, startColumn)
+                    val startRow = bishops.filter { it.col == startColumn }[0].row
+                    val startSquare = Square(startRow, startColumn)
                     result.add(startSquare)
                     result.add(endSquare)
                 }
                 cleanQuery[1].isDigit() -> {
                     // Неоднозначность по строке.
                     val startRow = cleanQuery[1].digitToInt() - 1
-                    val startSquare = Square(startRow, endColumn)
+                    val startColumn = bishops.filter { it.row == startRow }[0].col
+                    val startSquare = Square(startRow, startColumn)
                     result.add(startSquare)
                     result.add(endSquare)
                 }
@@ -185,31 +174,25 @@ class PgnParser {
                     throw Exception("Error pgn parsing: $cleanQuery")
                 }
             }
-        }
-        else if (query[0] == 'K')
-        {
+        } else if (query[0] == 'K') {
             val cleanQuery = query.replace("x", "").replace("+", "").replace("#", "")
             val endColumn = columnToDigit(cleanQuery.takeLast(2)[0])
-            val endRow = query.last().digitToInt() - 1
+            val endRow = cleanQuery.last().digitToInt() - 1
             val endSquare = Square(endRow, endColumn)
 
-            //val king = boardState.getKingThatCanGoTo(endSquare, player)
             val king = BoardState.getKingThatCanGoTo(endSquare, player)
             val startColumn = king?.col
             val startRow = king?.row
             val startSquare = startColumn?.let { startRow?.let { it1 -> Square(it, it1) } }
             startSquare?.let { result.add(it) }
             result.add(endSquare)
-        }
-        else if (query[0] == 'Q')
-        {
+        } else if (query[0] == 'Q') {
 
             val cleanQuery = query.replace("x", "").replace("+", "").replace("#", "")
             val endColumn = columnToDigit(cleanQuery.takeLast(2)[0])
-            val endRow = query.last().digitToInt() - 1
+            val endRow = cleanQuery.last().digitToInt() - 1
             val endSquare = Square(endRow, endColumn)
 
-            //val queens = boardState.getQueenThatCanGoTo(endSquare, player)
             val queens = BoardState.getQueenThatCanGoTo(endSquare, player)
 
             when {
@@ -224,14 +207,16 @@ class PgnParser {
                 cleanQuery[1].isLetter() -> {
                     // Неоднозначность по столбцу.
                     val startColumn = columnToDigit(cleanQuery[1])
-                    val startSquare = Square(endRow, startColumn)
+                    val startRow = queens.filter { it.col == startColumn }[0].row
+                    val startSquare = Square(startRow, startColumn)
                     result.add(startSquare)
                     result.add(endSquare)
                 }
                 cleanQuery[1].isDigit() -> {
                     // Неоднозначность по строке.
                     val startRow = cleanQuery[1].digitToInt() - 1
-                    val startSquare = Square(startRow, endColumn)
+                    val startColumn = queens.filter { it.row == startRow }[0].col
+                    val startSquare = Square(startRow, startColumn)
                     result.add(startSquare)
                     result.add(endSquare)
                 }
@@ -239,13 +224,49 @@ class PgnParser {
                     throw Exception("Error pgn parsing: $cleanQuery")
                 }
             }
-        }
-        else
-        {
+        } else if (query.contains("0-0")) {
+            // Сначала ходит король.
+            var startRow = if (player == Player.WHITE) 0 else 7
+            var startColumn = 4
+            var startSquare = Square(startRow, startColumn)
+            var endRow = if (player == Player.WHITE) 0 else 7
+            var endColumn = 6
+            var endSquare = Square(endRow, endColumn)
+            result.add(startSquare)
+            result.add(endSquare)
+
+            // Потом ходит ладья.
+            startRow = if (player == Player.WHITE) 0 else 7
+            startColumn = 7
+            startSquare = Square(startRow, startColumn)
+            endRow = if (player == Player.WHITE) 0 else 7
+            endColumn = 5
+            endSquare = Square(endRow, endColumn)
+            result.add(startSquare)
+            result.add(endSquare)
+        } else if (query.contains("0-0-0")) {
+            // Сначала ходит король.
+            var startRow = if (player == Player.WHITE) 0 else 7
+            var startColumn = 4
+            var startSquare = Square(startRow, startColumn)
+            var endRow = if (player == Player.WHITE) 0 else 7
+            var endColumn = 2
+            var endSquare = Square(endRow, endColumn)
+            result.add(startSquare)
+            result.add(endSquare)
+
+            // Потом ходит ладья.
+            startRow = if (player == Player.WHITE) 0 else 7
+            startColumn = 0
+            startSquare = Square(startRow, startColumn)
+            endRow = if (player == Player.WHITE) 0 else 7
+            endColumn = 3
+            endSquare = Square(endRow, endColumn)
+            result.add(startSquare)
+            result.add(endSquare)
+        } else {
             throw Exception("Wrong pgn piece parsing: $query")
         }
-
-
         return result
     }
 

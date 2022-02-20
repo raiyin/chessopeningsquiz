@@ -1,89 +1,242 @@
 package com.publicmaders.android.chessopeningsquiz
 
-class OpeningManager
-{
-    val openings = mutableListOf<Opening>()
+import android.util.Log
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.jsonObject
+import kotlinx.serialization.json.jsonPrimitive
 
-    init{
-        openings.add(Opening("Alekhine’s Defense","1.e4 Nf6"))
-        openings.add(Opening("Alekhine’s Defense Modern Variation","1.e4 Nf6 2.e5 Nd5 3.d4 d6 4.Nf3"))
-        openings.add(Opening("Benko Gambit","1.d4 Nf6 2.c4 c5 3.d5 b5"))
-        openings.add(Opening("Benko Gambit Accepted","1.d4 Nf6 2.c4 c5 3.d5 b5 4.cxb5"))
-        openings.add(Opening("Benoni Defense","1.e4 Nf6"))
-        openings.add(Opening("Benoni Defense Modern Variation","1.d4 Nf6 2.c4 c5 3.d5 e6"))
-        openings.add(Opening("Bird’s Opening","1.f4"))
-        openings.add(Opening("Bird’s Opening Dutch Variation","1.f4 d5 3.Nf3"))
-        openings.add(Opening("Bogo-Indian defense","1.d4 Nf6 2.c4 e6 3.Nf3 Bb4+"))
-        openings.add(Opening("Bogo-Indian Defense Nimzowitsch Variation","1.d4 Nf6 2.c4 e6 3.Nf3 Bb4+ 4.Bd2 Qe7"))
-        openings.add(Opening("Budapest Gambit","1.d4 Nf6 2.c4 e5"))
-        openings.add(Opening("Budapest Gambit Rubinstein Variation","1.d4 Nf6 2.c4 e5 3.dxe5 Ng4 4.Bf4 Nc6"))
-        openings.add(Opening("Catalan Opening","1.d4 Nf6 2.c4 e6 3.g3"))
-        openings.add(Opening("Catalan Opening Open Defense","1.d4 Nf6 2.c4 e6 3.g3 d5 4.Bg2 dxc4 5.Qa4+"))
-        openings.add(Opening("Caro-Kann Defense","1.e4 c6"))
-        openings.add(Opening("Caro-Kann Defense Advance Variation","1.e4 c6 2.e5 Bf5"))
-        openings.add(Opening("Colle System","1.d4 d5 2.Nf3 Nf6 3.e3"))
-        openings.add(Opening("Dutch Defense","1.d4 f5"))
-        openings.add(Opening("Dutch Defense Fianchetto Attack","1.d4 f5 2.g3 Nf6"))
-        openings.add(Opening("English Opening","1.c4"))
-        openings.add(Opening("English Opening Anglo-Indian Defense","1.c4 Nf6"))
-        openings.add(Opening("Evans Gambit","1.e4 e5 2.Nf3 Nc6 3.Bc4 Bc5 4.b4"))
-        openings.add(Opening("Evans Gambit Accepted","1.e4 e5 2.Nf3 Nc6 3.Bc4 Bc5 4.b4 Bxb4 c3"))
-        openings.add(Opening("Four Knights Game","1.e4 e5 2.Nf3 Nc6 3.Nc3 Nf6"))
-        openings.add(Opening("Four Knights Game Double Spanish Variation","1.e4 e5 2.Nf3 Nc6 3.Nc3 Nf6 4.Bb5 Bb4"))
-        openings.add(Opening("French Defense","1.e4 e6"))
-        openings.add(Opening("French Defense Winawer Variation","1.e4 e6 2.d4 d5 3.Nc3 Bb4"))
-        openings.add(Opening("Giuoco Piano","1.e4 e5 2.Nf3 Nc6 3.Bc4 Bc5"))
-        openings.add(Opening("Giuoco Piano Classical Variation","1.e4 e5 2.Nf3 Nc6 3.Bc4 Bc5 4.c3 Nf6"))
-        openings.add(Opening("Grünfeld Defense","1.d4 Nf6 2.c4 g6 3.Nc3 d5"))
-        openings.add(Opening("Grünfeld Defense Exchange Variation","1.d4 Nf6 2.c4 g6 3.Nc3 d5 4.cxd5 Nxd5"))
-        openings.add(Opening("Italian Game","1.e4 e5 2.Nf3 Nc6 3.Bc4"))
-        openings.add(Opening("Italian Game Giuoco Pianissimo","1.e4 e5 2.Nf3 Nc6 3.Bc4 Bc5 4.0-0 Nf6 5.d3"))
-        openings.add(Opening("King’s Gambit","1.e4 e5 2.f4"))
-        openings.add(Opening("King’s Gambit Accepted","1.e4 e5 2.f4 exf4"))
-        openings.add(Opening("King’s Indian Attack","1.Nf3 d5 2.g3"))
-        openings.add(Opening("King’s Indian Attack Yugoslav Variation","1.Nf3 d5 2.g3 Nf6 3.Bg2 c6 4.O-O Bg4 5.d3 Nbd7 6.Nbd2 e5 7.e4"))
-        openings.add(Opening("King’s Indian Defense","1.d4 Nf6 2.c4 g6"))
-        openings.add(Opening("London System","1.d4 Nf6 2.Nf3 d5 3.Bc4"))
-        openings.add(Opening("Modern Defense","1.d4 g6"))
-        openings.add(Opening("Modern Defense Standard Line","1.d4 g6 2.e4 d6 3.Nc3 Bg7"))
-        openings.add(Opening("Nimzo-Indian Defense","1.d4 Nf6 2.c4 e6 3.Nc3 Bb4"))
-        openings.add(Opening("Nimzo-Indian Defense Rubinstein Variation","1.d4 Nf6 2.c4 e6 3.Nc3 Bb4 4.e3 0-0 5.Bd3 d5"))
-        openings.add(Opening("Nimzowitsch Defense","1.e4 Nc6"))
-        openings.add(Opening("Nimzowitsch Defense Scandinavian Variation","1.e4 Nc6 2.d4 d5"))
-        openings.add(Opening("Petrov’s Defense","1.e4 e5 2.Nf3 Nf6"))
-        openings.add(Opening("Petrov’s Defense Classical Variation","1.e4 e5 2.Nf3 Nf6 3.Nxe5 d6"))
-        openings.add(Opening("Philidor’s Defense","1.e4 e5 2.Nf3 d6"))
-        openings.add(Opening("Philidor’s Defense Exchange Variation","1.e4 e5 2.Nf3 d6 3.d4 exd4"))
-        openings.add(Opening("Pirc Defense","1.e4 d6 2.d4 Nf6"))
-        openings.add(Opening("Pirc Defense Classical Variation","1.e4 d6 2.d4 Nf6 3.Nc3 g6 4.Nf3 Bg7 5.Be2 O-O 6.O-O c6"))
-        openings.add(Opening("Queen’s Gambit","1.d4 d5 2.c4"))
-        openings.add(Opening("Queen’s Gambit Accepted","1.d4 d5 2.c4 dxc4"))
-        openings.add(Opening("Queen’s Gambit Accepted Main Line","1.d4 d5 2.c4 dxc4 3.Nf3 Nf6 4.d3"))
-        openings.add(Opening("Queen’s Gambit Declined","1.d4 d5 2.c4 e6"))
-        openings.add(Opening("Queen’s Gambit Declined Semi Slav Variation","1.d4 d5 2.c4 e6 3. Nf3 Nf6 4.Nc3 c6"))
-        openings.add(Opening("Queen’s Indian Defense","1.d4 Nf6 2.c4 e6 3.Nf3 b6"))
-        openings.add(Opening("Queen’s Indian Defense Fianchetto Variation","1.d4 Nf6 2.c4 e6 3.Nf3 b6 4.g3 Ba6"))
-        openings.add(Opening("Queen’s Pawn Game","1.d4"))
-        openings.add(Opening("Queen’s Pawn Game / Anti-Nimzo-Indian","1.d4 Nf6 2.c4 e6 3.Nf3"))
-        openings.add(Opening("Réti Opening / Queen’s Gambit Declined (Transposed)","1.Nf3 d5 2.c4 e6"))
-        openings.add(Opening("Réti Opening","1.Nf3 d5 2.c4"))
-        openings.add(Opening("Ruy Lopez","1.e4 e5 2.Nf3 Nc6 3.Bb5"))
-        openings.add(Opening("Ruy Lopez Closed Defense","1.e4 e5 2.Nf3 Nc6 3.Bb5 a6 4.Ba4"))
-        openings.add(Opening("Scandinavian Defense","1.e4 d5"))
-        openings.add(Opening("Scandinavian Defense Main Line","1.e4 d5 2.exd5 Qxd5 3.Nc3 Qa5"))
-        openings.add(Opening("Scotch Game","1.e4 e5 2.Nf3 Nc6 3.d4"))
-        openings.add(Opening("Scotch Game Classical Variation","1.e4 e5 2.Nf3 Nc6 3.d4 exd4 4.Nxd5 Bc5 5.Be3"))
-        openings.add(Opening("Sicilian Defense","1.e4 c5"))
-        openings.add(Opening("Sicilian Defense Najdorf Variation","1.e4 c5 2.Nf3 d6 3.d4 cxd4 4.Nxd4 Nf6 5.Nc3 a6"))
-        openings.add(Opening("Slav Defense","1.d4 d5 2.c4 c6"))
-        openings.add(Opening("Slav Defense Modern Line","1.d4 d5 2.c4 c6 3.Nf3 Nf6"))
-        openings.add(Opening("Torre Attack","1.d4 e6 2.Nf3 Nf6 3.Bg5"))
-        openings.add(Opening("Two Knights Defense","1.e4 e5 2.Nf3 Nc6 3.Bc4 Nf6"))
-        openings.add(Opening("Fried Liver Attack","1.e4 e5 2.Nf3 Nc6 3.Bc4 Nc6 4.Ng5"))
-        openings.add(Opening("Two Knights Defense / Giuoco Pianissimo (Transposed)","1.e4 e5 2.Nf3 Nc6 3.Bc4 Nf6 4.d3 Bc5"))
-        openings.add(Opening("Vienna Game","1.e4 e5 2.Nc3"))
-        openings.add(Opening("Vienna Game Mieses Variation","1.e4 e5 2.Nc3 Nf6 3.g3"))
-        openings.add(Opening("Wade Defense","1.d4 d6 2.Nf3 Bg4"))
-        openings.add(Opening("Wade Defense Main Line","1.d4 d6 2.Nf3 Bg4 3.c4 Nbd7 4.Nc3 e5"))
+class OpeningManager {
+    val openings = mutableListOf<Opening>()
+    val stringOpenings =
+        """{"ru_type": "Открытые дебюты", "en_type": "open", "ru_name": "Испанская партия", "en_name": "Ruy Lopez", "ru_pgn": "1. e4 e5 2. Kf3 Kc6 3. Cb5", "eco": "C60 - C99", "en_pgn": "1. e4 e5 2. Nf3 Nc6 3. Bb5"},
+{"ru_type": "Открытые дебюты", "en_type": "open", "ru_name": "Испанская партия: Гамбит Яниша", "en_name": "Schliemann Defence", "ru_pgn": "1. e4 e5 2. Kf3 Kc6 3. Cb5 f5", "eco": "C63", "en_pgn": "1. e4 e5 2. Nf3 Nc6 3. Bb5 f5"},
+{"ru_type": "Открытые дебюты", "en_type": "open", "ru_name": "Испанская партия: Разменный вариант", "en_name": "Exchange Variation", "ru_pgn": "1. e4 e5 2. Kf3 Kc6 3. Cb5 a6 4. С:c6", "eco": "C68, C69", "en_pgn": "1. e4 e5 2. Nf3 Nc6 3. Bb5 a6 4. Bxc6"},
+{"ru_type": "Открытые дебюты", "en_type": "open", "ru_name": "Испанская партия: Защита Бёрда", "en_name": "Bird's Defence", "ru_pgn": "1. e4 e5 2. Kf3 Kc6 3. Cb5 Кd4", "eco": "C61", "en_pgn": "1. e4 e5 2. Nf3 Nc6 3. Bb5 Nd4"},
+{"ru_type": "Открытые дебюты", "en_type": "open", "ru_name": "Испанская партия: Защита Корделя", "en_name": "Cordel Defence", "ru_pgn": "1. e4 e5 2. Kf3 Kc6 3. Cb5 Сc5", "eco": "C64", "en_pgn": "1. e4 e5 2. Nf3 Nc6 3. Bb5 Bc5"},
+{"ru_type": "Открытые дебюты", "en_type": "open", "ru_name": "Испанская партия: Вариант Алапина", "en_name": "Alapin Defence", "ru_pgn": "1. e4 e5 2. Kf3 Kc6 3. Cb5 Сb4", "eco": "C60", "en_pgn": "1. e4 e5 2. Nf3 Nc6 3. Bb5 Bb4"},
+{"ru_type": "Открытые дебюты", "en_type": "open", "ru_name": "Испанская партия: Защита Стейница", "en_name": "Steinitz Defence", "ru_pgn": "1. e4 e5 2. Kf3 Kc6 3. Cb5 d6", "eco": "C62", "en_pgn": "1. e4 e5 2. Nf3 Nc6 3. Bb5 d6"},
+{"ru_type": "Открытые дебюты", "en_type": "open", "ru_name": "Испанская партия: Защита Пильсбери", "en_name": "Smyslov Defence, Fianchetto Defence, Barnes Defence, Pillsbury Defence", "ru_pgn": "1. e4 e5 2. Kf3 Kc6 3. Cb5 g6", "eco": "C60", "en_pgn": "1. e4 e5 2. Nf3 Nc6 3. Bb5 g6"},
+{"ru_type": "Открытые дебюты", "en_type": "open", "ru_name": "Испанская партия: Берлинская защита", "en_name": "Berlin Defence", "ru_pgn": "1. e4 e5 2. Kf3 Kc6 3. Cb5 Кf6", "eco": "C65, C66, C67", "en_pgn": "1. e4 e5 2. Nf3 Nc6 3. Bb5 Nf6"},
+{"ru_type": "Открытые дебюты", "en_type": "open", "ru_name": "Испанская партия: Анти-Берлин", "en_name": "Anti-Berlin", "ru_pgn": "1. e4 e5 2. Kf3 Kc6 3. Cb5 Кf6 4. d3", "eco": "C65", "en_pgn": "1. e4 e5 2. Nf3 Nc6 3. Bb5 Nf6 4. d3"},
+{"ru_type": "Открытые дебюты", "en_type": "open", "ru_name": "Испанская партия: Защита Мортимера", "en_name": "Mortimer Trap", "ru_pgn": "1. e4 e5 2. Kf3 Kc6 3. Cb5 Кf6 4. d3 Кe7", "eco": "C65", "en_pgn": "1. e4 e5 2. Nf3 Nc6 3. Bb5 Nf6 4. d3 Ne7"},
+{"ru_type": "Открытые дебюты", "en_type": "open", "ru_name": "Испанская партия: Нюрнбергский вариант", "en_name": "Nuremberg Defence", "ru_pgn": "1. e4 e5 2. Kf3 Kc6 3. Cb5 f6", "eco": "C60", "en_pgn": "1. e4 e5 2. Nf3 Nc6 3. Bb5 f6"},
+{"ru_type": "Открытые дебюты", "en_type": "open", "ru_name": "Испанская партия: Защита Поллока", "en_name": "Pollock's Defence", "ru_pgn": "1. e4 e5 2. Kf3 Kc6 3. Cb5 Кa5", "eco": "C60", "en_pgn": "1. e4 e5 2. Nf3 Nc6 3. Bb5 Na5"},
+{"ru_type": "Открытые дебюты", "en_type": "open", "ru_name": "Испанская партия: Защита Лусены", "en_name": "Lucena Defence", "ru_pgn": "1. e4 e5 2. Kf3 Kc6 3. Cb5 Сe7", "eco": "C60", "en_pgn": "1. e4 e5 2. Nf3 Nc6 3. Bb5 Be7"},
+{"ru_type": "Открытые дебюты", "en_type": "open", "ru_name": "Испанская партия: Вариант Виноградова", "en_name": "Vinogradov Variation", "ru_pgn": "1. e4 e5 2. Kf3 Kc6 3. Cb5 Фe7", "eco": "C60", "en_pgn": "1. e4 e5 2. Nf3 Nc6 3. Bb5 Qe7"},
+{"ru_type": "Открытые дебюты", "en_type": "open", "ru_name": "Испанская партия: Защита Брентано", "en_name": "Brentano Defence", "ru_pgn": "1. e4 e5 2. Kf3 Kc6 3. Cb5 g5", "eco": "C60", "en_pgn": "1. e4 e5 2. Nf3 Nc6 3. Bb5 g5"},
+{"ru_type": "Открытые дебюты", "en_type": "open", "ru_name": "Испанская партия: Защита Коцио", "en_name": "Cozio Defence", "ru_pgn": "1. e4 e5 2. Kf3 Kc6 3. Cb5 Кge7", "eco": "C60", "en_pgn": "1. e4 e5 2. Nf3 Nc6 3. Bb5 Nge7"},
+{"ru_type": "Открытые дебюты", "en_type": "open", "ru_name": "Испанская партия: Отложенный гамбит Яниша", "en_name": "Schliemann Defence Deferred", "ru_pgn": "1. e4 e5 2. Kf3 Kc6 3. Cb5 a6 4. Сa4 f5", "eco": "C70", "en_pgn": "1. e4 e5 2. Nf3 Nc6 3. Bb5 a6 4. Ba4 f5"},
+{"ru_type": "Открытые дебюты", "en_type": "open", "ru_name": "Испанская партия: Система Меллера", "en_name": "Classical Defence Deferred", "ru_pgn": "1. e4 e5 2. Kf3 Kc6 3. Cb5 a6 4. Сa4 Сc5", "eco": "C70", "en_pgn": "1. e4 e5 2. Nf3 Nc6 3. Bb5 a6 4. Ba4 Bc5"},
+{"ru_type": "Открытые дебюты", "en_type": "open", "ru_name": "Испанская партия: Улучшенная защита Стейница", "en_name": "Modern Steinitz Defence", "ru_pgn": "1. e4 e5 2. Kf3 Kc6 3. Cb5 a6 4. Сa4 d6", "eco": "C71 - C76", "en_pgn": "1. e4 e5 2. Nf3 Nc6 3. Bb5 a6 4. Ba4 d6"},
+{"ru_type": "Открытые дебюты", "en_type": "open", "ru_name": "Испанская партия: Вариант Каро", "en_name": "Caro Variation", "ru_pgn": "1. e4 e5 2. Kf3 Kc6 3. Cb5 a6 4. Сa4 b5", "eco": "C70", "en_pgn": "1. e4 e5 2. Nf3 Nc6 3. Bb5 a6 4. Ba4 b5"},
+{"ru_type": "Открытые дебюты", "en_type": "open", "ru_name": "Испанская партия: Грацский вариант", "en_name": "Graz Defence", "ru_pgn": "1. e4 e5 2. Kf3 Kc6 3. Cb5 a6 4. Сa4 b5 5. Сb3 Сc5", "eco": "C70", "en_pgn": "1. e4 e5 2. Nf3 Nc6 3. Bb5 a6 4. Ba4 b5 5. Bb3 Bc5"},
+{"ru_type": "Открытые дебюты", "en_type": "open", "ru_name": "Испанская партия: Вариант Тайманова", "en_name": "Norwegian Defence", "ru_pgn": "1. e4 e5 2. Kf3 Kc6 3. Cb5 a6 4. Сa4 b5 5. Сb3 Кa5", "eco": "C70", "en_pgn": "1. e4 e5 2. Nf3 Nc6 3. Bb5 a6 4. Ba4 b5 5. Bb3 Na5"},
+{"ru_type": "Открытые дебюты", "en_type": "open", "ru_name": "Испанская партия: Вариант четырёх коней", "en_name": "Ruy Lopez Four Knights Variation", "ru_pgn": "1. e4 e5 2. Kf3 Kc6 3. Cb5 a6 4. Сa4 Кf6 5. Кc3", "eco": "C77", "en_pgn": "1. e4 e5 2. Nf3 Nc6 3. Bb5 a6 4. Ba4 Nf6 5. Nc3"},
+{"ru_type": "Открытые дебюты", "en_type": "open", "ru_name": "Испанская партия: Вариант Трейбала", "en_name": "Treybal Variation", "ru_pgn": "1. e4 e5 2. Kf3 Kc6 3. Cb5 a6 4. Сa4 Кf6 5. С:c6", "eco": "C77", "en_pgn": "1. e4 e5 2. Nf3 Nc6 3. Bb5 a6 4. Ba4 Nf6 5. Bxc6"},
+{"ru_type": "Открытые дебюты", "en_type": "open", "ru_name": "Испанская партия: Вариант Уормалда", "en_name": "Wormald Attack", "ru_pgn": "1. e4 e5 2. Kf3 Kc6 3. Cb5 a6 4. Сa4 Кf6 5. Фe2", "eco": "C77", "en_pgn": "1. e4 e5 2. Nf3 Nc6 3. Bb5 a6 4. Ba4 Nf6 5. Qe2"},
+{"ru_type": "Открытые дебюты", "en_type": "open", "ru_name": "Испанская партия: Открытый вариант", "en_name": "Open Defence", "ru_pgn": "1. e4 e5 2. Kf3 Kc6 3. Cb5 a6 4. Сa4 Кf6 5. 0-0 К:e4", "eco": "C80 - C83", "en_pgn": "1. e4 e5 2. Nf3 Nc6 3. Bb5 a6 4. Ba4 Nf6 5. 0-0 Nxe4"},
+{"ru_type": "Открытые дебюты", "en_type": "open", "ru_name": "Испанская партия: Архангельский вариант", "en_name": "Arkhangelsk Defence", "ru_pgn": "1. e4 e5 2. Kf3 Kc6 3. Cb5 a6 4. Сa4 Кf6 5. 0-0 b5 6. Сb3 Сb7", "eco": "C78", "en_pgn": "1. e4 e5 2. Nf3 Nc6 3. Bb5 a6 4. Ba4 Nf6 5. 0-0 b5 6. Bb3 Bb7"},
+{"ru_type": "Открытые дебюты", "en_type": "open", "ru_name": "Испанская партия: Вариант Рубинштейна", "en_name": "Russian Defence", "ru_pgn": "1. e4 e5 2. Kf3 Kc6 3. Cb5 a6 4. Сa4 Кf6 5. 0-0 d6", "eco": "C79", "en_pgn": "1. e4 e5 2. Nf3 Nc6 3. Bb5 a6 4. Ba4 Nf6 5. 0-0 d6"},
+{"ru_type": "Открытые дебюты", "en_type": "open", "ru_name": "Испанская партия: Система Брейера", "en_name": "Breyer Variation", "ru_pgn": "1. e4 e5 2. Kf3 Kc6 3. Cb5 a6 4. Сa4 Кf6 5. 0-0 Сe7 6. Лe1 b5 7. Сb3 d6 8. c3 0-0 9. h3 Кb8", "eco": "C95, C94", "en_pgn": "1. e4 e5 2. Nf3 Nc6 3. Bb5 a6 4. Ba4 Nf6 5. 0-0 Be7 6. Re1 b5 7. Bb3 d6 8. c3 0-0 9. h3 Nb8"},
+{"ru_type": "Открытые дебюты", "en_type": "open", "ru_name": "Испанская партия: Вариант Смыслова", "en_name": "Smyslov Variation", "ru_pgn": "1. e4 e5 2. Kf3 Kc6 3. Cb5 a6 4. Сa4 Кf6 5. 0-0 Сe7 6. Лe1 b5 7. Сb3 d6 8. c3 0-0 9. h3 h6", "eco": "C93", "en_pgn": "1. e4 e5 2. Nf3 Nc6 3. Bb5 a6 4. Ba4 Nf6 5. 0-0 Be7 6. Re1 b5 7. Bb3 d6 8. c3 0-0 9. h3 h6"},
+{"ru_type": "Открытые дебюты", "en_type": "open", "ru_name": "Испанская партия: Вариант Холмова", "en_name": "Kholmov Variation", "ru_pgn": "1. e4 e5 2. Kf3 Kc6 3. Cb5 a6 4. Сa4 Кf6 5. 0-0 Сe7 6. Лe1 b5 7. Сb3 d6 8. c3 0-0 9. h3 Сe6", "eco": "C92", "en_pgn": "1. e4 e5 2. Nf3 Nc6 3. Bb5 a6 4. Ba4 Nf6 5. 0-0 Be7 6. Re1 b5 7. Bb3 d6 8. c3 0-0 9. h3 Be6"},
+{"ru_type": "Открытые дебюты", "en_type": "open", "ru_name": "Испанская партия: Вариант Зайцева", "en_name": "Zaitsev Variation", "ru_pgn": "1. e4 e5 2. Kf3 Kc6 3. Cb5 a6 4. Сa4 Кf6 5. 0-0 Сe7 6. Лe1 b5 7. Сb3 d6 8. c3 0-0 9. h3 Сb7", "eco": "C92", "en_pgn": "1. e4 e5 2. Nf3 Nc6 3. Bb5 a6 4. Ba4 Nf6 5. 0-0 Be7 6. Re1 b5 7. Bb3 d6 8. c3 0-0 9. h3 Bb7"},
+{"ru_type": "Открытые дебюты", "en_type": "open", "ru_name": "Испанская партия: Система Чигорина", "en_name": "Chigorin Variation", "ru_pgn": "1. e4 e5 2. Kf3 Kc6 3. Cb5 a6 4. Сa4 Кf6 5. 0-0 Сe7 6. Лe1 b5 7. Сb3 d6 8. c3 0-0 9. h3 Кa5", "eco": "C96 - C99", "en_pgn": "1. e4 e5 2. Nf3 Nc6 3. Bb5 a6 4. Ba4 Nf6 5. 0-0 Be7 6. Re1 b5 7. Bb3 d6 8. c3 0-0 9. h3 Na5"},
+{"ru_type": "Открытые дебюты", "en_type": "open", "ru_name": "Испанская партия: Московский вариант", "en_name": "Karpov Variation", "ru_pgn": "1. e4 e5 2. Kf3 Kc6 3. Cb5 a6 4. Сa4 Кf6 5. 0-0 Сe7 6. Лe1 b5 7. Сb3 d6 8. c3 0-0 9. h3 Кd7", "eco": "C92", "en_pgn": "1. e4 e5 2. Nf3 Nc6 3. Bb5 a6 4. Ba4 Nf6 5. 0-0 Be7 6. Re1 b5 7. Bb3 d6 8. c3 0-0 9. h3 Nd7"},
+{"ru_type": "Открытые дебюты", "en_type": "open", "ru_name": "Испанская партия: Уклонения от контратаки Маршалла", "en_name": "Anti-Marshall systems", "ru_pgn": "1. e4 e5 2. Kf3 Kc6 3. Cb5 a6 4. Сa4 Кf6 5. 0-0 Сe7 6. Лe1 b5 7. Сb3 0-0 8. a4", "eco": "C88", "en_pgn": "1. e4 e5 2. Nf3 Nc6 3. Bb5 a6 4. Ba4 Nf6 5. 0-0 Be7 6. Re1 b5 7. Bb3 0-0 8. a4"},
+{"ru_type": "Открытые дебюты", "en_type": "open", "ru_name": "Испанская партия: Контратака Маршалла", "en_name": "Marshall Attack", "ru_pgn": "1. e4 e5 2. Kf3 Kc6 3. Cb5 a6 4. Сa4 Кf6 5. 0-0 Сe7 6. Лe1 b5 7. Сb3 0-0 8. c3 d5", "eco": "C89", "en_pgn": "1. e4 e5 2. Nf3 Nc6 3. Bb5 a6 4. Ba4 Nf6 5. 0-0 Be7 6. Re1 b5 7. Bb3 0-0 8. c3 d5"},
+{"ru_type": "Открытые дебюты", "en_type": "open", "ru_name": "Королевский гамбит", "en_name": "King's Gambit", "ru_pgn": "1. e4 e5 2. f4", "eco": "C30 - C39", "en_pgn": "1. e4 e5 2. f4"},
+{"ru_type": "Открытые дебюты", "en_type": "open", "ru_name": "Королевский гамбит: Контргамбит Фалькбеера", "en_name": "Falkbeer Countergambit", "ru_pgn": "1. e4 e5 2. f4 d5", "eco": "C31, C32", "en_pgn": "1. e4 e5 2. f4 d5"},
+{"ru_type": "Открытые дебюты", "en_type": "open", "ru_name": "Королевский гамбит: Гамбит Альгайера", "en_name": "Allgaier Gambit", "ru_pgn": "1. e4 e5 2. f4 e:f4 3. Кf3 g5 4. h4 g4 5. Кg5", "eco": "C39", "en_pgn": "1. e4 e5 2. f4 exf4 3. Nf3 g5 4. h4 g4 5. Ng5"},
+{"ru_type": "Открытые дебюты", "en_type": "open", "ru_name": "Королевский гамбит: Гамбит Ганштейна", "en_name": "Hanstein Gambit", "ru_pgn": "1. e4 e5 2. f4 e:f4 3. Кf3 g5 4. Сc4 Сg7 5. 0-0", "eco": "C38", "en_pgn": "1. e4 e5 2. f4 exf4 3. Nf3 g5 4. Bc4 Bg7 5. 0-0"},
+{"ru_type": "Открытые дебюты", "en_type": "open", "ru_name": "Королевский гамбит: Гамбит Герцфельда", "en_name": "Salvio Gambit", "ru_pgn": "1. e4 e5 2. f4 e:f4 3. Кf3 g5 4. Сc4 g4 5. Кe5 Фh4+ 6. Крf1 Кc6", "eco": "C37", "en_pgn": "1. e4 e5 2. f4 exf4 3. Nf3 g5 4. Bc4 g4 5. Ne5 Qh4+ 6. Kf1 Nc6"},
+{"ru_type": "Открытые дебюты", "en_type": "open", "ru_name": "Королевский гамбит: Гамбит Греко-Филидора", "en_name": "Philidor Gambit", "ru_pgn": "1. e4 e5 2. f4 e:f4 3. Кf3 g5 4. Сc4 Сg7 5.h4", "eco": "C38", "en_pgn": "1. e4 e5 2. f4 exf4 3. Nf3 g5 4. Bc4 Bg7 5.h4"},
+{"ru_type": "Открытые дебюты", "en_type": "open", "ru_name": "Королевский гамбит: Гамбит Гулам Кассима", "en_name": "Ghulam Kassim Gambit", "ru_pgn": "1. e4 e5 2. f4 e:f4 3. Кf3 g5 4. Сc4 g4 5. d4", "eco": "C37", "en_pgn": "1. e4 e5 2. f4 exf4 3. Nf3 g5 4. Bc4 g4 5. d4"},
+{"ru_type": "Открытые дебюты", "en_type": "open", "ru_name": "Королевский гамбит: Гамбит Зильбершмидта", "en_name": "Salvio Gambit", "ru_pgn": "1. e4 e5 2. f4 e:f4 3. Кf3 g5 4. Сc4 g4 5. Кe5 Фh4+ 6. Крf1 Кh6 7. d4 f3", "eco": "C37", "en_pgn": "1. e4 e5 2. f4 exf4 3. Nf3 g5 4. Bc4 g4 5. Ne5 Qh4+ 6. Kf1 Nh6 7. d4 f3"},
+{"ru_type": "Открытые дебюты", "en_type": "open", "ru_name": "Королевский гамбит: Гамбит Каннингема", "en_name": "Cunningham Defense", "ru_pgn": "1. e4 e5 2. f4 e:f4 3. Кf3 Сe7", "eco": "C35", "en_pgn": "1. e4 e5 2. f4 exf4 3. Nf3 Be7"},
+{"ru_type": "Открытые дебюты", "en_type": "open", "ru_name": "Королевский гамбит: Гамбит Квааде", "en_name": "Quaade Gambit", "ru_pgn": "1. e4 e5 2. f4 e:f4 3. Кf3 g5 4. Кc3", "eco": "C37", "en_pgn": "1. e4 e5 2. f4 exf4 3. Nf3 g5 4. Nc3"},
+{"ru_type": "Открытые дебюты", "en_type": "open", "ru_name": "Королевский гамбит: Гамбит Кизерицкого", "en_name": "Kieseritzky Gambit", "ru_pgn": "1. e4 e5 2. f4 e:f4 3. Кf3 g5 4. h4 g4 5. Кe5", "eco": "C39", "en_pgn": "1. e4 e5 2. f4 exf4 3. Nf3 g5 4. h4 g4 5. Ne5"},
+{"ru_type": "Открытые дебюты", "en_type": "open", "ru_name": "Королевский гамбит: Гамбит Кохрена", "en_name": "Salvio Gambit", "ru_pgn": "1. e4 e5 2. f4 e:f4 3. Кf3 g5 4. Сc4 g4 5. Кe5 Фh4+ 6. Крf1 f3", "eco": "C37", "en_pgn": "1. e4 e5 2. f4 exf4 3. Nf3 g5 4. Bc4 g4 5. Ne5 Qh4+ 6. Kf1 f3"},
+{"ru_type": "Открытые дебюты", "en_type": "open", "ru_name": "Королевский гамбит: Гамбит Лолли", "en_name": "Lolli Gambit", "ru_pgn": "1. e4 e5 2. f4 e:f4 3. Кf3 g5 4. Cc4 g4 5. C:f7+", "eco": "C37", "en_pgn": "1. e4 e5 2. f4 exf4 3. Nf3 g5 4. Bc4 g4 5. Bxf7+"},
+{"ru_type": "Открытые дебюты", "en_type": "open", "ru_name": "Королевский гамбит: Гамбит Мак-Доннелла", "en_name": "McDonnell Gambit", "ru_pgn": "1. e4 e5 2. f4 e:f4 3. Кf3 g5 4. Cc4 g4 5. Kc3", "eco": "C37", "en_pgn": "1. e4 e5 2. f4 exf4 3. Nf3 g5 4. Bc4 g4 5. Nc3"},
+{"ru_type": "Открытые дебюты", "en_type": "open", "ru_name": "Королевский гамбит: Гамбит Муцио", "en_name": "Muzio Gambit", "ru_pgn": "1. e4 e5 2. f4 e:f4 3. Кf3 g5 4. Cc4 g4 5. 0-0", "eco": "C37", "en_pgn": "1. e4 e5 2. f4 exf4 3. Nf3 g5 4. Bc4 g4 5. 0-0"},
+{"ru_type": "Открытые дебюты", "en_type": "open", "ru_name": "Королевский гамбит: Гамбит Райса", "en_name": "Kieseritzky Gambit", "ru_pgn": "1. e4 e5 2. f4 e:f4 3. Кf3 g5 4. h4 g4 5. Кe5 Кf6 6. Сc4 d5 7. e:d5 Сd6 8. 0-0", "eco": "C39", "en_pgn": "1. e4 e5 2. f4 exf4 3. Nf3 g5 4. h4 g4 5. Ne5 Nf6 6. Bc4 d5 7. exd5 Bd6 8. 0-0"},
+{"ru_type": "Открытые дебюты", "en_type": "open", "ru_name": "Королевский гамбит: Гамбит Розентретера", "en_name": "Rosentreter Gambit", "ru_pgn": "1. e4 e5 2. f4 e:f4 3. Кf3 g5 4. d4", "eco": "C37", "en_pgn": "1. e4 e5 2. f4 exf4 3. Nf3 g5 4. d4"},
+{"ru_type": "Открытые дебюты", "en_type": "open", "ru_name": "Королевский гамбит: Гамбит Сальвио", "en_name": "Salvio Gambit", "ru_pgn": "1. e4 e5 2. f4 e:f4 3. Кf3 g5 4. Сc4 g4 5. Кe5", "eco": "C37", "en_pgn": "1. e4 e5 2. f4 exf4 3. Nf3 g5 4. Bc4 g4 5. Ne5"},
+{"ru_type": "Открытые дебюты", "en_type": "open", "ru_name": "Королевский гамбит: Защита Беккера", "en_name": "Becker Defense", "ru_pgn": "1. e4 e5 2. f4 e:f4 3. Кf3 h6", "eco": "C34", "en_pgn": "1. e4 e5 2. f4 exf4 3. Nf3 h6"},
+{"ru_type": "Открытые дебюты", "en_type": "open", "ru_name": "Королевский гамбит: Защита Фишера", "en_name": "Fischer Defense", "ru_pgn": "1. e4 e5 2. f4 e:f4 3. Кf3 d6", "eco": "C34", "en_pgn": "1. e4 e5 2. f4 exf4 3. Nf3 d6"},
+{"ru_type": "Открытые дебюты", "en_type": "open", "ru_name": "Королевский гамбит: Защита Шаллопа", "en_name": "Schallopp Defense", "ru_pgn": "1. e4 e5 2. f4 e:f4 3. Кf3 Кf6", "eco": "C34", "en_pgn": "1. e4 e5 2. f4 exf4 3. Nf3 Nf6"},
+{"ru_type": "Открытые дебюты", "en_type": "open", "ru_name": "Королевский гамбит: Гамбит Бледова", "en_name": "Bledow variation", "ru_pgn": "1. e4 e5 2. f4 e:f4 3. Сc4 d5", "eco": "C33", "en_pgn": "1. e4 e5 2. f4 exf4 3. Bc4 d5"},
+{"ru_type": "Открытые дебюты", "en_type": "open", "ru_name": "Королевский гамбит: Контргамбит Лопеса", "en_name": "Lopez-Gianutio counter-gambit", "ru_pgn": "1. e4 e5 2. f4 e:f4 3. Сc4 f5", "eco": "C33", "en_pgn": "1. e4 e5 2. f4 exf4 3. Bc4 f5"},
+{"ru_type": "Открытые дебюты", "en_type": "open", "ru_name": "Королевский гамбит: Гамбит Брейера", "en_name": "Breyer gambit", "ru_pgn": "1. e4 e5 2. f4 e:f4 3. Фf3", "eco": "C33", "en_pgn": "1. e4 e5 2. f4 exf4 3. Qf3"},
+{"ru_type": "Открытые дебюты", "en_type": "open", "ru_name": "Королевский гамбит: Гамбит Мэзона", "en_name": "Mason Gambit / Keres Gambit", "ru_pgn": "1. e4 e5 2. f4 e:f4 3. Кc3", "eco": "C33", "en_pgn": "1. e4 e5 2. f4 exf4 3. Nc3"},
+{"ru_type": "Открытые дебюты", "en_type": "open", "ru_name": "Королевский гамбит: Гамбит Петрова", "en_name": "Lesser Bishop's Gambit / Tartakower Gambit", "ru_pgn": "1. e4 e5 2. f4 e:f4 3. Сe2", "eco": "C33", "en_pgn": "1. e4 e5 2. f4 exf4 3. Be2"},
+{"ru_type": "Открытые дебюты", "en_type": "open", "ru_name": "Королевский гамбит: Испанский гамбит", "en_name": "Villemson Gambit / Steinitz Gambit", "ru_pgn": "1. e4 e5 2. f4 e:f4 3. d4", "eco": "C33", "en_pgn": "1. e4 e5 2. f4 exf4 3. d4"},
+{"ru_type": "Открытые дебюты", "en_type": "open", "ru_name": "Защита двух коней", "en_name": "Two Knights Defense", "ru_pgn": "1. e4 e5 2. Кf3 Кc6 3. Сc4 Кf6", "eco": "C55 - C59", "en_pgn": "1. e4 e5 2. Nf3 Nc6 3. Bc4 Nf6"},
+{"ru_type": "Открытые дебюты", "en_type": "open", "ru_name": "Защита двух коней: Контратака Тракслера", "en_name": "Traxler Counterattack", "ru_pgn": "1. e4 e5 2. Кf3 Кc6 3. Сc4 Кf6 4. Кg5 Сc5", "eco": "C57", "en_pgn": "1. e4 e5 2. Nf3 Nc6 3. Bc4 Nf6 4. Ng5 Bc5"},
+{"ru_type": "Открытые дебюты", "en_type": "open", "ru_name": "Защита двух коней: Атака Лолли", "en_name": "Lolli Attack", "ru_pgn": "1. e4 e5 2. Кf3 Кc6 3. Сc4 Кf6 4. Кg5 d5 5. e:d5 К:d5 6. d4", "eco": "C57", "en_pgn": "1. e4 e5 2. Nf3 Nc6 3. Bc4 Nf6 4. Ng5 d5 5. exd5 Nxd5 6. d4"},
+{"ru_type": "Открытые дебюты", "en_type": "open", "ru_name": "Защита двух коней: Атака Макса Ланге", "en_name": "Max Lange Attack", "ru_pgn": "1. e4 e5 2. Кf3 Кc6 3. Сc4 Кf6 4. d4 e:d4 5. 0-0 Сc5 6. e5", "eco": "C55", "en_pgn": "1. e4 e5 2. Nf3 Nc6 3. Bc4 Nf6 4. d4 exd4 5. 0-0 Bc5 6. e5"},
+{"ru_type": "Открытые дебюты", "en_type": "open", "ru_name": "Защита двух коней: Атака Фегателло", "en_name": "Fried Liver Attack", "ru_pgn": "1. e4 e5 2. Кf3 Кc6 3. Сc4 Кf6 4. Кg5 d5 5. e:d5 К:d5 6. К:f7", "eco": "C57", "en_pgn": "1. e4 e5 2. Nf3 Nc6 3. Bc4 Nf6 4. Ng5 d5 5. exd5 Nxd5 6. Nxf7"},
+{"ru_type": "Открытые дебюты", "en_type": "open", "ru_name": "Защита двух коней: Вариант Ульвестада", "en_name": "Ulvestad Variation", "ru_pgn": "1. e4 e5 2. Кf3 Кc6 3. Сc4 Кf6 4. Кg5 d5 5. e:d5 b5", "eco": "C57", "en_pgn": "1. e4 e5 2. Nf3 Nc6 3. Bc4 Nf6 4. Ng5 d5 5. exd5 b5"},
+{"ru_type": "Открытые дебюты", "en_type": "open", "ru_name": "Защита двух коней: Вариант Фрица", "en_name": "Fritz Variation", "ru_pgn": "1. e4 e5 2. Кf3 Кc6 3. Сc4 Кf6 4. Кg5 d5 5. e:d5 Кd4", "eco": "C57", "en_pgn": "1. e4 e5 2. Nf3 Nc6 3. Bc4 Nf6 4. Ng5 d5 5. exd5 Nd4"},
+{"ru_type": "Открытые дебюты", "en_type": "open", "ru_name": "Дебют слона", "en_name": "Bishop's Opening", "ru_pgn": "1. e4 e5 2. Сc4", "eco": "C23, C24", "en_pgn": "1. e4 e5 2. Bc4"},
+{"ru_type": "Открытые дебюты", "en_type": "open", "ru_name": "Дебют слона: Гамбит Урусова", "en_name": "Urusov gambit", "ru_pgn": "1. e4 e5 2. Сc4 Кf6 3. d4 ed 4. Кf3", "eco": "C24, C43", "en_pgn": "1. e4 e5 2. Bc4 Nf6 3. d4 exd4 4. Nf3"},
+{"ru_type": "Открытые дебюты", "en_type": "open", "ru_name": "Дебют слона: Двойной гамбит Мак-Доннелла", "en_name": "Wing Gambit", "ru_pgn": "1. e4 e5 2. Сc4 Сc5 3. b4 С:b4 4. f4", "eco": "C23", "en_pgn": "1. e4 e5 2. Bc4 Bc5 3. b4 Bxb4 4. f4"},
+{"ru_type": "Открытые дебюты", "en_type": "open", "ru_name": "Дебют слона: Гамбит Понциани", "en_name": "Ponziani's Gambit", "ru_pgn": "1. e4 e5 2. Сc4 Кf6 3. d4", "eco": "C24", "en_pgn": "1. e4 e5 2. Bc4 Nf6 3. d4"},
+{"ru_type": "Открытые дебюты", "en_type": "open", "ru_name": "Дебют слона: Гамбит Льюиса", "en_name": "Lewis Gambit", "ru_pgn": "1. e4 e5 2. Сc4 Сc5 3. d4", "eco": "C23", "en_pgn": "1. e4 e5 2. Bc4 Bc5 3. d4"},
+{"ru_type": "Открытые дебюты", "en_type": "open", "ru_name": "Дебют слона: Гамбит Греко", "en_name": "Greco Gambit", "ru_pgn": "1. e4 e5 2. Сc4 Kf6 3. f4", "eco": "C24", "en_pgn": "1. e4 e5 2. Bc4 Nf6 3. f4"},
+{"ru_type": "Открытые дебюты", "en_type": "open", "ru_name": "Венская партия", "en_name": "Vienna Game", "ru_pgn": "1. e4 e5 2. Кc3", "eco": "C25 - C29", "en_pgn": "1. e4 e5 2. Nc3"},
+{"ru_type": "Открытые дебюты", "en_type": "open", "ru_name": "Венская партия: Гамбит Стейница", "en_name": "Steinitz-Gambit", "ru_pgn": "1. e4 e5 2. Кc3 Кc6 3. f4 exf4 4. d4", "eco": "C25", "en_pgn": "1. e4 e5 2. Nc3 Nc6 3. f4 exf4 4. d4"},
+{"ru_type": "Открытые дебюты", "en_type": "open", "ru_name": "Венская партия: Гамбит Гампе-Альгайера", "en_name": "Vienna Gambit", "ru_pgn": "1. e4 e5 2. Кc3 Кc6 3. f4 e:f4 4. Кf3 g5 5. h4 g4 6. Кg5", "eco": "C25", "en_pgn": "1. e4 e5 2. Nc3 Nc6 3. f4 exf4 4. Nf3 g5 5. h4 g4 6. Ng5"},
+{"ru_type": "Открытые дебюты", "en_type": "open", "ru_name": "Венская партия: Гамбит Гампе-Муцио", "en_name": "Hamppe–Muzio Gambit", "ru_pgn": "1. e4 e5 2. Кc3 Кc6 3. f4 e:f4 4. Кf3 g5 5. Сc4 g4 6. 0-0", "eco": "C25", "en_pgn": "1. e4 e5 2. Nc3 Nc6 3. f4 exf4 4. Nf3 g5 5. Bc4 g4 6. 0-0"},
+{"ru_type": "Открытые дебюты", "en_type": "open", "ru_name": "Венская партия: Гамбит Пирса", "en_name": "Pierce Gambit", "ru_pgn": "1. e4 e5 2. Кc3 Кc6 3. f4 e:f4 4. Кf3 g5 5. d4", "eco": "C25", "en_pgn": "1. e4 e5 2. Nc3 Nc6 3. f4 exf4 4. Nf3 g5 5. d4"},
+{"ru_type": "Открытые дебюты", "en_type": "open", "ru_name": "Итальянская партия", "en_name": "Giuoco Piano", "ru_pgn": "1. e4 e5 2. Kf3 Kc6 3. Cc4 Cc5", "eco": "C50 - C54", "en_pgn": "1. e4 e5 2. Nf3 Nc6 3. Bc4 Bc5"},
+{"ru_type": "Открытые дебюты", "en_type": "open", "ru_name": "Итальянская партия: Гамбит Греко", "en_name": "Greco Variation / Møller Attack", "ru_pgn": "1. e4 e5 2. Kf3 Kc6 3. Cc4 Cc5 4. c3 Кf6 5. d4 e:d4 6. c:d4 Сb4+ 7. Кc3", "eco": "C54", "en_pgn": "1. e4 e5 2. Nf3 Nc6 3. Bc4 Bc5 4. c3 Nf6 5. d4 exd4 6. cxd4 Bb4+ 7. Nc3"},
+{"ru_type": "Открытые дебюты", "en_type": "open", "ru_name": "Итальянская партия: Гамбит Эванса", "en_name": "Evans Gambit", "ru_pgn": "1. e4 e5 2. Kf3 Kc6 3. Cc4 Cc5 4. b4", "eco": "C51, C52", "en_pgn": "1. e4 e5 2. Nf3 Nc6 3. Bc4 Bc5 4. b4"},
+{"ru_type": "Открытые дебюты", "en_type": "open", "ru_name": "Итальянская партия: Гамбит Джерома", "en_name": "Jerome Gambit", "ru_pgn": "1. e4 e5 2. Kf3 Kc6 3. Cc4 Cc5 4. С:f7+", "eco": "C50", "en_pgn": "1. e4 e5 2. Nf3 Nc6 3. Bc4 Bc5 4. Bxf7+"},
+{"ru_type": "Открытые дебюты", "en_type": "open", "ru_name": "Дебют четырёх коней", "en_name": "Four Knights Game", "ru_pgn": "1. e4 e5 2. Кf3 Кc6 3. Кc3 Кf6", "eco": "C46 - C49", "en_pgn": "1. e4 e5 2. Nf3 Nc6 3. Nc3 Nf6"},
+{"ru_type": "Открытые дебюты", "en_type": "open", "ru_name": "Дебют четырёх коней: Белградский гамбит", "en_name": "Belgrade Gambit", "ru_pgn": "1. e4 e5 2. Кf3 Кc6 3. Кc3 Кf6 4. d4 e:d4 5. Кd5", "eco": "C47", "en_pgn": "1. e4 e5 2. Nf3 Nc6 3. Nc3 Nf6 4. d4 exd4 5. Nd5"},
+{"ru_type": "Открытые дебюты", "en_type": "open", "ru_name": "Дебют четырёх коней: Гамбит Рубинштейна", "en_name": "Rubinstein Variation", "ru_pgn": "1. e4 e5 2. Кf3 Кc6 3. Кc3 Кf6 4. Сb5 Кd4", "eco": "C48", "en_pgn": "1. e4 e5 2. Nf3 Nc6 3. Nc3 Nf6 4. Bb5 Nd4"},
+{"ru_type": "Открытые дебюты", "en_type": "open", "ru_name": "Дебют четырёх коней: Гамбит Хэллоуин", "en_name": "Halloween Gambit", "ru_pgn": "1. e4 e5 2. Кf3 Кc6 3. Кc3 Кf6 4. К:e5", "eco": "C46, C47", "en_pgn": "1. e4 e5 2. Nf3 Nc6 3. Nc3 Nf6 4. Nxe5"},
+{"ru_type": "Открытые дебюты", "en_type": "open", "ru_name": "Шотландская партия", "en_name": "Scotch Game", "ru_pgn": "1. e4 e5 2. Кf3 Кc6 3. d4", "eco": "C44, C45", "en_pgn": "1. e4 e5 2. Nf3 Nc6 3. d4"},
+{"ru_type": "Открытые дебюты", "en_type": "open", "ru_name": "Шотландская партия: Шотландский гамбит", "en_name": "Scotch Gambit", "ru_pgn": "1. e4 e5 2. Кf3 Кc6 3. d4 e:d4 4. Сc4", "eco": "C44", "en_pgn": "1. e4 e5 2. Nf3 Nc6 3. d4 exd4 4. Bc4"},
+{"ru_type": "Открытые дебюты", "en_type": "open", "ru_name": "Шотландская партия: Гамбит Гёринга", "en_name": "Göring Gambit", "ru_pgn": "1. e4 e5 2. Кf3 Кc6 3. d4 e:d4 4. c3", "eco": "C44", "en_pgn": "1. e4 e5 2. Nf3 Nc6 3. d4 exd4 4. c3"},
+{"ru_type": "Открытые дебюты", "en_type": "open", "ru_name": "Шотландская партия: Система Стейница", "en_name": "Steinitz Variation", "ru_pgn": "1. e4 e5 2. Кf3 Кc6 3. d4 e:d4 4. K:d4 Фh4", "eco": "C45", "en_pgn": "1. e4 e5 2. Nf3 Nc6 3. d4 exd4 4. Nxd4 Qh4"},
+{"ru_type": "Открытые дебюты", "en_type": "open", "ru_name": "Русская партия (защита Петрова)", "en_name": "Petrov's Defence", "ru_pgn": "1. e4 e5 2. Kf3 Kf6", "eco": "C42, C43, C44", "en_pgn": "1. e4 e5 2. Nf3 Nf6"},
+{"ru_type": "Открытые дебюты", "en_type": "open", "ru_name": "Русская партия (защита Петрова): Гамбит Кохрена", "en_name": "Cochrane Gambit", "ru_pgn": "1. e4 e5 2. Kf3 Kf6 3. K:e5 d6 4. K:f7", "eco": "C42", "en_pgn": "1. e4 e5 2. Nf3 Nf6 3. Nxe5 d6 4. Nxf7"},
+{"ru_type": "Открытые дебюты", "en_type": "open", "ru_name": "Дебют королевского коня", "en_name": "King's Knight Opening", "ru_pgn": "1. e4 e5 2. Кf3", "eco": "C40 - C99", "en_pgn": "1. e4 e5 2. Nf3"},
+{"ru_type": "Открытые дебюты", "en_type": "open", "ru_name": "Центральный дебют", "en_name": "Center Game", "ru_pgn": "1. e4 e5 2. d4 e:d 3. Фd4", "eco": "C21, C22", "en_pgn": "1. e4 e5 2. d4 exd4 3. Qd4"},
+{"ru_type": "Открытые дебюты", "en_type": "open", "ru_name": "Дебют Константинопольского", "en_name": "Konstantinopolsky Opening", "ru_pgn": "1. e4 e5 2. Кf3 Kc6 3. g3", "eco": "C44", "en_pgn": "1. e4 e5 2. Nf3 Nc6 3. g3"},
+{"ru_type": "Открытые дебюты", "en_type": "open", "ru_name": "Гамбит Руссо", "en_name": "Rousseau Gambit", "ru_pgn": "1. e4 e5 2. Кf3 Kc6 3. Cc4 f5", "eco": "C50", "en_pgn": "1. e4 e5 2. Nf3 Nc6 3. Bc4 f5"},
+{"ru_type": "Открытые дебюты", "en_type": "open", "ru_name": "Гамбит Блэкберна", "en_name": "Blackburne Shilling Gambit", "ru_pgn": "1. e4 e5 2. Кf3 Кc6 3. Сc4 Кd4", "eco": "C50", "en_pgn": "1. e4 e5 2. Nf3 Nc6 3. Bc4 Nd4"},
+{"ru_type": "Открытые дебюты", "en_type": "open", "ru_name": "Дебют трёх коней", "en_name": "Three Knights Game", "ru_pgn": "1. e4 e5 2. Kf3 Kc6 3. Kc3", "eco": "C46", "en_pgn": "1. e4 e5 2. Nf3 Nc6 3. Nc3"},
+{"ru_type": "Открытые дебюты", "en_type": "open", "ru_name": "Венгерская партия", "en_name": "Hungarian Defense", "ru_pgn": "1. e4 e5 2. Kf3 Kc6 3. Cc4 Cе7", "eco": "C50", "en_pgn": "1. e4 e5 2. Nf3 Nc6 3. Bc4 Be7"},
+{"ru_type": "Открытые дебюты", "en_type": "open", "ru_name": "Дебют Понциани", "en_name": "Ponziani Opening", "ru_pgn": "1. e4 e5 2. Kf3 Kc6 3. c3", "eco": "C44", "en_pgn": "1. e4 e5 2. Nf3 Nc6 3. c3"},
+{"ru_type": "Открытые дебюты", "en_type": "open", "ru_name": "Защита Греко", "en_name": "Greco Defence", "ru_pgn": "1. e4 e5 2. Kf3 Фf6", "eco": "C40", "en_pgn": "1. e4 e5 2. Nf3 Qf6"},
+{"ru_type": "Открытые дебюты", "en_type": "open", "ru_name": "Дебют Наполеона", "en_name": "Napoleon Opening", "ru_pgn": "1. e4 e5 2. Фf3", "eco": "C20", "en_pgn": "1. e4 e5 2. Qf3"},
+{"ru_type": "Открытые дебюты", "en_type": "open", "ru_name": "Дебют королевских пешек", "en_name": "King's pawn game", "ru_pgn": "1. e4 e5", "eco": "C20", "en_pgn": "1. e4 e5"},
+{"ru_type": "Открытые дебюты", "en_type": "open", "ru_name": "Дебют Воротникова", "en_name": "King's pawn, Indian opening", "ru_pgn": "1. e4 e5 2. d3", "eco": "C20", "en_pgn": "1. e4 e5 2. d3"},
+{"ru_type": "Открытые дебюты", "en_type": "open", "ru_name": "Дебют Алапина", "en_name": "Alapin's Opening", "ru_pgn": "1. е4 е5 2. Kе2", "eco": "C20", "en_pgn": "1. e4 e5 2. Ne2"},
+{"ru_type": "Открытые дебюты", "en_type": "open", "ru_name": "Защита Гундерама", "en_name": "Gunderam Defense", "ru_pgn": "1. e4 e5 2. Kf3 Фe7", "eco": "C40", "en_pgn": "1. e4 e5 2. Nf3 Qe7"},
+{"ru_type": "Открытые дебюты", "en_type": "open", "ru_name": "Атака Парэма", "en_name": "Danvers Opening", "ru_pgn": "1. e4 e5 2. Фh5", "eco": "C20", "en_pgn": "1. e4 e5 2. Qh5"},
+{"ru_type": "Открытые дебюты", "en_type": "open", "ru_name": "Центральный контргамбит", "en_name": "Elephant Gambit", "ru_pgn": "1. e4 e5 2. Kf3 d5", "eco": "C40", "en_pgn": "1. e4 e5 2. Nf3 d5"},
+{"ru_type": "Открытые дебюты", "en_type": "open", "ru_name": "Латышский гамбит", "en_name": "Latvian Gambit", "ru_pgn": "1. e4 e5 2. Kf3 f5", "eco": "C40", "en_pgn": "1. e4 e5 2. Nf3 f5"},
+{"ru_type": "Открытые дебюты", "en_type": "open", "ru_name": "Защита Филидора", "en_name": "Philidor Defence", "ru_pgn": "1. e4 e5 2. Kf3 d6", "eco": "C41", "en_pgn": "1. e4 e5 2. Nf3 d6"},
+{"ru_type": "Открытые дебюты", "en_type": "open", "ru_name": "Защита Дамиано", "en_name": "Damiano Defence", "ru_pgn": "1. e4 e5 2. Kf3 f6", "eco": "C40", "en_pgn": "1. e4 e5 2. Nf3 f6"},
+{"ru_type": "Полуоткрытые дебюты", "en_type": "halfopen", "ru_name": "Сицилианская защита", "en_name": "Sicilian Defence", "ru_pgn": "1. e4 c5", "eco": "B20 - B99", "en_pgn": "1. e4 c5"},
+{"ru_type": "Полуоткрытые дебюты", "en_type": "halfopen", "ru_name": "Сицилианская защита: Сицилианский гамбит", "en_name": "Wing Gambit", "ru_pgn": "1. e4 c5 2. b4", "eco": "B20", "en_pgn": "1. e4 c5 2. b4"},
+{"ru_type": "Полуоткрытые дебюты", "en_type": "halfopen", "ru_name": "Сицилианская защита: Гамбит Морра", "en_name": "Smith–Morra Gambit", "ru_pgn": "1. e4 c5 2. d4 c:d4 3. c3", "eco": "B21", "en_pgn": "1. e4 c5 2. d4 cxd4 3. c3"},
+{"ru_type": "Полуоткрытые дебюты", "en_type": "halfopen", "ru_name": "Сицилианская защита: Атака Гран-при", "en_name": "Closed Sicilian, Grand Prix Attack", "ru_pgn": "1. e4 c5 2. Kc3 Кc6 3. f4", "eco": "B23", "en_pgn": "1. e4 c5 2. Nc3 Nc6 3. f4"},
+{"ru_type": "Полуоткрытые дебюты", "en_type": "halfopen", "ru_name": "Сицилианская защита: Вариант Алапина", "en_name": "Alapin Variation", "ru_pgn": "1. e4 c5 2. c3", "eco": "B22", "en_pgn": "1. e4 c5 2. c3"},
+{"ru_type": "Полуоткрытые дебюты", "en_type": "halfopen", "ru_name": "Сицилианская защита: Вариант дракона", "en_name": "Dragon Variation", "ru_pgn": "1. e4 c5 2. Kf3 d6 3. d4 c:d4 4. K:d4 Kf6 5. Kc3 g6", "eco": "B70", "en_pgn": "1. e4 c5 2. Nf3 d6 3. d4 cxd4 4. Nxd4 Nf6 5. Nc3 g6"},
+{"ru_type": "Полуоткрытые дебюты", "en_type": "halfopen", "ru_name": "Сицилианская защита: Вариант Найдорфа", "en_name": "Najdorf Variation", "ru_pgn": "1. e4 c5 2. Kf3 d6 3. d4 c:d4 4. K:d4 Kf6 5. Kc3 a6", "eco": "B90", "en_pgn": "1. e4 c5 2. Nf3 d6 3. d4 cxd4 4. Nxd4 Nf6 5. Nc3 a6"},
+{"ru_type": "Полуоткрытые дебюты", "en_type": "halfopen", "ru_name": "Сицилианская защита: Вариант отравленной пешки", "en_name": "Poisoned pawn variation", "ru_pgn": "1. e4 c5 2. Kf3 d6 3. d4 c:d4 4. K:d4 Kf6 5. Kc3 a6 6. Сg5 e6\r\n7. f4 Фb6 8.Фd2 Ф:b2", "eco": "B97", "en_pgn": "1. e4 c5 2. Nf3 d6 3. d4 cxd4 4. Nxd4 Nf6 5. Nc3 a6 6. Bg5 e6 7. f4 Qb6 8.Qd2 Qxb2"},
+{"ru_type": "Полуоткрытые дебюты", "en_type": "halfopen", "ru_name": "Сицилианская защита: Вариант Полугаевского", "en_name": "Polugayevsky variation", "ru_pgn": "1. e4 c5 2. Kf3 d6 3. d4 c:d4 4. K:d4 Kf6 5. Kc3 a6 6. Сg5 e6 7. f4 b5", "eco": "B96", "en_pgn": "1. e4 c5 2. Nf3 d6 3. d4 cxd4 4. Nxd4 Nf6 5. Nc3 a6 6. Bg5 e6 7. f4 b5"},
+{"ru_type": "Полуоткрытые дебюты", "en_type": "halfopen", "ru_name": "Сицилианская защита: Гамбит Каспарова", "en_name": "Kasparov Gambit", "ru_pgn": "1. e4 c5 2. Kf3 e6 3. d4 c:d4 4. К:d4 Кc6 5. Кb5 d6 6. c4 Кf6 7. К1c3 a6 8. Кa3 d5", "eco": "B44", "en_pgn": "1. e4 c5 2. Nf3 e6 3. d4 cxd4 4. Nxd4 Nc6 5. Nb5 d6 6. c4 Nf6 7. N1c3 a6 8. Na3 d5"},
+{"ru_type": "Полуоткрытые дебюты", "en_type": "halfopen", "ru_name": "Сицилианская защита: Схевенингенский вариант", "en_name": "Scheveningen Variation", "ru_pgn": "1. e4 c5 2. Kf3 e6 3. d4 c:d4 4. K:d4 Kf6 5. Kc3 d6", "eco": "B80", "en_pgn": "1. e4 c5 2. Nf3 e6 3. d4 cxd4 4. Nxd4 Nf6 5. Nc3 d6"},
+{"ru_type": "Полуоткрытые дебюты", "en_type": "halfopen", "ru_name": "Сицилианская защита: Челябинский вариант", "en_name": "Sveshnikov Variation", "ru_pgn": "1. e4 c5 2. Kf3 Kc6 3. d4 c:d4 4. K:d4 Kf6 5. Kc3 e5 6. Kdb5 d6 7. Cg5 a6 8. Ka3 b5", "eco": "B33", "en_pgn": "1. e4 c5 2. Nf3 Nc6 3. d4 cxd4 4. Nxd4 Nf6 5. Nc3 e5 6. Ndb5 d6 7. Bg5 a6 8. Na3 b5"},
+{"ru_type": "Полуоткрытые дебюты", "en_type": "halfopen", "ru_name": "Защита Каро-Канн", "en_name": "Caro–Kann Defence", "ru_pgn": "1. e4 c6", "eco": "B10 - B19", "en_pgn": "1. e4 c6"},
+{"ru_type": "Полуоткрытые дебюты", "en_type": "halfopen", "ru_name": "Защита Каро-Канн: Атака Панова", "en_name": "Panov–Botvinnik Attack", "ru_pgn": "1. e4 c6 2. d4 d5 3. exd5 cxd5 4. c4", "eco": "B13, B14", "en_pgn": "1. e4 c6 2. d4 d5 3. exd5 cxd5 4. c4"},
+{"ru_type": "Полуоткрытые дебюты", "en_type": "halfopen", "ru_name": "Защита Каро-Канн: Закрытая система", "en_name": "Advance Variation", "ru_pgn": "1. e4 c6 2. d4 d5 3. e5", "eco": "B12", "en_pgn": "1. e4 c6 2. d4 d5 3. e5"},
+{"ru_type": "Полуоткрытые дебюты", "en_type": "halfopen", "ru_name": "Защита Каро-Канн: Система Нимцовича", "en_name": "Bronstein–Larsen Variation", "ru_pgn": "1. e4 c6 2. d4 d5 3. Кc3 d:e4 4. К:e4 Кf6 5. К:f6 g:f6", "eco": "B16", "en_pgn": "1. e4 c6 2. d4 d5 3. Nc3 dxe4 4. Nxe4 Nf6 5. Nxf6 gxf6"},
+{"ru_type": "Полуоткрытые дебюты", "en_type": "halfopen", "ru_name": "Защита Каро-Канн: Классическая система", "en_name": "Classical Variation", "ru_pgn": "1. e4 c6 2. d4 d5 3. Кc3 d:e4 4. К:e4 Сf5", "eco": "B18, B19", "en_pgn": "1. e4 c6 2. d4 d5 3. Nc3 dxe4 4. Nxe4 Bf5"},
+{"ru_type": "Полуоткрытые дебюты", "en_type": "halfopen", "ru_name": "Защита Каро-Канн: Система Петросяна-Смыслова", "en_name": "Modern Variation", "ru_pgn": "1. e4 c6 2. d4 d5 3. Кc3 d:e4 4. К:e4 Кd7", "eco": "B17", "en_pgn": "1. e4 c6 2. d4 d5 3. Nc3 dxe4 4. Nxe4 Nd7"},
+{"ru_type": "Полуоткрытые дебюты", "en_type": "halfopen", "ru_name": "Защита Каро-Канн: Вариант Флора", "en_name": "Korchnoi Variation", "ru_pgn": "1. e4 c6 2. d4 d5 3. Кc3 d:e4 4. К:e4 Кf6 5. К:f6 e:f6", "eco": "B15", "en_pgn": "1. e4 c6 2. d4 d5 3. Nc3 dxe4 4. Nxe4 Nf6 5. Nxf6 exf6"},
+{"ru_type": "Полуоткрытые дебюты", "en_type": "halfopen", "ru_name": "Защита Каро-Канн: Вариант Гургенидзе", "en_name": "Gurgenidze Variation", "ru_pgn": "1. e4 c6 2. d4 d5 3. Кc3 g6", "eco": "B15", "en_pgn": "1. e4 c6 2. d4 d5 3. Nc3 g6"},
+{"ru_type": "Полуоткрытые дебюты", "en_type": "halfopen", "ru_name": "Защита Каро-Канн: 3. e5 c5", "en_name": "Arkell/Khenkin Variation", "ru_pgn": "1. e4 c6 2. d4 d5 3. e5 c5", "eco": "B12", "en_pgn": "1. e4 c6 2. d4 d5 3. e5 c5"},
+{"ru_type": "Полуоткрытые дебюты", "en_type": "halfopen", "ru_name": "Французская защита", "en_name": "French Defence", "ru_pgn": "1. е4 е6", "eco": "C00 - C19", "en_pgn": "1. e4 e6"},
+{"ru_type": "Полуоткрытые дебюты", "en_type": "halfopen", "ru_name": "Французская защита: Разменный вариант", "en_name": "Exchange Variation", "ru_pgn": "1. e4 e6 2. d4 d5 3. e:d5", "eco": "C01", "en_pgn": "1. e4 e6 2. d4 d5 3. exd5"},
+{"ru_type": "Полуоткрытые дебюты", "en_type": "halfopen", "ru_name": "Французская защита: Система Нимцовича", "en_name": "Advance Variation", "ru_pgn": "1. е4 e6 2. d4 d5 3. e5", "eco": "C02", "en_pgn": "1. e4 e6 2. d4 d5 3. e5"},
+{"ru_type": "Полуоткрытые дебюты", "en_type": "halfopen", "ru_name": "Французская защита: Система Тарраша", "en_name": "Tarrasch Variation", "ru_pgn": "1. е4 e6 2. d4 d5 3. Кd2", "eco": "C03 - C09", "en_pgn": "1. e4 e6 2. d4 d5 3. Nd2"},
+{"ru_type": "Полуоткрытые дебюты", "en_type": "halfopen", "ru_name": "Защита Алехина", "en_name": "Alekhine's Defence", "ru_pgn": "1. e4 Kf6", "eco": "B02 - B05", "en_pgn": "1. e4 Nf6"},
+{"ru_type": "Полуоткрытые дебюты", "en_type": "halfopen", "ru_name": "Защита Пирца-Уфимцева", "en_name": "Pirc Defence", "ru_pgn": "1. e4 d6 2. d4 Kf6 3. Kc3 g6", "eco": "B07, B08, B09", "en_pgn": "1. e4 d6 2. d4 Nf6 3. Nc3 g6"},
+{"ru_type": "Полуоткрытые дебюты", "en_type": "halfopen", "ru_name": "Дебют Нимцовича", "en_name": "Nimzowitsch Defence", "ru_pgn": "1. e4 Kc6", "eco": "B00", "en_pgn": "1. e4 Nc6"},
+{"ru_type": "Полуоткрытые дебюты", "en_type": "halfopen", "ru_name": "Защита Басмана", "en_name": "Reversed Grob", "ru_pgn": "1. e4 g5", "eco": "B00", "en_pgn": "1. e4 g5"},
+{"ru_type": "Полуоткрытые дебюты", "en_type": "halfopen", "ru_name": "Защита Оуэна", "en_name": "Owen's Defence", "ru_pgn": "1. е4 b6", "eco": "B00", "en_pgn": "1. e4 b6"},
+{"ru_type": "Полуоткрытые дебюты", "en_type": "halfopen", "ru_name": "Защита Робача", "en_name": "Modern Defense", "ru_pgn": "1. e4 g6", "eco": "B06", "en_pgn": "1. e4 g6"},
+{"ru_type": "Полуоткрытые дебюты", "en_type": "halfopen", "ru_name": "Защита Святого Георгия", "en_name": "St. George Defence", "ru_pgn": "1. e4 a6", "eco": "B00", "en_pgn": "1. e4 a6"},
+{"ru_type": "Полуоткрытые дебюты", "en_type": "halfopen", "ru_name": "Скандинавская защита", "en_name": "Scandinavian Defense", "ru_pgn": "1. e4 d5", "eco": "B01", "en_pgn": "1. e4 d5"},
+{"ru_type": "Закрытые дебюты", "en_type": "closed", "ru_name": "Дебют ферзевых пешек", "en_name": "Double Queen's Pawn Opening", "ru_pgn": "1. d4 d5", "eco": "D00 - D05", "en_pgn": "1. d4 d5"},
+{"ru_type": "Закрытые дебюты", "en_type": "closed", "ru_name": "Дебют ферзевых пешек: Атака Торре", "en_name": "Torre Attack", "ru_pgn": "1. d4 d5 2. Кf3 Кf6 3. Сg5", "eco": "D03", "en_pgn": "1. d4 d5 2. Nf3 Nf6 3. Bg5"},
+{"ru_type": "Закрытые дебюты", "en_type": "closed", "ru_name": "Дебют ферзевых пешек: Вариант Чигорина", "en_name": "Chigorin variation", "ru_pgn": "1. d4 d5 2. Kc3", "eco": "D00", "en_pgn": "1. d4 d5 2. Nc3"},
+{"ru_type": "Закрытые дебюты", "en_type": "closed", "ru_name": "Дебют ферзевых пешек: Гамбит Блэкмара", "en_name": "Blackmar gambit", "ru_pgn": "1. d4 d5 2. e4", "eco": "D00", "en_pgn": "1. d4 d5 2. e4"},
+{"ru_type": "Закрытые дебюты", "en_type": "closed", "ru_name": "Дебют ферзевых пешек: Гамбит Блэкмара - Димера", "en_name": "Blackmar–Diemer Gambit", "ru_pgn": "1. d4 d5 2. Кc3 Кf6 3. e4", "eco": "D00", "en_pgn": "1. d4 d5 2. Nc3 Nf6 3. e4"},
+{"ru_type": "Закрытые дебюты", "en_type": "closed", "ru_name": "Дебют ферзевых пешек: Лондонская система", "en_name": "London System", "ru_pgn": "1. d4 d5 2. Кf3 Кf6 3. Cf4", "eco": "D00 - D05", "en_pgn": "1. d4 d5 2. Nf3 Nf6 3. Bf4"},
+{"ru_type": "Закрытые дебюты", "en_type": "closed", "ru_name": "Дебют ферзевых пешек: Польский гамбит", "en_name": "Popiel Gambit", "ru_pgn": "1. d4 d5 2. e4 dxe4 3. Кc3 Кf6 4. Сg5", "eco": "D00", "en_pgn": "1. d4 d5 2. e4 dxe4 3. Nc3 Nf6 4. Bg5"},
+{"ru_type": "Закрытые дебюты", "en_type": "closed", "ru_name": "Дебют ферзевых пешек: Система Вересова", "en_name": "Richter–Veresov Attack", "ru_pgn": "1. d4 d5 2. Kc3 Kf6 3. Cg5", "eco": "D01", "en_pgn": "1. d4 d5 2. Nc3 Nf6 3. Bg5"},
+{"ru_type": "Закрытые дебюты", "en_type": "closed", "ru_name": "Дебют ферзевых пешек: Система Колле", "en_name": "Colle System", "ru_pgn": "1. d4 d5 2. Кf3 Кf6 3. e3 e6 4. Сd3 c5 5. c3", "eco": "D05", "en_pgn": "1. d4 d5 2. Nf3 Nf6 3. e3 e6 4. Bd3 c5 5. c3"},
+{"ru_type": "Закрытые дебюты", "en_type": "closed", "ru_name": "Дебют ферзевых пешек: Система Левитского", "en_name": "Hodgson Attack", "ru_pgn": "1. d4 d5 2. Cg5", "eco": "D00", "en_pgn": "1. d4 d5 2. Bg5"},
+{"ru_type": "Закрытые дебюты", "en_type": "closed", "ru_name": "Дебют ферзевых пешек: Система Цукерторта", "en_name": "Colle–Zukertort System", "ru_pgn": "1. d4 d5 2. Кf3 Кf6 3. e3 e6 4. Сd3 c5 5. b3", "eco": "D05", "en_pgn": "1. d4 d5 2. Nf3 Nf6 3. e3 e6 4. Bd3 c5 5. b3"},
+{"ru_type": "Закрытые дебюты", "en_type": "closed", "ru_name": "Ферзевый гамбит", "en_name": "Queen's Gambit", "ru_pgn": "1. d4 d5 2. c4", "eco": "D06 - D69", "en_pgn": "1. d4 d5 2. c4"},
+{"ru_type": "Закрытые дебюты", "en_type": "closed", "ru_name": "Ферзевый гамбит: Принятый ферзевый гамбит", "en_name": "Queen's Gambit Accepted", "ru_pgn": "1. d4 d5 2. c4 dxc4", "eco": "D20 - D29", "en_pgn": "1. d4 d5 2. c4 dxc4"},
+{"ru_type": "Закрытые дебюты", "en_type": "closed", "ru_name": "Ферзевый гамбит: Отказанный ферзевый гамбит", "en_name": "Queen's Gambit Declined (QGD)", "ru_pgn": "1. d4 d5 2. c4 e6", "eco": "D30 - D69", "en_pgn": "1. d4 d5 2. c4 e6"},
+{"ru_type": "Закрытые дебюты", "en_type": "closed", "ru_name": "Славянская защита", "en_name": "Slav Defense", "ru_pgn": "1. d4 d5 2. c4 c6", "eco": "D10 - D19", "en_pgn": "1. d4 d5 2. c4 c6"},
+{"ru_type": "Закрытые дебюты", "en_type": "closed", "ru_name": "Каталонское начало", "en_name": "Catalan Opening", "ru_pgn": "1. d4 Kf6 2. c4 e6 3. g3 d5 4. Cg2", "eco": "E01 - E09", "en_pgn": "1. d4 Nf6 2. c4 e6 3. g3 d5 4. Bg2"},
+{"ru_type": "Полузакрытые дебюты", "en_type": "halfclosed", "ru_name": "Староиндийская защита", "en_name": "King's Indian Defence", "ru_pgn": "1. d4 Kf6 2. c4 g6 3. Кc3 (или 3. g3) Сg7", "eco": "E60 - E99", "en_pgn": "1. d4 Nf6 2. c4 g6 3. Nc3 Bg7"},
+{"ru_type": "Полузакрытые дебюты", "en_type": "halfclosed", "ru_name": "Защита Нимцовича", "en_name": "Nimzo-Indian Defence", "ru_pgn": "1. d4 Kf6 2. c4 e6 3. Кc3 Cb4", "eco": "E20 - E59", "en_pgn": "1. d4 Nf6 2. c4 e6 3. Nc3 Bb4"},
+{"ru_type": "Полузакрытые дебюты", "en_type": "halfclosed", "ru_name": "Защита Грюнфельда", "en_name": "Grünfeld Defence", "ru_pgn": "1. d4 Kf6 2. c4 g6 3. Кc3 d5", "eco": "D70 - D99", "en_pgn": "1. d4 Nf6 2. c4 g6 3. Nc3 d5"},
+{"ru_type": "Полузакрытые дебюты", "en_type": "halfclosed", "ru_name": "Защита Бенони", "en_name": "Benoni Defense", "ru_pgn": "1. d4 Kf6 2. c4 c5 3. d5", "eco": "A43, A44, A56 - A79", "en_pgn": "1. d4 Nf6 2. c4 c5 3. d5"},
+{"ru_type": "Полузакрытые дебюты", "en_type": "halfclosed", "ru_name": "Голландская защита", "en_name": "Dutch Defence", "ru_pgn": "1. d4 f5", "eco": "A80 - A99", "en_pgn": "1. d4 f5"},
+{"ru_type": "Полузакрытые дебюты", "en_type": "halfclosed", "ru_name": "Новоиндийская защита", "en_name": "Queen's Indian Defense", "ru_pgn": "1. d4 Kf6 2. c4 e6 3. Kf3 b6", "eco": "E12 - E19", "en_pgn": "1. d4 Nf6 2. c4 e6 3. Nf3 b6"},
+{"ru_type": "Полузакрытые дебюты", "en_type": "halfclosed", "ru_name": "Волжский гамбит", "en_name": "Benko Gambit", "ru_pgn": "1. d4 Кf6 2. c4 c5 3. d5 b5", "eco": "A57, A58, A59", "en_pgn": "1. d4 Nf6 2. c4 c5 3. d5 b5"},
+{"ru_type": "Полузакрытые дебюты", "en_type": "halfclosed", "ru_name": "Будапештский гамбит", "en_name": "Budapest Gambit", "ru_pgn": "1. d4 Kf6 2. c4 e5", "eco": "A51, A52", "en_pgn": "1. d4 Nf6 2. c4 e5"},
+{"ru_type": "Полузакрытые дебюты", "en_type": "halfclosed", "ru_name": "Гамбит Блюменфельда", "en_name": "Blumenfeld Countergambit", "ru_pgn": "1. d4 Кf6 2. c4 e6 3. Kf3 c5 4. d5 b5", "eco": "E10", "en_pgn": "1. d4 Nf6 2. c4 e6 3. Nf3 c5 4. d5 b5"},
+{"ru_type": "Полузакрытые дебюты", "en_type": "halfclosed", "ru_name": "Атака Тромповского", "en_name": "Trompowsky Attack", "ru_pgn": "1. d4 Kf6 2. Cg5", "eco": "A45", "en_pgn": "1. d4 Nf6 2. Bg5"},
+{"ru_type": "Полузакрытые дебюты", "en_type": "halfclosed", "ru_name": "Гамбит Крейчика", "en_name": "Krejcik gambit", "ru_pgn": "1. d4 f5 2. g4", "eco": "A80", "en_pgn": "1. d4 f5 2. g4"},
+{"ru_type": "Полузакрытые дебюты", "en_type": "halfclosed", "ru_name": "Гамбит Стаунтона", "en_name": "Staunton Gambit", "ru_pgn": "1. d4 f5 2. e4", "eco": "A82", "en_pgn": "1. d4 f5 2. e4"},
+{"ru_type": "Полузакрытые дебюты", "en_type": "halfclosed", "ru_name": "Гамбит Энглунда", "en_name": "Englund Gambit", "ru_pgn": "1. d4 е5", "eco": "A40", "en_pgn": "1. d4 e5"},
+{"ru_type": "Полузакрытые дебюты", "en_type": "halfclosed", "ru_name": "Дебют ферзевой пешки", "en_name": "Queen's Pawn Game", "ru_pgn": "1. d4", "eco": "A40", "en_pgn": "1. d4"},
+{"ru_type": "Полузакрытые дебюты", "en_type": "halfclosed", "ru_name": "Защита Боголюбова", "en_name": "Bogo-Indian Defence", "ru_pgn": "1. d4 Kf6 2. c4 e6 3. Kf3 Cb4+", "eco": "E11", "en_pgn": "1. d4 Nf6 2. c4 e6 3. Nf3 Bb4+"},
+{"ru_type": "Полузакрытые дебюты", "en_type": "halfclosed", "ru_name": "Индийская защита", "en_name": "Old Indian Defense", "ru_pgn": "1. d4 Kf6 2. c4 d6", "eco": "A53", "en_pgn": "1. d4 Nf6 2. c4 d6"},
+{"ru_type": "Полузакрытые дебюты", "en_type": "halfclosed", "ru_name": "Польская защита", "en_name": "Polish Defense", "ru_pgn": "1. d4 b5", "eco": "A40", "en_pgn": "1. d4 b5"},
+{"ru_type": "Фланговые дебюты", "en_type": "flank", "ru_name": "Английское начало", "en_name": "English Opening", "ru_pgn": "1. c4", "eco": "A10, A11, A12, A39, A13 - A38", "en_pgn": "1. c4"},
+{"ru_type": "Фланговые дебюты", "en_type": "flank", "ru_name": "Дебют Рети", "en_name": "Reti Opening", "ru_pgn": "1. Kf3", "eco": "A04 - A09", "en_pgn": "1. Nf3"},
+{"ru_type": "Фланговые дебюты", "en_type": "flank", "ru_name": "Дебют ван Круйса", "en_name": "Van't Kruijs Opening", "ru_pgn": "1. e3", "eco": "A00", "en_pgn": "1. e3"},
+{"ru_type": "Фланговые дебюты", "en_type": "flank", "ru_name": "Атака Гроба", "en_name": "Grob's Attack", "ru_pgn": "1. g4", "eco": "A00", "en_pgn": "1. g4"},
+{"ru_type": "Фланговые дебюты", "en_type": "flank", "ru_name": "Атака Дёркина", "en_name": "Durkin Opening", "ru_pgn": "1. Кa3", "eco": "A00", "en_pgn": "1. Na3"},
+{"ru_type": "Фланговые дебюты", "en_type": "flank", "ru_name": "Дебют Амара", "en_name": "Amar Opening", "ru_pgn": "1. Кh3", "eco": "A00", "en_pgn": "1. Nh3"},
+{"ru_type": "Фланговые дебюты", "en_type": "flank", "ru_name": "Дебют Андерсена", "en_name": "Anderssen's Opening", "ru_pgn": "1. a3", "eco": "A00", "en_pgn": "1. a3"},
+{"ru_type": "Фланговые дебюты", "en_type": "flank", "ru_name": "Дебют Бёрда", "en_name": "Bird's Opening", "ru_pgn": "1. f4", "eco": "A00", "en_pgn": "1. f4"},
+{"ru_type": "Фланговые дебюты", "en_type": "flank", "ru_name": "Гамбит Фрома", "en_name": "From's Gambit", "ru_pgn": "1. f4 e5", "eco": "A02", "en_pgn": "1. f4 e5"},
+{"ru_type": "Фланговые дебюты", "en_type": "flank", "ru_name": "Швейцарский гамбит", "en_name": "Swiss Gambit", "ru_pgn": "1. f4 f5 2. e4", "eco": "A02", "en_pgn": "1. f4 f5 2. e4"},
+{"ru_type": "Фланговые дебюты", "en_type": "flank", "ru_name": "Дебют Данста", "en_name": "Dunst Opening", "ru_pgn": "1. Кc3", "eco": "A00", "en_pgn": "1. Nc3"},
+{"ru_type": "Фланговые дебюты", "en_type": "flank", "ru_name": "Дебют Гедульта", "en_name": "Barnes Opening", "ru_pgn": "1. f3", "eco": "A00", "en_pgn": "1. f3"},
+{"ru_type": "Фланговые дебюты", "en_type": "flank", "ru_name": "Дебют Депре", "en_name": "Desprez Opening", "ru_pgn": "1. h4", "eco": "A00", "en_pgn": "1. h4"},
+{"ru_type": "Фланговые дебюты", "en_type": "flank", "ru_name": "Дебют Клеменца", "en_name": "Clemenz Opening", "ru_pgn": "1. h3", "eco": "A00", "en_pgn": "1. h3"},
+{"ru_type": "Фланговые дебюты", "en_type": "flank", "ru_name": "Дебют Ларсена", "en_name": "Larsen's Opening", "ru_pgn": "1. b3", "eco": "A01", "en_pgn": "1. b3"},
+{"ru_type": "Фланговые дебюты", "en_type": "flank", "ru_name": "Дебют Мизеса", "en_name": "Mieses Opening", "ru_pgn": "1. d3", "eco": "A00", "en_pgn": "1. d3"},
+{"ru_type": "Фланговые дебюты", "en_type": "flank", "ru_name": "Гамбит Лисицына", "en_name": "Lisitsin Gambit", "ru_pgn": "1. Кf3 f5 2. e4", "eco": "A04", "en_pgn": "1. Nf3 f5 2. e4"},
+{"ru_type": "Фланговые дебюты", "en_type": "flank", "ru_name": "Львовский гамбит", "en_name": "Tennison Gambit", "ru_pgn": "1. Kf3 d5 2. e4 de 3. Kg5", "eco": "A06", "en_pgn": "1. Nf3 d5 2. e4 dxe4 3. Ng5"},
+{"ru_type": "Фланговые дебюты", "en_type": "flank", "ru_name": "Дебют Сокольского (Польский дебют)", "en_name": "Sokolsky Opening", "ru_pgn": "1. b4", "eco": "A00", "en_pgn": "1. b4"},
+{"ru_type": "Фланговые дебюты", "en_type": "flank", "ru_name": "Дебют Уэра", "en_name": "Ware Opening", "ru_pgn": "1. a4", "eco": "A00", "en_pgn": "1. a4"},
+{"ru_type": "Фланговые дебюты", "en_type": "flank", "ru_name": "Сарагосское начало", "en_name": "Saragossa Opening", "ru_pgn": "1. c3", "eco": "A00", "en_pgn": "1. c3"},
+{"ru_type": "Фланговые дебюты", "en_type": "flank", "ru_name": "Староиндийское начало", "en_name": "King's Fianchetto Opening", "ru_pgn": "1. g3", "eco": "A00"} "en_pgn": "1. g3"}"""
+
+    init {
+        val openingList = stringOpenings.split(",\n")
+        for (temp in openingList) {
+            val jsonObject = Json.parseToJsonElement(temp).jsonObject
+            val opening = Opening(
+                jsonObject["ru_type"]!!.jsonPrimitive.content,
+                jsonObject["en_type"]!!.jsonPrimitive.content,
+                jsonObject["ru_name"]!!.jsonPrimitive.content,
+                jsonObject["en_name"]!!.jsonPrimitive.content,
+                jsonObject["ru_pgn"]!!.jsonPrimitive.content,
+                jsonObject["en_pgn"]!!.jsonPrimitive.content,
+                jsonObject["eco"]!!.jsonPrimitive.content
+            )
+            //Log.d("MyInfo", opening.ru_name)
+            openings.add(opening)
+        }
+    }
+
+    fun count(): Int {
+        return openings.size
+    }
+
+    operator fun get(index: Int):Opening
+    {
+        return openings[index]
     }
 }
