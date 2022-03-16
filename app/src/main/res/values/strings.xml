@@ -7,5 +7,6 @@
     <string name="training">Training</string>
     <string name="game">Game</string>
     <string name="test">Test</string>
-    <string name="next_quiz">next</string>
+    <string name="next_quiz">Next</string>
+    <string name="startQuizText">Start!</string>
 </resources>

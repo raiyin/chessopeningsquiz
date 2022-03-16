@@ -20,6 +20,7 @@ class TrainActivity : AppCompatActivity(), ChessDelegate {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_train)
+
         trainView = findViewById(R.id.train_view)
         lvOpening = findViewById(R.id.lv_train_openings)
         tilOpeningFilter = findViewById(R.id.tilOpeningFilter)

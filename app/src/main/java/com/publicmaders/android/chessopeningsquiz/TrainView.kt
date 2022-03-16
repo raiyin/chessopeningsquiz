@@ -117,7 +117,9 @@ class TrainView(context: Context?, attrs: AttributeSet?) : View(context, attrs) 
 
         if (moveIndex >= movesPaths.count()) {
             moveIndex = 0
-            lvOpening.isEnabled = true
+            if (this::lvOpening.isInitialized) {
+                lvOpening.isEnabled = true
+            }
             needDrawOpening = false
             BoardState.reset()
             return

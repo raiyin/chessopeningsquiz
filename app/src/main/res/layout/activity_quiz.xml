@@ -19,35 +19,39 @@
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent" >
+
             <androidx.appcompat.widget.AppCompatButton
-                android:layout_height="match_parent"
-                android:layout_weight="1"
                 android:id="@+id/button_first_answer"
-                android:backgroundTint="@color/answer_button_color"
-                />
-            <androidx.appcompat.widget.AppCompatButton
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:id="@+id/button_second_answer"
                 android:backgroundTint="@color/answer_button_color"
-                />
+                android:tag="0" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/button_second_answer"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:backgroundTint="@color/answer_button_color"
+                android:tag="1" />
         </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent" >
+
             <androidx.appcompat.widget.AppCompatButton
-                android:layout_height="match_parent"
-                android:layout_weight="1"
                 android:id="@+id/button_third_answer"
-                android:backgroundTint="@color/answer_button_color"
-                />
-            <androidx.appcompat.widget.AppCompatButton
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:id="@+id/button_fourth_answer"
                 android:backgroundTint="@color/answer_button_color"
-                />
+                android:tag="2" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/button_fourth_answer"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:backgroundTint="@color/answer_button_color"
+                android:tag="3" />
         </TableRow>
 
     </TableLayout>
@@ -61,7 +65,7 @@
         android:background="@color/answer_button_color"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
-        android:progress="25"
+        android:progress="0"
         android:max="100"
         android:indeterminate="false"/>
 
