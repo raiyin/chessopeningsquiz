@@ -14,44 +14,74 @@
 
     <TableLayout
         android:layout_width="match_parent"
-        android:layout_height="90dp">
+        android:layout_height="100sp">
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="50sp" >
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/button_first_answer"
-                android:layout_height="match_parent"
+                android:layout_height="50sp"
                 android:layout_weight="1"
                 android:backgroundTint="@color/answer_button_color"
-                android:tag="0" />
+                android:textAllCaps="false"
+                android:tag="0"
+
+                android:singleLine="true"
+                android:scrollHorizontally="true"
+                android:ellipsize="marquee"
+                android:marqueeRepeatLimit="1"
+
+                />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/button_second_answer"
-                android:layout_height="match_parent"
+                android:layout_height="50sp"
                 android:layout_weight="1"
                 android:backgroundTint="@color/answer_button_color"
-                android:tag="1" />
+                android:textAllCaps="false"
+                android:tag="1"
+
+                android:singleLine="true"
+                android:scrollHorizontally="true"
+                android:ellipsize="marquee"
+                android:marqueeRepeatLimit="1"
+                />
         </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="50sp" >
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/button_third_answer"
-                android:layout_height="match_parent"
+                android:layout_height="50sp"
                 android:layout_weight="1"
                 android:backgroundTint="@color/answer_button_color"
-                android:tag="2" />
+                android:textAllCaps="false"
+                android:tag="2"
+
+
+                android:singleLine="true"
+                android:scrollHorizontally="true"
+                android:ellipsize="marquee"
+                android:marqueeRepeatLimit="1"
+                />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/button_fourth_answer"
-                android:layout_height="match_parent"
+                android:layout_height="50sp"
                 android:layout_weight="1"
                 android:backgroundTint="@color/answer_button_color"
-                android:tag="3" />
+                android:textAllCaps="false"
+                android:tag="3"
+
+                android:singleLine="true"
+                android:scrollHorizontally="true"
+                android:ellipsize="marquee"
+                android:marqueeRepeatLimit="1"
+                />
         </TableRow>
 
     </TableLayout>

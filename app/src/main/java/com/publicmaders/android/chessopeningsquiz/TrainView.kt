@@ -11,7 +11,8 @@ import android.graphics.PathMeasure
 import android.widget.ListView
 
 
-class TrainView(context: Context?, attrs: AttributeSet?) : View(context, attrs) {
+class TrainView(context: Context?, attrs: AttributeSet?) : View(context, attrs)
+{
     private val scaleFactor = 1.0f
     private var originX = 20f
     private var originY = 200f
@@ -55,19 +56,22 @@ class TrainView(context: Context?, attrs: AttributeSet?) : View(context, attrs) 
 
     var chessDelegate: ChessDelegate? = null
 
-    init {
+    init
+    {
         loadBitmaps()
         view = this
         movesPaths = mutableListOf()
     }
 
-    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
+    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int)
+    {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec)
         val smaller = min(widthMeasureSpec, heightMeasureSpec)
         setMeasuredDimension(smaller, smaller)
     }
 
-    override fun onDraw(canvas: Canvas?) {
+    override fun onDraw(canvas: Canvas?)
+    {
         canvas ?: return
 
         val chessBoardSide = min(width, height) * scaleFactor
@@ -77,47 +81,68 @@ class TrainView(context: Context?, attrs: AttributeSet?) : View(context, attrs) 
 
         drawChessboard(canvas)
         drawPieces(canvas)
-        if (needDrawOpening) {
+        if (needDrawOpening)
+        {
             drawPgn(canvas)
         }
     }
 
-    fun initMovesPathsFromPgn(pgn: String) {
+    fun initMovesPathsFromPgn(pgn: String)
+    {
         val pgnParser = PgnParser()
         val moves = pgnParser.parse(pgn)
         BoardState.reset()
         movesPaths = mutableListOf()
 
-        for (move in moves) {
-            val piece = BoardState.pieceAt(Square(move[0].row, move[0].col)) ?: return
+        for (move in moves)
+        {
+            var piece = BoardState.pieceAt(Square(move[0].row, move[0].col)) ?: return
 
-            val xStart = originX + move[0].col * cellSide
-            val yStart = originY + (7 - move[0].row) * cellSide
-            val xEnd = originX + move[1].col * cellSide
-            val yEnd = originY + (7 - move[1].row) * cellSide
+            var xStart = originX + move[0].col * cellSide
+            var yStart = originY + (7 - move[0].row) * cellSide
+            var xEnd = originX + move[1].col * cellSide
+            var yEnd = originY + (7 - move[1].row) * cellSide
 
-            val path = Path()
+            var path = Path()
             path.moveTo(xStart, yStart)
             path.lineTo(xEnd, yEnd)
-            movesPaths.add(
-                Triple(
-                    piece.resID,
-                    path,
-                    listOf(Square(move[0].row, move[0].col), Square(move[1].row, move[1].col))
-                )
-            )
+            movesPaths.add(Triple(piece.resID,
+                path,
+                listOf(Square(move[0].row, move[0].col), Square(move[1].row, move[1].col))))
 
             BoardState.movePiece(Square(move[0].row, move[0].col), Square(move[1].row, move[1].col))
+
+            // Рокировка.
+            if(move.count()>2)
+            {
+                piece = BoardState.pieceAt(Square(move[2].row, move[2].col)) ?: return
+
+                xStart = originX + move[2].col * cellSide
+                yStart = originY + (7 - move[2].row) * cellSide
+                xEnd = originX + move[3].col * cellSide
+                yEnd = originY + (7 - move[3].row) * cellSide
+
+                path = Path()
+                path.moveTo(xStart, yStart)
+                path.lineTo(xEnd, yEnd)
+                movesPaths.add(Triple(piece.resID,
+                    path,
+                    listOf(Square(move[2].row, move[2].col), Square(move[3].row, move[3].col))))
+
+                BoardState.movePiece(Square(move[2].row, move[2].col), Square(move[3].row, move[3].col))
+            }
         }
     }
 
-    private fun drawPgn(canvas: Canvas) {
-        if (movesPaths == null)
-            return
+    private fun drawPgn(canvas: Canvas)
+    {
+        if (movesPaths == null) return
 
-        if (moveIndex >= movesPaths.count()) {
+        if (moveIndex >= movesPaths.count())
+        {
             moveIndex = 0
-            if (this::lvOpening.isInitialized) {
+            if (this::lvOpening.isInitialized)
+            {
                 lvOpening.isEnabled = true
             }
             needDrawOpening = false
@@ -125,24 +150,26 @@ class TrainView(context: Context?, attrs: AttributeSet?) : View(context, attrs) 
             return
         }
 
-        if (animStepIndex == 0) {
-            curMovingPiece = BoardState.pop_piece(
-                movesPaths[moveIndex].third[0].row,
-                movesPaths[moveIndex].third[0].col
-            )
+        if (animStepIndex == 0)
+        {
+            curMovingPiece = BoardState.pop_piece(movesPaths[moveIndex].third[0].row,
+                movesPaths[moveIndex].third[0].col)
         }
 
         val mxTransform = Matrix()
         val pm = PathMeasure(movesPaths[moveIndex].second, false)
         val fSegmentLen = pm.length / 40
-        if (animStepIndex <= 40) {
+        if (animStepIndex <= 40)
+        {
             pm.getMatrix(fSegmentLen * animStepIndex, mxTransform, PathMeasure.POSITION_MATRIX_FLAG)
 
             val bitmapPiece: Bitmap = bitmaps[movesPaths[moveIndex].first]!!
             canvas.drawBitmap(bitmapPiece, mxTransform, null)
             animStepIndex++
             invalidate()
-        } else {
+        }
+        else
+        {
             BoardState.push_piece(curMovingPiece)
             BoardState.movePiece(movesPaths[moveIndex].third[0], movesPaths[moveIndex].third[1])
             animStepIndex = 0
@@ -151,65 +178,61 @@ class TrainView(context: Context?, attrs: AttributeSet?) : View(context, attrs) 
         }
     }
 
-    private fun drawPieces(canvas: Canvas) {
-        for (row in 0 until 8)
-            for (col in 0 until 8)
-                chessDelegate?.pieceAt(Square(row, col))?.let { piece ->
-                    if (piece != movingPiece) {
-                        drawPieceAt(canvas, row, col, piece.resID)
-                    }
+    private fun drawPieces(canvas: Canvas)
+    {
+        for (row in 0 until 8) for (col in 0 until 8) chessDelegate?.pieceAt(Square(row, col))
+            ?.let { piece ->
+                if (piece != movingPiece)
+                {
+                    drawPieceAt(canvas, row, col, piece.resID)
                 }
+            }
 
         movingPieceBitmap?.let {
-            canvas.drawBitmap(
-                it,
+            canvas.drawBitmap(it,
                 null,
-                RectF(
-                    movingPieceX - cellSide / 2,
+                RectF(movingPieceX - cellSide / 2,
                     movingPieceY - cellSide / 2,
                     movingPieceX + cellSide / 2,
-                    movingPieceY + cellSide / 2
-                ),
-                paint
-            )
+                    movingPieceY + cellSide / 2),
+                paint)
         }
     }
 
-    private fun drawPieceAt(canvas: Canvas, row: Int, col: Int, resID: Int) {
-        canvas.drawBitmap(
-            bitmaps[resID]!!,
+    private fun drawPieceAt(canvas: Canvas, row: Int, col: Int, resID: Int)
+    {
+        canvas.drawBitmap(bitmaps[resID]!!,
             null,
-            RectF(
-                originX + col * cellSide,
+            RectF(originX + col * cellSide,
                 originY + (7 - row) * cellSide,
                 originX + (col + 1) * cellSide,
-                originY + ((7 - row) + 1) * cellSide
-            ),
-            paint
-        )
+                originY + ((7 - row) + 1) * cellSide),
+            paint)
     }
 
-    private fun loadBitmaps() {
+    private fun loadBitmaps()
+    {
         imgResIDs.forEach { imgResID ->
             val bitmap = resources.getDrawable(imgResID, null).toBitmap()
             bitmaps[imgResID] = bitmap
         }
     }
 
-    private fun drawChessboard(canvas: Canvas) {
-        for (row in 0 until 8)
-            for (col in 0 until 8)
-                drawSquareAt(canvas, row, col, (col + row) % 2 == 1)
+    private fun drawChessboard(canvas: Canvas)
+    {
+        for (row in 0 until 8) for (col in 0 until 8) drawSquareAt(canvas,
+            row,
+            col,
+            (col + row) % 2 == 1)
     }
 
-    private fun drawSquareAt(canvas: Canvas, row: Int, col: Int, isDark: Boolean) {
+    private fun drawSquareAt(canvas: Canvas, row: Int, col: Int, isDark: Boolean)
+    {
         paint.color = if (isDark) darkColor else lightColor
-        canvas.drawRect(
-            originX + col * cellSide,
+        canvas.drawRect(originX + col * cellSide,
             originY + row * cellSide,
             originX + (col + 1) * cellSide,
             originY + (row + 1) * cellSide,
-            paint
-        )
+            paint)
     }
 }

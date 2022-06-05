@@ -275,7 +275,7 @@ class PgnParser
             var startRow = if (player == Player.WHITE) 0 else 7
             var startColumn = 4
             var startSquare = Square(startRow, startColumn)
-            var endRow = if (player == Player.WHITE) 0 else 7
+            var endRow = startRow
             var endColumn = 6
             var endSquare = Square(endRow, endColumn)
             result.add(startSquare)
@@ -285,7 +285,7 @@ class PgnParser
             startRow = if (player == Player.WHITE) 0 else 7
             startColumn = 7
             startSquare = Square(startRow, startColumn)
-            endRow = if (player == Player.WHITE) 0 else 7
+            endRow = startRow
             endColumn = 5
             endSquare = Square(endRow, endColumn)
             result.add(startSquare)
@@ -297,7 +297,7 @@ class PgnParser
             var startRow = if (player == Player.WHITE) 0 else 7
             var startColumn = 4
             var startSquare = Square(startRow, startColumn)
-            var endRow = if (player == Player.WHITE) 0 else 7
+            var endRow = startRow
             var endColumn = 2
             var endSquare = Square(endRow, endColumn)
             result.add(startSquare)
@@ -307,7 +307,7 @@ class PgnParser
             startRow = if (player == Player.WHITE) 0 else 7
             startColumn = 0
             startSquare = Square(startRow, startColumn)
-            endRow = if (player == Player.WHITE) 0 else 7
+            endRow = startRow
             endColumn = 3
             endSquare = Square(endRow, endColumn)
             result.add(startSquare)
