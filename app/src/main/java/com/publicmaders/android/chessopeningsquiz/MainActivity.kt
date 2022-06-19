@@ -9,6 +9,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var trainingButton: Button
     private lateinit var quizButton: Button
+    private lateinit var settingsButton: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -16,6 +17,7 @@ class MainActivity : AppCompatActivity() {
 
         trainingButton = findViewById(R.id.button_training)
         quizButton = findViewById(R.id.button_quiz)
+        settingsButton = findViewById(R.id.button_settings)
 
         trainingButton.setOnClickListener {
             val intent = Intent(this, TrainActivity::class.java)
@@ -24,6 +26,11 @@ class MainActivity : AppCompatActivity() {
 
         quizButton.setOnClickListener {
             val intent = Intent(this, QuizActivity::class.java)
+            startActivity(intent)
+        }
+
+        settingsButton.setOnClickListener {
+            val intent = Intent(this, SettingsActivity::class.java)
             startActivity(intent)
         }
     }
