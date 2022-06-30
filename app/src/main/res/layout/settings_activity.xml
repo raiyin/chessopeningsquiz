@@ -21,6 +21,7 @@
             android:textColor="#BCAAA4" />
 
         <SeekBar
+            android:id="@+id/sb_quizCount"
             style="@style/Widget.AppCompat.SeekBar.Discrete"
             android:layout_width="match_parent"
             android:layout_height="50sp"
@@ -47,6 +48,7 @@
             android:textColor="#BCAAA4" />
 
         <SeekBar
+            android:id="@+id/sb_pieceSpeed"
             style="@style/Widget.AppCompat.SeekBar.Discrete"
             android:layout_width="match_parent"
             android:layout_height="50sp"
@@ -56,6 +58,7 @@
     </LinearLayout>
 
     <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/sc_darkTheme"
         android:layout_width="match_parent"
         android:layout_height="50sp"
         android:layout_marginStart="10sp"
@@ -66,6 +69,7 @@
         android:textColor="#BCAAA4" />
 
     <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/sc_nextMoveNow"
         android:layout_width="match_parent"
         android:layout_height="50sp"
         android:layout_margin="10sp"
