@@ -5,7 +5,8 @@
     android:layout_height="match_parent"
     tools:context=".TrainActivity"
     android:gravity="top"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:theme="@style/Theme.ChessOpeningsQuiz">
 
     <com.publicmaders.android.chessopeningsquiz.TrainView
         android:id="@+id/train_quiz_view"

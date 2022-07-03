@@ -158,8 +158,8 @@ class TrainView(context: Context?, attrs: AttributeSet?) : View(context, attrs)
 
         val mxTransform = Matrix()
         val pm = PathMeasure(movesPaths[moveIndex].second, false)
-        val fSegmentLen = pm.length / 40
-        if (animStepIndex <= 40)
+        val fSegmentLen = pm.length / Settings.PieceSpeed
+        if (animStepIndex <= Settings.PieceSpeed)
         {
             pm.getMatrix(fSegmentLen * animStepIndex, mxTransform, PathMeasure.POSITION_MATRIX_FLAG)
 
