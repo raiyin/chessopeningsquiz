@@ -2,60 +2,57 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:theme="@style/Theme.ChessOpeningsQuiz">
+    android:theme="@style/Theme.ChessOpeningsQuiz"
+    android:background="@color/background">
 
-    <LinearLayout
+    <TableLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:stretchColumns="1"
         android:layout_marginStart="10sp"
-        android:layout_marginTop="10sp"
-        android:layout_marginEnd="10sp"
-        android:orientation="horizontal">
+        android:layout_marginEnd="10sp">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="50sp"
-            android:fontFamily="@font/roboto"
-            android:gravity="center"
-            android:text="@string/quiz_count"
-            android:textColor="#BCAAA4" />
-
-        <SeekBar
-            android:id="@+id/sb_quizCount"
-            style="@style/Widget.AppCompat.SeekBar.Discrete"
+        <TableRow
             android:layout_width="match_parent"
             android:layout_height="50sp"
-            android:max="10"
-            android:progress="3"/>
+            android:layout_marginTop="10sp">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="50sp"
+                android:fontFamily="@font/roboto"
+                android:gravity=""
+                android:text="@string/quiz_count"/>
 
-    </LinearLayout>
+            <SeekBar
+                android:id="@+id/sb_quizCount"
+                style="@style/Widget.AppCompat.SeekBar.Discrete"
+                android:layout_height="50sp"
+                android:max="10"
+                android:progress="3" />
+        </TableRow>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10sp"
-        android:layout_marginTop="10sp"
-        android:layout_marginEnd="10sp"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="50sp"
-            android:fontFamily="@font/roboto"
-            android:gravity="center"
-            android:text="@string/piece_speed"
-            android:textColor="#BCAAA4" />
-
-        <SeekBar
-            android:id="@+id/sb_pieceSpeed"
-            style="@style/Widget.AppCompat.SeekBar.Discrete"
+        <TableRow
             android:layout_width="match_parent"
             android:layout_height="50sp"
-            android:max="10"
-            android:progress="4" />
+            android:layout_marginTop="10sp">
 
-    </LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="50sp"
+                android:fontFamily="@font/roboto"
+                android:gravity=""
+                android:text="@string/piece_speed" />
+
+            <SeekBar
+                android:id="@+id/sb_pieceSpeed"
+                style="@style/Widget.AppCompat.SeekBar.Discrete"
+                android:layout_height="50sp"
+                android:max="10"
+                android:progress="4" />
+        </TableRow>
+
+    </TableLayout>
 
     <androidx.appcompat.widget.SwitchCompat
         android:id="@+id/sc_darkTheme"
@@ -65,8 +62,7 @@
         android:layout_marginTop="10sp"
         android:layout_marginEnd="10sp"
         android:text="@string/set_dark_theme"
-        android:fontFamily="@font/roboto"
-        android:textColor="#BCAAA4" />
+        android:fontFamily="@font/roboto" />
 
     <androidx.appcompat.widget.SwitchCompat
         android:id="@+id/sc_nextMoveNow"
@@ -74,7 +70,6 @@
         android:layout_height="50sp"
         android:layout_margin="10sp"
         android:text="@string/next_task_now"
-        android:fontFamily="@font/roboto"
-        android:textColor="#BCAAA4" />
+        android:fontFamily="@font/roboto"/>
 
 </LinearLayout>

@@ -8,4 +8,5 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="answer_button_color">#747679</color>
+    <color name="background">#ddd</color>
 </resources>
