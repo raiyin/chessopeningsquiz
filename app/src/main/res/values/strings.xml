@@ -19,4 +19,5 @@
     <string name="set_dark_theme">Set dark theme</string>
     <string name="piece_speed">Piece speed</string>
     <string name="quiz_count">Quiz count</string>
+    <string name="filter">Filter</string>
 </resources>

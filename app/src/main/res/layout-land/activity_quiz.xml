@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TrainActivity"
+    android:gravity="start"
+    android:orientation="horizontal"
+    android:theme="@style/Theme.ChessOpeningsQuiz"
+    android:background="@color/background">
+
+    <com.publicmaders.android.chessopeningsquiz.TrainView
+        android:id="@+id/train_quiz_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="top">
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="100sp">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="50sp" >
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/button_first_answer"
+                    android:layout_height="50sp"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/answer_button_color"
+                    android:textAllCaps="false"
+                    android:tag="0"
+
+                    android:singleLine="true"
+                    android:scrollHorizontally="true"
+                    android:ellipsize="marquee"
+                    android:marqueeRepeatLimit="1"/>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/button_second_answer"
+                    android:layout_height="50sp"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/answer_button_color"
+                    android:textAllCaps="false"
+                    android:tag="1"
+
+                    android:singleLine="true"
+                    android:scrollHorizontally="true"
+                    android:ellipsize="marquee"
+                    android:marqueeRepeatLimit="1"/>
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="50sp" >
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/button_third_answer"
+                    android:layout_height="50sp"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/answer_button_color"
+                    android:textAllCaps="false"
+                    android:tag="2"
+
+                    android:singleLine="true"
+                    android:scrollHorizontally="true"
+                    android:ellipsize="marquee"
+                    android:marqueeRepeatLimit="1"/>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/button_fourth_answer"
+                    android:layout_height="50sp"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/answer_button_color"
+                    android:textAllCaps="false"
+                    android:tag="3"
+
+                    android:singleLine="true"
+                    android:scrollHorizontally="true"
+                    android:ellipsize="marquee"
+                    android:marqueeRepeatLimit="1"/>
+            </TableRow>
+
+        </TableLayout>
+
+        <ProgressBar
+            android:id="@+id/pbProgress"
+            android:layout_marginTop="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            style="@android:style/Widget.ProgressBar.Horizontal"
+            android:background="@color/answer_button_color"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:progress="0"
+            android:max="100"
+            android:indeterminate="false"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_height="50dp"
+            android:layout_width="150dp"
+            android:layout_marginTop="50dp"
+            android:layout_gravity="center_horizontal"
+            android:id="@+id/button_next_quiz"
+            android:backgroundTint="@color/answer_button_color"
+            android:text="@string/next_quiz"/>
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:maxLines="1"
+            android:padding="5dp"
+            android:shadowColor="#FF888888"
+            android:shadowDx="0"
+            android:shadowDy="0"
+            android:shadowRadius="8"
+            android:textColor="#ff000000"
+            android:textSize="40sp"
+            android:textStyle="bold"
+            android:layout_gravity="center_horizontal"
+            android:visibility="gone" />
+
+    </LinearLayout>
+
+</LinearLayout>
