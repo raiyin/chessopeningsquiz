@@ -97,9 +97,9 @@
         android:background="@color/answer_button_color"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
-        android:progress="0"
+        android:progress="30"
         android:max="100"
-        android:indeterminate="false"/>
+        android:progressTint="@color/teal_200"/>
 
     <androidx.appcompat.widget.AppCompatButton
         android:layout_height="50dp"
