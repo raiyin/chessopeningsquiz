@@ -1,5 +1,6 @@
 package com.publicmaders.android.chessopeningsquiz
 import kotlinx.serialization.Serializable
+import java.util.*
 
 @Serializable
 open class Opening() {
@@ -21,5 +22,8 @@ open class Opening() {
         this.eco = eco
     }
 
-    override fun toString(): String = en_name
+    override fun toString(): String
+    {
+        return if(Locale.getDefault().isO3Language =="rus") ru_name else en_name
+    }
 }

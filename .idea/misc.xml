@@ -13,13 +13,8 @@
         <entry key="..\:/Users/Lomonosov/android/Chessopeningsquiz/app/src/main/res/drawable/color_selector.xml" value="0.3828125" />
         <entry key="..\:/Users/Lomonosov/android/Chessopeningsquiz/app/src/main/res/drawable/ic_buy.xml" value="0.19" />
         <entry key="..\:/Users/Lomonosov/android/Chessopeningsquiz/app/src/main/res/drawable/ic_settings.xml" value="0.3828125" />
-        <entry key="..\:/Users/Lomonosov/android/Chessopeningsquiz/app/src/main/res/drawable/list_selector.xml" value="0.299" />
         <entry key="..\:/Users/Lomonosov/android/Chessopeningsquiz/app/src/main/res/drawable/selector_s.xml" value="0.2635" />
-        <entry key="..\:/Users/Lomonosov/android/Chessopeningsquiz/app/src/main/res/layout-land/activity_quiz.xml" value="0.25" />
-        <entry key="..\:/Users/Lomonosov/android/Chessopeningsquiz/app/src/main/res/layout-land/activity_train.xml" value="0.33" />
-        <entry key="..\:/Users/Lomonosov/android/Chessopeningsquiz/app/src/main/res/layout-v26/settings_activity.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/Lomonosov/android/Chessopeningsquiz/app/src/main/res/layout/activity_config.xml" value="0.25" />
-        <entry key="..\:/Users/Lomonosov/android/Chessopeningsquiz/app/src/main/res/layout/activity_main.xml" value="0.3009833262077811" />
+        <entry key="..\:/Users/Lomonosov/android/Chessopeningsquiz/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/Users/Lomonosov/android/Chessopeningsquiz/app/src/main/res/layout/activity_quiz.xml" value="0.25" />
         <entry key="..\:/Users/Lomonosov/android/Chessopeningsquiz/app/src/main/res/layout/activity_train.xml" value="0.22592592592592592" />
         <entry key="..\:/Users/Lomonosov/android/Chessopeningsquiz/app/src/main/res/layout/color_selector.xml" value="0.36666666666666664" />
@@ -29,11 +24,19 @@
         <entry key="..\:/Users/Lomonosov/android/Chessopeningsquiz/app/src/main/res/layout/selector.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Lomonosov/android/Chessopeningsquiz/app/src/main/res/layout/selector_d.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Lomonosov/android/Chessopeningsquiz/app/src/main/res/layout/selector_s.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/Lomonosov/android/Chessopeningsquiz/app/src/main/res/layout/settings_activity.xml" value="0.33" />
+        <entry key="..\:/Users/Lomonosov/android/Chessopeningsquiz/app/src/main/res/layout/settings_activity.xml" value="0.35260416666666666" />
         <entry key="..\:/Users/Lomonosov/android/Chessopeningsquiz/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.140625" />
         <entry key="..\:/Users/Lomonosov/android/Chessopeningsquiz/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.140625" />
         <entry key="..\:/Users/Lomonosov/android/Chessopeningsquiz/app/src/main/res/xml/root_preferences.xml" value="0.33" />
+        <entry key="..\:/projects/chessopeningsquiz/app/src/main/res/layout-land/activity_quiz.xml" value="0.19112627986348124" />
+        <entry key="..\:/projects/chessopeningsquiz/app/src/main/res/layout-sw600dp/activity_main.xml" value="0.1" />
+        <entry key="..\:/projects/chessopeningsquiz/app/src/main/res/layout-w1240dp-night/activity_main.xml" value="0.16131687242798354" />
+        <entry key="..\:/projects/chessopeningsquiz/app/src/main/res/layout-w1240dp/activity_main.xml" value="0.1" />
         <entry key="..\:/projects/chessopeningsquiz/app/src/main/res/layout/activity_config.xml" value="0.17074275362318841" />
+        <entry key="..\:/projects/chessopeningsquiz/app/src/main/res/layout/activity_main.xml" value="0.1675213675213675" />
+        <entry key="..\:/projects/chessopeningsquiz/app/src/main/res/layout/activity_quiz.xml" value="0.15537059056678557" />
+        <entry key="..\:/projects/chessopeningsquiz/app/src/main/res/layout/activity_train.xml" value="0.20416666666666666" />
+        <entry key="..\:/projects/chessopeningsquiz/app/src/main/res/layout/settings_activity.xml" value="0.20416666666666666" />
       </map>
     </option>
   </component>
