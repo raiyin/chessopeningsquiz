@@ -211,7 +211,7 @@ class OpeningManager {
 {"ru_type": "Фланговые дебюты", "en_type": "flank", "ru_name": "Дебют Сокольского (Польский дебют)", "en_name": "Sokolsky Opening", "ru_pgn": "1. b4", "eco": "A00", "en_pgn": "1. b4"},
 {"ru_type": "Фланговые дебюты", "en_type": "flank", "ru_name": "Дебют Уэра", "en_name": "Ware Opening", "ru_pgn": "1. a4", "eco": "A00", "en_pgn": "1. a4"},
 {"ru_type": "Фланговые дебюты", "en_type": "flank", "ru_name": "Сарагосское начало", "en_name": "Saragossa Opening", "ru_pgn": "1. c3", "eco": "A00", "en_pgn": "1. c3"},
-{"ru_type": "Фланговые дебюты", "en_type": "flank", "ru_name": "Староиндийское начало", "en_name": "King's Fianchetto Opening", "ru_pgn": "1. g3", "eco": "A00"} "en_pgn": "1. g3"}"""
+{"ru_type": "Фланговые дебюты", "en_type": "flank", "ru_name": "Староиндийское начало", "en_name": "King's Fianchetto Opening", "ru_pgn": "1. g3", "eco": "A00", "en_pgn": "1. g3"}"""
 
     init {
         val openingList = stringOpenings.split(",\n")

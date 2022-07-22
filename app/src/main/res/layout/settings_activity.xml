@@ -29,6 +29,7 @@
                 style="@style/Widget.AppCompat.SeekBar.Discrete"
                 android:layout_height="50dp"
                 android:max="10"
+                android:min="1"
                 android:progress="3" />
         </TableRow>
 
@@ -49,6 +50,7 @@
                 style="@style/Widget.AppCompat.SeekBar.Discrete"
                 android:layout_height="50dp"
                 android:max="10"
+                android:min="1"
                 android:progress="4" />
         </TableRow>
 

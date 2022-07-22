@@ -59,14 +59,14 @@ object BoardState
         addPiece(ChessPiece(7, 4, Player.BLACK, Chessman.KING, R.drawable.ic_chess_bk))
     }
 
-    fun pop_piece(row: Int, col: Int): ChessPiece
+    fun popPiece(row: Int, col: Int): ChessPiece
     {
         val piece = piecesBox.filter { piece -> piece.row == row && piece.col == col }[0]
         piecesBox.remove(piece)
         return piece
     }
 
-    fun push_piece(piece: ChessPiece)
+    fun pushPiece(piece: ChessPiece)
     {
         piecesBox.add(piece)
     }
@@ -121,7 +121,7 @@ object BoardState
 
     fun getPawnsThatCanTakeOn(square: Square, player: Player): MutableList<ChessPiece>
     {
-        var result: MutableList<ChessPiece> = mutableListOf()
+        val result: MutableList<ChessPiece> = mutableListOf()
 
         if (player == Player.WHITE)
         {

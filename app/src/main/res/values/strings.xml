@@ -11,8 +11,6 @@
     <string name="problems_out_of">\u0020problems out of\u0020</string>
     <string name="title_activity_settings" translatable="false">SettingsActivity</string>
 
-    <!-- Sync Preferences -->
-    <string name="title_activity_config" translatable="false">ConfigActivity</string>
     <!-- Strings used for fragments for navigation -->
 
     <string name="next_task_now">Next task now</string>

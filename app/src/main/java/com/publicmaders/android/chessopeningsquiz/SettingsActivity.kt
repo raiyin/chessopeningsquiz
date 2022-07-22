@@ -28,7 +28,7 @@ class SettingsActivity : AppCompatActivity()
         nextTaskNowSwitchCompat = findViewById(R.id.sc_nextMoveNow)
 
         Settings.load(applicationContext)
-        quizCountSeekBar.progress = Settings.QuizCount
+        quizCountSeekBar.progress = Settings.TasksCount
         pieceSpeedSeekBar.progress = Settings.PieceSpeed
         darkThemeSwitchCompat.isChecked = Settings.SetupDarkTheme
         nextTaskNowSwitchCompat.isChecked = Settings.NextTaskImmediately
@@ -46,7 +46,7 @@ class SettingsActivity : AppCompatActivity()
             override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean)
             {
                 Toast.makeText(applicationContext, progress.toString(), Toast.LENGTH_LONG).show()
-                Settings.QuizCount = progress
+                Settings.TasksCount = progress
                 Settings.save(applicationContext)
             }
         })

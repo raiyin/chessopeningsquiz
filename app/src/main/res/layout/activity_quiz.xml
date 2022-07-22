@@ -6,8 +6,7 @@
     tools:context=".TrainActivity"
     android:gravity="top"
     android:orientation="vertical"
-    android:theme="@style/Theme.ChessOpeningsQuiz"
-    android:background="@color/background">
+    android:theme="@style/Theme.ChessOpeningsQuiz">
 
     <com.publicmaders.android.chessopeningsquiz.TrainView
         android:id="@+id/train_quiz_view"
@@ -97,14 +96,14 @@
         android:background="@color/answer_button_color"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
-        android:progress="30"
+        android:progress="0"
         android:max="100"
         android:progressTint="@color/teal_200"/>
 
     <androidx.appcompat.widget.AppCompatButton
         android:layout_height="50dp"
         android:layout_width="150dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="30dp"
         android:layout_gravity="center_horizontal"
         android:id="@+id/button_next_quiz"
         android:backgroundTint="@color/answer_button_color"

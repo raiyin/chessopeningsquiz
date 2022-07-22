@@ -52,7 +52,7 @@ class TrainView(context: Context?, attrs: AttributeSet?) : View(context, attrs)
     private var movingPiece: ChessPiece? = null
     private var movingPieceX = -1f
     private var movingPieceY = -1f
-    private lateinit var movesPaths: MutableList<Triple<Int, Path, List<Square>>>
+    private var movesPaths: MutableList<Triple<Int, Path, List<Square>>>
 
     var chessDelegate: ChessDelegate? = null
 
@@ -136,8 +136,6 @@ class TrainView(context: Context?, attrs: AttributeSet?) : View(context, attrs)
 
     private fun drawPgn(canvas: Canvas)
     {
-        if (movesPaths == null) return
-
         if (moveIndex >= movesPaths.count())
         {
             moveIndex = 0
@@ -152,7 +150,7 @@ class TrainView(context: Context?, attrs: AttributeSet?) : View(context, attrs)
 
         if (animStepIndex == 0)
         {
-            curMovingPiece = BoardState.pop_piece(movesPaths[moveIndex].third[0].row,
+            curMovingPiece = BoardState.popPiece(movesPaths[moveIndex].third[0].row,
                 movesPaths[moveIndex].third[0].col)
         }
 
@@ -170,7 +168,7 @@ class TrainView(context: Context?, attrs: AttributeSet?) : View(context, attrs)
         }
         else
         {
-            BoardState.push_piece(curMovingPiece)
+            BoardState.pushPiece(curMovingPiece)
             BoardState.movePiece(movesPaths[moveIndex].third[0], movesPaths[moveIndex].third[1])
             animStepIndex = 0
             moveIndex++
@@ -213,7 +211,7 @@ class TrainView(context: Context?, attrs: AttributeSet?) : View(context, attrs)
     private fun loadBitmaps()
     {
         imgResIDs.forEach { imgResID ->
-            val bitmap = resources.getDrawable(imgResID, null).toBitmap()
+            val bitmap = context.resources.getDrawable(imgResID, null).toBitmap()
             bitmaps[imgResID] = bitmap
         }
     }

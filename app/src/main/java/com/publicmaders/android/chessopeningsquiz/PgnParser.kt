@@ -53,7 +53,7 @@ class PgnParser
             if (query.contains('x'))
             {
                 // Взятие.
-                var startSquare: Square =
+                val startSquare: Square =
                     if (player == Player.WHITE) Square(query[3].digitToInt() - 2,
                         columnToDigit(query[0]))
                     else Square(query[3].digitToInt(), columnToDigit(query[0]))

@@ -2,27 +2,24 @@ package com.publicmaders.android.chessopeningsquiz
 
 import kotlin.random.Random
 
-class QuizManager(taskCount: Int, openingManager: OpeningManager) {
+class QuizManager(openingManager: OpeningManager) {
     // Quiz - все, например, 10 вопросов вместе.
     // Task - один из, например, 10 вопросов.
     // MutableMap<Opening, Boolean>, так как содержит верный и неверные варианты.
-    var quiz: MutableList<MutableMap<Opening, Boolean>> = mutableListOf()
+    private var quiz = mutableListOf<MutableMap<Opening, Boolean>>()
     var rightAnswersCount: Int = 0
     var currentTaskNumber: Int = 0
-        private set
-    var totalTaskCount: Int = 0
-    private lateinit var openingManager: OpeningManager
+    private var openingManager: OpeningManager
 
     init {
-        totalTaskCount = taskCount
         this.openingManager = openingManager
-        for (taskIndex in 0 until totalTaskCount) {
+        for (taskIndex in 0 until Settings.TasksCount) {
 
             val task: MutableMap<Opening, Boolean> = mutableMapOf()
             val rightIndex: Int = Random.nextInt(0, 4)
+            val indexList: MutableList<Int> = mutableListOf()
 
             for (optionIndex in 0 until 4) {
-                val indexList: MutableList<Int> = mutableListOf()
                 var openingIndex: Int = Random.nextInt(0, openingManager.count())
                 while (indexList.contains(openingIndex)) {
                     openingIndex = Random.nextInt(0, openingManager.count())
@@ -39,7 +36,7 @@ class QuizManager(taskCount: Int, openingManager: OpeningManager) {
         currentTaskNumber = 0
         rightAnswersCount = 0
         quiz.clear()
-        for (taskIndex in 0 until totalTaskCount) {
+        for (taskIndex in 0 until Settings.TasksCount) {
 
             val task: MutableMap<Opening, Boolean> = mutableMapOf()
             val rightIndex: Int = Random.nextInt(0, 4)
@@ -58,7 +55,7 @@ class QuizManager(taskCount: Int, openingManager: OpeningManager) {
         }
     }
 
-    fun inrementCurrentTaskNumber() {
+    fun incrementCurrentTaskNumber() {
         currentTaskNumber += 1
     }
 

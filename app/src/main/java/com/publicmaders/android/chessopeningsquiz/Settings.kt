@@ -11,36 +11,36 @@ import java.io.FileWriter
 @Serializable
 object Settings
 {
-    public var QuizCount: Int = 10
-    public var PieceSpeed: Int = 20
-    public var SetupDarkTheme: Boolean = true
-    public var NextTaskImmediately: Boolean = false
+    var TasksCount: Int = 10
+    var PieceSpeed: Int = 20
+    var SetupDarkTheme: Boolean = true
+    var NextTaskImmediately: Boolean = false
 
-    public fun load(applicationContext: Context)
+    fun load(applicationContext: Context)
     {
         val filename = applicationContext.filesDir.path.toString() + Utils.settingsFileName
-        var file = File(filename)
-        var notexisted = file.createNewFile()
+        val file = File(filename)
+        val notexisted = file.createNewFile()
         if (notexisted)
         {
             val json = Json.encodeToString(Settings)
-            var fileWriter = FileWriter(filename)
+            val fileWriter = FileWriter(filename)
             fileWriter.write(json)
         }
         else
         {
-            var fileReader = FileReader(filename)
+            val fileReader = FileReader(filename)
             val jsonSettingsString = fileReader.readText()
             if (jsonSettingsString == "")
             {
                 val json = Json.encodeToString(Settings)
-                var fileWriter = FileWriter(filename)
+                val fileWriter = FileWriter(filename)
                 fileWriter.write(json)
             }
             else
             {
-                var tempSettings = Json.decodeFromString<Settings>(jsonSettingsString)
-                QuizCount = tempSettings.QuizCount
+                val tempSettings = Json.decodeFromString<Settings>(jsonSettingsString)
+                TasksCount = tempSettings.TasksCount
                 PieceSpeed = tempSettings.PieceSpeed
                 SetupDarkTheme = tempSettings.SetupDarkTheme
                 NextTaskImmediately = tempSettings.NextTaskImmediately
@@ -48,11 +48,11 @@ object Settings
         }
     }
 
-    public fun save(applicationContext:Context)
+    fun save(applicationContext:Context)
     {
         val filename = applicationContext.filesDir.path.toString() + Utils.settingsFileName
         val json = Json.encodeToString(Settings)
-        var fileWriter = FileWriter(filename)
+        val fileWriter = FileWriter(filename)
         fileWriter.write(json)
     }
 }

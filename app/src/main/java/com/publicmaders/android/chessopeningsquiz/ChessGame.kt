@@ -99,7 +99,7 @@ object ChessGame {
         return false
     }
 
-    fun canMove(from: Square, to: Square): Boolean {
+    private fun canMove(from: Square, to: Square): Boolean {
         if (from.col == to.col && from.row == to.row) {
             return  false
         }
@@ -135,7 +135,7 @@ object ChessGame {
         addPiece(movingPiece.copy(col = toCol, row = toRow))
     }
 
-    fun reset() {
+    private fun reset() {
         clear()
         for (i in 0 until 2) {
             addPiece(ChessPiece(0 + i * 7, 0, Player.WHITE, Chessman.ROOK, R.drawable.ic_chess_wr))
@@ -159,7 +159,7 @@ object ChessGame {
         addPiece(ChessPiece(4, 7, Player.BLACK, Chessman.KING, R.drawable.ic_chess_bk))
     }
 
-    fun pieceAt(square: Square): ChessPiece? {
+    private fun pieceAt(square: Square): ChessPiece? {
         return pieceAt(square.col, square.row)
     }
 

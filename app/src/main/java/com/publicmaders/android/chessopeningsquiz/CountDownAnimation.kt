@@ -1,13 +1,12 @@
 package com.publicmaders.android.chessopeningsquiz
 
 import android.os.Handler
-import android.os.Looper
 import android.view.View
 import android.view.animation.AlphaAnimation
 import android.view.animation.Animation
 import android.widget.TextView
 
-class CountDownAnimation(private val mTextView: TextView, var startCount: Int)
+class CountDownAnimation(private val mTextView: TextView, private var startCount: Int)
 {
     private var mAnimation: Animation
     private var mCurrentCount = 0
