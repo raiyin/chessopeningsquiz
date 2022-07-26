@@ -3,6 +3,7 @@ package com.publicmaders.android.chessopeningsquiz.activities
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.Window
 import android.widget.ArrayAdapter
 import android.widget.EditText
 import android.widget.ListView
@@ -29,6 +30,7 @@ class TrainActivity : AppCompatActivity(), ChessDelegate
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_train)
+        supportActionBar?.hide()
 
         trainView = findViewById(R.id.train_view)
         lvOpening = findViewById(R.id.lv_train_openings)

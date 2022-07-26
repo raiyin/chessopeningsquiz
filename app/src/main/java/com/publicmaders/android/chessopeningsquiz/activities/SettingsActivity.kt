@@ -1,6 +1,7 @@
 package com.publicmaders.android.chessopeningsquiz.activities
 
 import android.os.Bundle
+import android.view.Window
 import android.widget.SeekBar
 import android.widget.SeekBar.OnSeekBarChangeListener
 import android.widget.Toast
@@ -21,6 +22,7 @@ class SettingsActivity : AppCompatActivity()
     {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.settings_activity)
+        supportActionBar?.hide()
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 

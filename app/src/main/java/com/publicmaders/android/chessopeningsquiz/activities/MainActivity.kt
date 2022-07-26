@@ -2,6 +2,7 @@ package com.publicmaders.android.chessopeningsquiz.activities
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.Window
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import com.publicmaders.android.chessopeningsquiz.*
@@ -17,6 +18,7 @@ class MainActivity : AppCompatActivity()
     {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        supportActionBar?.hide()
         Settings.load(applicationContext)
 
         trainingButton = findViewById(R.id.button_training)

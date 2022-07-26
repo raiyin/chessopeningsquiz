@@ -4,6 +4,7 @@ import android.content.res.ColorStateList
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
+import android.view.Window
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.publicmaders.android.chessopeningsquiz.*
@@ -39,6 +40,7 @@ class QuizActivity : AppCompatActivity(), ChessDelegate, CountDownListener
     {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_quiz)
+        supportActionBar?.hide()
 
         chessBoardView = findViewById(R.id.train_quiz_view)
         bFirst = findViewById(R.id.button_first_answer)
