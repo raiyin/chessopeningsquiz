@@ -112,7 +112,7 @@
     <TextView
         android:id="@+id/tv_CountDown"
         android:layout_width="64dp"
-        android:layout_height="51dp"
+        android:layout_height="50dp"
         android:layout_gravity="center_horizontal"
         android:gravity="center"
         android:maxLines="1"
@@ -124,6 +124,7 @@
         android:textColor="#ff000000"
         android:textSize="40sp"
         android:textStyle="bold"
-        android:visibility="gone" />
+        android:layout_marginTop="-55dp"
+        android:visibility="gone"/>
 
 </LinearLayout>
