@@ -9,18 +9,17 @@ import kotlinx.serialization.json.Json
 import java.io.File
 import java.io.FileReader
 import java.io.FileWriter
-import kotlin.math.max
 
 @Serializable
 object Settings
 {
-    var TasksCount: Int = 10
-    val MinTaskCount: Int = 1
-    val MaxTaskCount: Int = 10
+    var TasksCount: Int = 1
+    const val MinTaskCount: Int = 1
+    const val MaxTaskCount: Int = 10
 
-    var PieceSpeed: Int = 10
-    val MinSpeed: Int = 5
-    val MaxSpeed: Int = 20
+    var PieceSpeed: Int = 20
+    const val MinSpeed: Int = 5
+    const val MaxSpeed: Int = 20
 
     var SetupDarkTheme: Boolean = true
     var NextTaskImmediately: Boolean = false
@@ -83,6 +82,6 @@ object Settings
         fileWriter.write(json)
     }
 
-    var IterationCount: Int = 0
+    val IterationCount: Int
         get() = MaxSpeed + MinSpeed - PieceSpeed
 }

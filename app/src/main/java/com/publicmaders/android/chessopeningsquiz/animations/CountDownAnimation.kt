@@ -4,56 +4,70 @@ import android.os.Handler
 import android.view.View
 import android.view.animation.AlphaAnimation
 import android.view.animation.Animation
+import android.view.animation.AnimationSet
+import android.view.animation.ScaleAnimation
 import android.widget.TextView
+import com.publicmaders.android.chessopeningsquiz.interfaces.CountDownListener
 
-class CountDownAnimation(private val mTextView: TextView, private var startCount: Int)
+class CountDownAnimation(private val tvAnimation: TextView)
 {
     private var mAnimation: Animation
+    private var startCount = 3
     private var mCurrentCount = 0
-    private var mStartCount = 0
     private var mListener: CountDownListener? = null
     private val mHandler: Handler = Handler()
 
-    init {
-        mStartCount = startCount
-        mAnimation = AlphaAnimation(1.0f, 0.0f)
+    init
+    {
+        val scaleAnimation: Animation = ScaleAnimation(1.0f,
+            0.0f,
+            1.0f,
+            0.0f,
+            Animation.RELATIVE_TO_SELF,
+            0.5f,
+            Animation.RELATIVE_TO_SELF,
+            0.5f)
+        val alphaAnimation: Animation = AlphaAnimation(1.0f, 0.0f)
+        val animationSet = AnimationSet(false)
+        animationSet.addAnimation(scaleAnimation)
+        animationSet.addAnimation(alphaAnimation)
+
+        mAnimation = animationSet
         mAnimation.duration = 1000
     }
 
     private val mCountDown = Runnable {
-        if (mCurrentCount > 0) {
-            mTextView.text = mCurrentCount.toString()
-            mTextView.startAnimation(mAnimation)
+        if (mCurrentCount > 0)
+        {
+            tvAnimation.text = mCurrentCount.toString()
+            tvAnimation.startAnimation(mAnimation)
             mCurrentCount--
-        } else {
-            mTextView.visibility = View.GONE
-            if (mListener != null) mListener!!.onCountDownEnd(this@CountDownAnimation)
+        }
+        else
+        {
+            tvAnimation.visibility = View.GONE
+            if (mListener != null)
+            {
+                mListener!!.onCountDownEnd(this@CountDownAnimation)
+            }
         }
     }
 
-    fun start() {
+    fun start()
+    {
         mHandler.removeCallbacks(mCountDown)
-        mTextView.text = startCount.toString()
-        mTextView.visibility = View.VISIBLE
+        //tvAnimation.text = startCount.toString()
+        tvAnimation.visibility = View.VISIBLE
         mCurrentCount = startCount
         mHandler.post(mCountDown)
-        for (i in 1..startCount) {
-            mHandler.postDelayed(mCountDown, (i * 1000).toLong())
+        for (i in 1..startCount)
+        {
+            mHandler.postDelayed(mCountDown, (i * mAnimation.duration))
         }
     }
 
-    var animation: Animation
-        get() = mAnimation
-        set(animation) {
-            mAnimation = animation
-            if (mAnimation.duration == 0L) mAnimation.duration = 1000
-        }
-
-    fun setCountDownListener(listener: CountDownListener) {
+    fun setCountDownListener(listener: CountDownListener)
+    {
         mListener = listener
-    }
-
-    interface CountDownListener {
-        fun onCountDownEnd(animation: CountDownAnimation?)
     }
 }
