@@ -10,17 +10,17 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ChessOpeningsQuiz">
         <activity
-            android:name=".SettingsActivity"
+            android:name=".activities.SettingsActivity"
             android:exported="false"
             android:label="@string/title_activity_settings" />
         <activity
-            android:name=".QuizActivity"
+            android:name=".activities.QuizActivity"
             android:exported="true" />
         <activity
-            android:name=".TrainActivity"
+            android:name=".activities.TrainActivity"
             android:exported="true" />
         <activity
-            android:name=".MainActivity"
+            android:name=".activities.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

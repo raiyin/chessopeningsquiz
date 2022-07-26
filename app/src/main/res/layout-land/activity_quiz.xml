@@ -3,13 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".TrainActivity"
+    tools:context=".activities.TrainActivity"
     android:gravity="start"
     android:orientation="horizontal"
     android:theme="@style/Theme.ChessOpeningsQuiz"
     android:background="@color/background">
 
-    <com.publicmaders.android.chessopeningsquiz.TrainView
+    <com.publicmaders.android.chessopeningsquiz.views.TrainView
         android:id="@+id/train_quiz_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />

@@ -1,9 +1,9 @@
-package com.publicmaders.android.chessopeningsquiz
+package com.publicmaders.android.chessopeningsquiz.models
 
+import com.publicmaders.android.chessopeningsquiz.R
 import java.lang.Integer.*
 import kotlin.math.abs
 
-//class BoardState {
 object BoardState
 {
     private var piecesBox = mutableSetOf<ChessPiece>()

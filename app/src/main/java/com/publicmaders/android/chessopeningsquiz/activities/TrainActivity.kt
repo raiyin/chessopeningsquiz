@@ -1,4 +1,4 @@
-package com.publicmaders.android.chessopeningsquiz
+package com.publicmaders.android.chessopeningsquiz.activities
 
 import android.os.Bundle
 import android.text.Editable
@@ -8,9 +8,18 @@ import android.widget.EditText
 import android.widget.ListView
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.textfield.TextInputLayout
+import com.publicmaders.android.chessopeningsquiz.*
+import com.publicmaders.android.chessopeningsquiz.controllers.OpeningManager
+import com.publicmaders.android.chessopeningsquiz.delegates.ChessDelegate
+import com.publicmaders.android.chessopeningsquiz.models.BoardState
+import com.publicmaders.android.chessopeningsquiz.models.ChessPiece
+import com.publicmaders.android.chessopeningsquiz.models.Opening
+import com.publicmaders.android.chessopeningsquiz.models.Square
+import com.publicmaders.android.chessopeningsquiz.views.TrainView
 
 
-class TrainActivity : AppCompatActivity(), ChessDelegate {
+class TrainActivity : AppCompatActivity(), ChessDelegate
+{
     private lateinit var trainView: TrainView
     private var openingManager = OpeningManager()
     private lateinit var lvOpening: ListView

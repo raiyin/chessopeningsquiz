@@ -1,4 +1,5 @@
-package com.publicmaders.android.chessopeningsquiz
+package com.publicmaders.android.chessopeningsquiz.models
+import com.publicmaders.android.chessopeningsquiz.R
 import kotlin.math.abs
 
 object ChessGame {

@@ -1,4 +1,4 @@
-package com.publicmaders.android.chessopeningsquiz
+package com.publicmaders.android.chessopeningsquiz.activities
 
 import android.content.res.ColorStateList
 import android.graphics.Color
@@ -11,11 +11,20 @@ import android.view.animation.AnimationSet
 import android.view.animation.ScaleAnimation
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import com.publicmaders.android.chessopeningsquiz.*
+import com.publicmaders.android.chessopeningsquiz.animations.CountDownAnimation
+import com.publicmaders.android.chessopeningsquiz.controllers.OpeningManager
+import com.publicmaders.android.chessopeningsquiz.controllers.QuizManager
+import com.publicmaders.android.chessopeningsquiz.delegates.ChessDelegate
+import com.publicmaders.android.chessopeningsquiz.models.BoardState
+import com.publicmaders.android.chessopeningsquiz.models.ChessPiece
+import com.publicmaders.android.chessopeningsquiz.models.Settings
+import com.publicmaders.android.chessopeningsquiz.models.Square
+import com.publicmaders.android.chessopeningsquiz.views.TrainView
 
 
 class QuizActivity : AppCompatActivity(), ChessDelegate, CountDownAnimation.CountDownListener
 {
-
     private lateinit var chessBoardView: TrainView
     private lateinit var bFirst: Button
     private lateinit var bSecond: Button
@@ -155,7 +164,8 @@ class QuizActivity : AppCompatActivity(), ChessDelegate, CountDownAnimation.Coun
         if (quizManager.currentTaskNumber == Settings.TasksCount - 1)
         {
             Toast.makeText(this,
-                getString(R.string.you_have_solved) + quizManager.rightAnswersCount + getString(R.string.problems_out_of) + Settings.TasksCount,
+                getString(R.string.you_have_solved) + quizManager.rightAnswersCount +
+                        getString(R.string.problems_out_of) + Settings.TasksCount,
                 Toast.LENGTH_SHORT).show()
             bNext.text = getString(R.string.start_new)
         }

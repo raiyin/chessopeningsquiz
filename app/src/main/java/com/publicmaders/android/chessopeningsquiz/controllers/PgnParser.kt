@@ -1,5 +1,9 @@
-package com.publicmaders.android.chessopeningsquiz
+package com.publicmaders.android.chessopeningsquiz.controllers
 
+import com.publicmaders.android.chessopeningsquiz.models.BoardState
+import com.publicmaders.android.chessopeningsquiz.models.ChessPiece
+import com.publicmaders.android.chessopeningsquiz.models.Player
+import com.publicmaders.android.chessopeningsquiz.models.Square
 import java.security.InvalidParameterException
 
 // Не проанализирована рокировка

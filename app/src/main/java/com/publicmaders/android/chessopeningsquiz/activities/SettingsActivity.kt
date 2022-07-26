@@ -1,4 +1,4 @@
-package com.publicmaders.android.chessopeningsquiz
+package com.publicmaders.android.chessopeningsquiz.activities
 
 import android.os.Bundle
 import android.widget.SeekBar
@@ -6,11 +6,13 @@ import android.widget.SeekBar.OnSeekBarChangeListener
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SwitchCompat
+import com.publicmaders.android.chessopeningsquiz.R
+import com.publicmaders.android.chessopeningsquiz.models.Settings
 
 
 class SettingsActivity : AppCompatActivity()
 {
-    private lateinit var quizCountSeekBar: SeekBar
+    private lateinit var tasksCountSeekBar: SeekBar
     private lateinit var pieceSpeedSeekBar: SeekBar
     private lateinit var darkThemeSwitchCompat: SwitchCompat
     private lateinit var nextTaskNowSwitchCompat: SwitchCompat
@@ -22,18 +24,23 @@ class SettingsActivity : AppCompatActivity()
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        quizCountSeekBar = findViewById(R.id.sb_quizCount)
+        tasksCountSeekBar = findViewById(R.id.sb_tasksCount)
         pieceSpeedSeekBar = findViewById(R.id.sb_pieceSpeed)
         darkThemeSwitchCompat = findViewById(R.id.sc_darkTheme)
         nextTaskNowSwitchCompat = findViewById(R.id.sc_nextMoveNow)
 
+        tasksCountSeekBar.min = Settings.MinTaskCount
+        tasksCountSeekBar.max = Settings.MaxTaskCount
+        pieceSpeedSeekBar.min = Settings.MinSpeed
+        pieceSpeedSeekBar.max = Settings.MaxSpeed
+
         Settings.load(applicationContext)
-        quizCountSeekBar.progress = Settings.TasksCount
+        tasksCountSeekBar.progress = Settings.TasksCount
         pieceSpeedSeekBar.progress = Settings.PieceSpeed
         darkThemeSwitchCompat.isChecked = Settings.SetupDarkTheme
         nextTaskNowSwitchCompat.isChecked = Settings.NextTaskImmediately
 
-        quizCountSeekBar.setOnSeekBarChangeListener(object : OnSeekBarChangeListener
+        tasksCountSeekBar.setOnSeekBarChangeListener(object : OnSeekBarChangeListener
         {
             override fun onStopTrackingTouch(seekBar: SeekBar)
             {

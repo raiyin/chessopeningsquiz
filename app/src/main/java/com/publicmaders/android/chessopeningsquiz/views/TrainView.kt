@@ -1,4 +1,4 @@
-package com.publicmaders.android.chessopeningsquiz
+package com.publicmaders.android.chessopeningsquiz.views
 
 import android.content.Context
 import android.graphics.*
@@ -9,6 +9,13 @@ import androidx.core.graphics.drawable.toBitmap
 import android.graphics.Bitmap
 import android.graphics.PathMeasure
 import android.widget.ListView
+import com.publicmaders.android.chessopeningsquiz.controllers.PgnParser
+import com.publicmaders.android.chessopeningsquiz.R
+import com.publicmaders.android.chessopeningsquiz.models.Settings
+import com.publicmaders.android.chessopeningsquiz.delegates.ChessDelegate
+import com.publicmaders.android.chessopeningsquiz.models.BoardState
+import com.publicmaders.android.chessopeningsquiz.models.ChessPiece
+import com.publicmaders.android.chessopeningsquiz.models.Square
 
 
 class TrainView(context: Context?, attrs: AttributeSet?) : View(context, attrs)
@@ -156,8 +163,8 @@ class TrainView(context: Context?, attrs: AttributeSet?) : View(context, attrs)
 
         val mxTransform = Matrix()
         val pm = PathMeasure(movesPaths[moveIndex].second, false)
-        val fSegmentLen = pm.length / Settings.PieceSpeed
-        if (animStepIndex <= Settings.PieceSpeed)
+        val fSegmentLen = pm.length / Settings.IterationCount
+        if (animStepIndex <= Settings.IterationCount)
         {
             pm.getMatrix(fSegmentLen * animStepIndex, mxTransform, PathMeasure.POSITION_MATRIX_FLAG)
 

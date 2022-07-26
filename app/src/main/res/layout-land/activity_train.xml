@@ -7,9 +7,9 @@
     android:gravity="start"
     android:orientation="horizontal"
     android:theme="@style/Theme.ChessOpeningsQuiz"
-    tools:context=".TrainActivity">
+    tools:context=".activities.TrainActivity">
 
-    <com.publicmaders.android.chessopeningsquiz.TrainView
+    <com.publicmaders.android.chessopeningsquiz.views.TrainView
         android:id="@+id/train_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />

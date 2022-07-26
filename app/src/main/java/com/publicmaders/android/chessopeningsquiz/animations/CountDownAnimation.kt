@@ -1,4 +1,4 @@
-package com.publicmaders.android.chessopeningsquiz
+package com.publicmaders.android.chessopeningsquiz.animations
 
 import android.os.Handler
 import android.view.View

@@ -1,12 +1,15 @@
 package com.publicmaders.android.chessopeningsquiz
 
-import android.util.Log
+import com.publicmaders.android.chessopeningsquiz.controllers.OpeningManager
+import com.publicmaders.android.chessopeningsquiz.controllers.PgnParser
+import com.publicmaders.android.chessopeningsquiz.models.BoardState
+import com.publicmaders.android.chessopeningsquiz.models.Opening
+import com.publicmaders.android.chessopeningsquiz.models.Square
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.json.jsonPrimitive
 import org.junit.Assert.*
 import org.junit.Test
-import java.util.logging.Logger
 
 class ExampleUnitTest {
 

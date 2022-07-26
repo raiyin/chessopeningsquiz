@@ -1,9 +1,11 @@
-package com.publicmaders.android.chessopeningsquiz
+package com.publicmaders.android.chessopeningsquiz.activities
 
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
+import com.publicmaders.android.chessopeningsquiz.*
+import com.publicmaders.android.chessopeningsquiz.models.Settings
 
 class MainActivity : AppCompatActivity()
 {

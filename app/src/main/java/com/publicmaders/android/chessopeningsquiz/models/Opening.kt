@@ -1,4 +1,4 @@
-package com.publicmaders.android.chessopeningsquiz
+package com.publicmaders.android.chessopeningsquiz.models
 import kotlinx.serialization.Serializable
 import java.util.*
 

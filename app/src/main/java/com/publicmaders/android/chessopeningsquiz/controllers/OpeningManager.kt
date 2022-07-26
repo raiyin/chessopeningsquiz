@@ -1,7 +1,6 @@
-package com.publicmaders.android.chessopeningsquiz
+package com.publicmaders.android.chessopeningsquiz.controllers
 
-import android.util.Log
-import kotlinx.serialization.Serializable
+import com.publicmaders.android.chessopeningsquiz.models.Opening
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.json.jsonPrimitive
@@ -235,7 +234,7 @@ class OpeningManager {
         return openings.size
     }
 
-    operator fun get(index: Int):Opening
+    operator fun get(index: Int): Opening
     {
         return openings[index]
     }

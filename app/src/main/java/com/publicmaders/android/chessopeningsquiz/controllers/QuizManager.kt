@@ -1,5 +1,7 @@
-package com.publicmaders.android.chessopeningsquiz
+package com.publicmaders.android.chessopeningsquiz.controllers
 
+import com.publicmaders.android.chessopeningsquiz.models.Opening
+import com.publicmaders.android.chessopeningsquiz.models.Settings
 import kotlin.random.Random
 
 class QuizManager(openingManager: OpeningManager) {
