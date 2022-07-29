@@ -2,7 +2,10 @@ package com.publicmaders.android.chessopeningsquiz.activities
 
 import android.content.res.ColorStateList
 import android.graphics.Color
+import android.graphics.Point
+import android.graphics.Rect
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.Window
 import android.widget.*
@@ -63,8 +66,7 @@ class QuizActivity : AppCompatActivity(), ChessDelegate, CountDownListener
             setAnswerButtonsEnableState(false)
             bNext.isEnabled = true
             processAnswer(it, rightQuizNumber)
-            pbProgress.progress =
-                (quizManager.currentTaskNumber + 1) * 100 / Settings.TasksCount
+            pbProgress.progress = (quizManager.currentTaskNumber + 1) * 100 / Settings.TasksCount
             checkLastTask()
         }
 
@@ -74,8 +76,7 @@ class QuizActivity : AppCompatActivity(), ChessDelegate, CountDownListener
             setAnswerButtonsEnableState(false)
             bNext.isEnabled = true
             processAnswer(it, rightQuizNumber)
-            pbProgress.progress =
-                (quizManager.currentTaskNumber + 1) * 100 / Settings.TasksCount
+            pbProgress.progress = (quizManager.currentTaskNumber + 1) * 100 / Settings.TasksCount
             checkLastTask()
         }
 
@@ -85,8 +86,7 @@ class QuizActivity : AppCompatActivity(), ChessDelegate, CountDownListener
             setAnswerButtonsEnableState(false)
             bNext.isEnabled = true
             processAnswer(it, rightQuizNumber)
-            pbProgress.progress =
-                (quizManager.currentTaskNumber + 1) * 100 / Settings.TasksCount
+            pbProgress.progress = (quizManager.currentTaskNumber + 1) * 100 / Settings.TasksCount
             checkLastTask()
         }
 
@@ -96,8 +96,7 @@ class QuizActivity : AppCompatActivity(), ChessDelegate, CountDownListener
             setAnswerButtonsEnableState(false)
             bNext.isEnabled = true
             processAnswer(it, rightQuizNumber)
-            pbProgress.progress =
-                (quizManager.currentTaskNumber + 1) * 100 / Settings.TasksCount
+            pbProgress.progress = (quizManager.currentTaskNumber + 1) * 100 / Settings.TasksCount
             checkLastTask()
         }
 
@@ -124,6 +123,14 @@ class QuizActivity : AppCompatActivity(), ChessDelegate, CountDownListener
         countDownAnimation = CountDownAnimation(tvCountDown!!)
         countDownAnimation!!.setCountDownListener(this)
         bNext.text = getString(R.string.start)
+
+
+        chessBoardView.post {
+            val boardCenter = Point((chessBoardView.x + chessBoardView.width / 2).toInt(),
+               (chessBoardView.translationY + chessBoardView.height / 2).toInt())
+            tvCountDown!!.x = (boardCenter.x - tvCountDown!!.width / 2).toFloat()
+            tvCountDown!!.y = (boardCenter.y - tvCountDown!!.height / 2).toFloat()
+        }
     }
 
     private fun drawOpening(pgn: String)
@@ -151,8 +158,8 @@ class QuizActivity : AppCompatActivity(), ChessDelegate, CountDownListener
     {
         if (quizManager.currentTaskNumber == Settings.TasksCount - 1)
         {
-            Toast.makeText(this, getString(R.string.you_have_solved) + quizManager.rightAnswersCount +
-                getString(R.string.problems_out_of) + Settings.TasksCount,
+            Toast.makeText(this,
+                getString(R.string.you_have_solved) + quizManager.rightAnswersCount + getString(R.string.problems_out_of) + Settings.TasksCount,
                 Toast.LENGTH_SHORT).show()
             bNext.text = getString(R.string.start_new)
         }
@@ -191,12 +198,12 @@ class QuizActivity : AppCompatActivity(), ChessDelegate, CountDownListener
 
     private fun setButtonsColor(button: View, rightQuizNumber: Int)
     {
-        buttonList[rightQuizNumber].backgroundTintList = ColorStateList.valueOf(
-            Color.parseColor("#" + Integer.toHexString(R.color.rightAnswer)))
+        buttonList[rightQuizNumber].backgroundTintList =
+            ColorStateList.valueOf(Color.parseColor("#" + Integer.toHexString(R.color.rightAnswer)))
         if ((button.tag as String).toInt() != rightQuizNumber)
         {
-            button.backgroundTintList = ColorStateList.valueOf(
-                Color.parseColor("#" + Integer.toHexString(R.color.wrongAnswer)))
+            button.backgroundTintList =
+                ColorStateList.valueOf(Color.parseColor("#" + Integer.toHexString(R.color.wrongAnswer)))
         }
     }
 

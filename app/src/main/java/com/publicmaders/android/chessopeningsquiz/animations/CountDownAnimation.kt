@@ -19,17 +19,8 @@ class CountDownAnimation(private val tvAnimation: TextView)
 
     init
     {
-        val scaleAnimation: Animation = ScaleAnimation(1.0f,
-            0.0f,
-            1.0f,
-            0.0f,
-            Animation.RELATIVE_TO_SELF,
-            0.5f,
-            Animation.RELATIVE_TO_SELF,
-            0.5f)
         val alphaAnimation: Animation = AlphaAnimation(1.0f, 0.0f)
         val animationSet = AnimationSet(false)
-        animationSet.addAnimation(scaleAnimation)
         animationSet.addAnimation(alphaAnimation)
 
         mAnimation = animationSet
@@ -56,7 +47,6 @@ class CountDownAnimation(private val tvAnimation: TextView)
     fun start()
     {
         mHandler.removeCallbacks(mCountDown)
-        //tvAnimation.text = startCount.toString()
         tvAnimation.visibility = View.VISIBLE
         mCurrentCount = startCount
         mHandler.post(mCountDown)
