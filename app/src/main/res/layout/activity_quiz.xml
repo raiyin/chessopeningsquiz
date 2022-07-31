@@ -6,7 +6,8 @@
     tools:context=".activities.TrainActivity"
     android:gravity="top"
     android:orientation="vertical"
-    android:theme="@style/Theme.ChessOpeningsQuiz">
+    android:theme="@style/Theme.ChessOpeningsQuiz"
+    android:background="?android:attr/colorBackground">
 
     <com.publicmaders.android.chessopeningsquiz.views.TrainView
         android:id="@+id/train_quiz_view"

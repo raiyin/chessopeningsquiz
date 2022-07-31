@@ -3,7 +3,7 @@
     <string name="next_quiz">next</string>
     <string name="startQuizText">Start!</string>
     <string name="next_task_now">Next task now</string>
-    <string name="set_dark_theme">Set dark theme</string>
+    <string name="app_theme">Set dark theme</string>
     <string name="piece_speed">Piece speed</string>
     <string name="quiz_count">Quiz count</string>
 </resources>

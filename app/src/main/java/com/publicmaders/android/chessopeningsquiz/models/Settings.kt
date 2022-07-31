@@ -1,6 +1,9 @@
 package com.publicmaders.android.chessopeningsquiz.models
 
 import android.content.Context
+import android.content.SharedPreferences
+import android.util.Log
+import androidx.appcompat.app.AppCompatDelegate
 import com.publicmaders.android.chessopeningsquiz.utils.Utils
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.decodeFromString
@@ -10,48 +13,83 @@ import java.io.File
 import java.io.FileReader
 import java.io.FileWriter
 
-@Serializable
 object Settings
 {
-    var TasksCount: Int = 1
+    var TasksCount: Int
+        get()
+        {
+            return setData.taskCount
+        }
+        set(value)
+        {
+            setData.taskCount = value
+        }
     const val MinTaskCount: Int = 1
     const val MaxTaskCount: Int = 10
 
-    var PieceSpeed: Int = 20
+    var PieceSpeed: Int
+        get()
+        {
+            return setData.pieceSpeed
+        }
+        set(value)
+        {
+            setData.pieceSpeed = value
+        }
     const val MinSpeed: Int = 5
     const val MaxSpeed: Int = 20
 
-    var SetupDarkTheme: Boolean = true
-    var NextTaskImmediately: Boolean = false
+    var appTheme: Int
+        get()
+        {
+            return setData.appTheme
+        }
+        set(value)
+        {
+            setData.appTheme = value
+        }
+    var NextTaskImmediately: Boolean
+        get()
+        {
+            return setData.immediately
+        }
+        set(value)
+        {
+            setData.immediately = value
+        }
+
+    private var setData: SettingsData =
+        SettingsData(1, 20, AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM, false)
 
     fun load(applicationContext: Context)
     {
         val filename = applicationContext.filesDir.path.toString() + Utils.settingsFileName
+
         val file = File(filename)
         val notExisted = file.createNewFile()
         if (notExisted)
         {
-            val json = Json.encodeToString(Settings)
+            val json = Json.encodeToString(setData)
             val fileWriter = FileWriter(filename)
             fileWriter.write(json)
         }
         else
         {
             val fileReader = FileReader(filename)
-            val jsonSettingsString = fileReader.readText()
-            if (jsonSettingsString == "")
+            var json = fileReader.readText()
+            if (json == "")
             {
-                val json = Json.encodeToString(Settings)
+                json = Json.encodeToString(setData)
                 val fileWriter = FileWriter(filename)
                 fileWriter.write(json)
             }
             else
             {
-                val tempSettings = Json.decodeFromString<Settings>(jsonSettingsString)
-                TasksCount = tempSettings.TasksCount
-                PieceSpeed = tempSettings.PieceSpeed
-                SetupDarkTheme = tempSettings.SetupDarkTheme
-                NextTaskImmediately = tempSettings.NextTaskImmediately
+                val tempSettings = Json.decodeFromString<SettingsData>(json)
+                TasksCount = tempSettings.taskCount
+                PieceSpeed = tempSettings.pieceSpeed
+                appTheme = tempSettings.appTheme
+                NextTaskImmediately = tempSettings.immediately
 
                 if (PieceSpeed < MinSpeed)
                 {
@@ -77,9 +115,11 @@ object Settings
     fun save(applicationContext: Context)
     {
         val filename = applicationContext.filesDir.path.toString() + Utils.settingsFileName
-        val json = Json.encodeToString(Settings)
+        val json = Json.encodeToString(setData)
         val fileWriter = FileWriter(filename)
         fileWriter.write(json)
+        fileWriter.flush()
+        fileWriter.close()
     }
 
     val IterationCount: Int

@@ -7,7 +7,7 @@
     android:gravity="top"
     android:orientation="vertical"
     android:theme="@style/Theme.ChessOpeningsQuiz"
-    android:background="@color/background">
+    android:background="?android:attr/colorBackground">
 
     <com.publicmaders.android.chessopeningsquiz.views.TrainView
         android:id="@+id/train_view"

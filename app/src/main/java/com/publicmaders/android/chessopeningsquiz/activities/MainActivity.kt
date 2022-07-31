@@ -2,9 +2,11 @@ package com.publicmaders.android.chessopeningsquiz.activities
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.Window
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import com.publicmaders.android.chessopeningsquiz.*
 import com.publicmaders.android.chessopeningsquiz.models.Settings
 
@@ -19,7 +21,6 @@ class MainActivity : AppCompatActivity()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         supportActionBar?.hide()
-        Settings.load(applicationContext)
 
         trainingButton = findViewById(R.id.button_training)
         quizButton = findViewById(R.id.button_quiz)
@@ -39,5 +40,8 @@ class MainActivity : AppCompatActivity()
             val intent = Intent(this, SettingsActivity::class.java)
             startActivity(intent)
         }
+
+        Settings.load(applicationContext)
+        AppCompatDelegate.setDefaultNightMode(Settings.appTheme)
     }
 }

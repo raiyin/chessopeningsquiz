@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.ThemeActivity"
+    android:theme="@style/Theme.ChessOpeningsQuiz"
+    android:background="?android:attr/colorBackground">
+<RadioGroup
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="10dp">
+    <RadioButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/default_theme"
+        android:checked="true"
+        android:id="@+id/rbDefaultTheme"/>
+    <RadioButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/light_theme"
+        android:id="@+id/rbLightTheme"/>
+    <RadioButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/dark_theme"
+        android:id="@+id/rbDarkTheme"/>
+</RadioGroup>
+</androidx.constraintlayout.widget.ConstraintLayout>

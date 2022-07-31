@@ -5,10 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:theme="@style/Theme.ChessOpeningsQuiz"
-    tools:context=".activities.MainActivity">
+    tools:context=".activities.MainActivity"
+    android:background="?android:attr/colorBackground">
 
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -32,7 +34,7 @@
             android:layout_marginTop="20dp"
             android:background="@drawable/my_button"
             android:fontFamily="@font/roboto"
-            android:text="@string/game"/>
+            android:text="@string/game" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/button_settings"
@@ -40,9 +42,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:background="@drawable/my_button"
+            android:contentDescription="@string/settings"
             android:fontFamily="@font/roboto"
-            android:text="@string/settings"
-            android:contentDescription="@string/settings"/>
+            android:text="@string/settings" />
 
     </LinearLayout>
 

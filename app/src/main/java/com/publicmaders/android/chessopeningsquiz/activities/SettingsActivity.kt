@@ -1,7 +1,8 @@
 package com.publicmaders.android.chessopeningsquiz.activities
 
+import android.content.Intent
 import android.os.Bundle
-import android.view.Window
+import android.widget.Button
 import android.widget.SeekBar
 import android.widget.SeekBar.OnSeekBarChangeListener
 import android.widget.Toast
@@ -15,7 +16,7 @@ class SettingsActivity : AppCompatActivity()
 {
     private lateinit var tasksCountSeekBar: SeekBar
     private lateinit var pieceSpeedSeekBar: SeekBar
-    private lateinit var darkThemeSwitchCompat: SwitchCompat
+    private lateinit var bTheme: Button
     private lateinit var nextTaskNowSwitchCompat: SwitchCompat
 
     override fun onCreate(savedInstanceState: Bundle?)
@@ -28,7 +29,7 @@ class SettingsActivity : AppCompatActivity()
 
         tasksCountSeekBar = findViewById(R.id.sb_tasksCount)
         pieceSpeedSeekBar = findViewById(R.id.sb_pieceSpeed)
-        darkThemeSwitchCompat = findViewById(R.id.sc_darkTheme)
+        bTheme = findViewById(R.id.bTheme)
         nextTaskNowSwitchCompat = findViewById(R.id.sc_nextMoveNow)
 
         tasksCountSeekBar.min = Settings.MinTaskCount
@@ -39,7 +40,6 @@ class SettingsActivity : AppCompatActivity()
         Settings.load(applicationContext)
         tasksCountSeekBar.progress = Settings.TasksCount
         pieceSpeedSeekBar.progress = Settings.PieceSpeed
-        darkThemeSwitchCompat.isChecked = Settings.SetupDarkTheme
         nextTaskNowSwitchCompat.isChecked = Settings.NextTaskImmediately
 
         tasksCountSeekBar.setOnSeekBarChangeListener(object : OnSeekBarChangeListener
@@ -54,7 +54,7 @@ class SettingsActivity : AppCompatActivity()
 
             override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean)
             {
-                Toast.makeText(applicationContext, progress.toString(), Toast.LENGTH_LONG).show()
+                Toast.makeText(applicationContext, progress.toString(), Toast.LENGTH_SHORT).show()
                 Settings.TasksCount = progress
                 Settings.save(applicationContext)
             }
@@ -72,15 +72,15 @@ class SettingsActivity : AppCompatActivity()
 
             override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean)
             {
-                Toast.makeText(applicationContext, progress.toString(), Toast.LENGTH_LONG).show()
+                Toast.makeText(applicationContext, progress.toString(), Toast.LENGTH_SHORT).show()
                 Settings.PieceSpeed = pieceSpeedSeekBar.progress
                 Settings.save(applicationContext)
             }
         })
 
-        darkThemeSwitchCompat.setOnClickListener {
-            Settings.SetupDarkTheme = darkThemeSwitchCompat.isChecked
-            Settings.save(applicationContext)
+        bTheme.setOnClickListener {
+            val intent = Intent(this, ThemeActivity::class.java)
+            startActivity(intent)
         }
 
         nextTaskNowSwitchCompat.setOnClickListener {

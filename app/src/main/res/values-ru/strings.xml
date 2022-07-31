@@ -10,9 +10,12 @@
     <string name="start_new">Начать снова</string>
     <string name="you_have_solved">Вы решили\u0020</string>
     <string name="problems_out_of">\u0020задач(и) из\u0020</string>
-    <string name="set_dark_theme">Установить тёмную тему</string>
+    <string name="app_theme">Тема</string>
     <string name="piece_speed">Скорость фигур</string>
     <string name="quiz_count">Количество задач</string>
     <string name="next_task_now">Переходить к следующей сразу</string>
     <string name="filter">Фильтр</string>
+    <string name="default_theme">По умолчанию.\nИспользовать тёмную тему, когда на устройстве включена тёмная тема или режим энергосбережения.</string>
+    <string name="light_theme">Светлая</string>
+    <string name="dark_theme">Тёмная</string>
 </resources>

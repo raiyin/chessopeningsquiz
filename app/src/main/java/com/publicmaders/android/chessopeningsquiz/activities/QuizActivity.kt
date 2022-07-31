@@ -129,7 +129,7 @@ class QuizActivity : AppCompatActivity(), ChessDelegate, CountDownListener
             val boardCenter =
                 Point((chessBoardView.translationX + chessBoardView.width / 2).toInt(),
                     (chessBoardView.translationY + chessBoardView.height / 2).toInt())
-            Log.d("MyInfo", boardCenter.toString())
+
             tvCountDown!!.x = (boardCenter.x - tvCountDown!!.width / 2).toFloat()
             tvCountDown!!.y = (boardCenter.y - tvCountDown!!.height / 2).toFloat()
         }
