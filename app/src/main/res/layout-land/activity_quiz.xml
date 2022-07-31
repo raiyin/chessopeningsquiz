@@ -111,23 +111,24 @@
             android:fontFamily="@font/roboto"
             android:text="@string/next_quiz"/>
 
-        <TextView
-            android:id="@+id/tv_CountDown"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:maxLines="1"
-            android:padding="5dp"
-            android:shadowColor="#FF888888"
-            android:shadowDx="0"
-            android:shadowDy="0"
-            android:shadowRadius="8"
-            android:textColor="#ff000000"
-            android:textSize="40sp"
-            android:textStyle="bold"
-            android:layout_gravity="center_horizontal"
-            android:visibility="gone" />
-
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_CountDown"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        android:maxLines="1"
+        android:padding="5dp"
+        android:shadowColor="#FF888888"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowRadius="8"
+        android:textColor="#88000000"
+        android:textSize="60sp"
+        android:textStyle="bold"
+        android:background="#00000000"/>
+
 
 </LinearLayout>
