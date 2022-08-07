@@ -18,4 +18,8 @@
     <string name="default_theme">По умолчанию.\nИспользовать тёмную тему, когда на устройстве включена тёмная тема или режим энергосбережения.</string>
     <string name="light_theme">Светлая</string>
     <string name="dark_theme">Тёмная</string>
+    <string name="dontShowCoord"><Нет></Нет></string>
+    <string name="showCoordInside">Внутри доски</string>
+    <string name="showCoordOutside">Вне доски</string>
+    <string name="board_coord">Координаты доски (A–H, 1–8)</string>
 </resources>

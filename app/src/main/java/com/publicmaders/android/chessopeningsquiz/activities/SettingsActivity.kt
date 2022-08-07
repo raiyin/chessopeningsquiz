@@ -17,6 +17,7 @@ class SettingsActivity : AppCompatActivity()
     private lateinit var tasksCountSeekBar: SeekBar
     private lateinit var pieceSpeedSeekBar: SeekBar
     private lateinit var bTheme: Button
+    private lateinit var bCoords: Button
     private lateinit var nextTaskNowSwitchCompat: SwitchCompat
 
     override fun onCreate(savedInstanceState: Bundle?)
@@ -30,6 +31,7 @@ class SettingsActivity : AppCompatActivity()
         tasksCountSeekBar = findViewById(R.id.sb_tasksCount)
         pieceSpeedSeekBar = findViewById(R.id.sb_pieceSpeed)
         bTheme = findViewById(R.id.bTheme)
+        bCoords = findViewById(R.id.bCoord)
         nextTaskNowSwitchCompat = findViewById(R.id.sc_nextMoveNow)
 
         tasksCountSeekBar.min = Settings.MinTaskCount
@@ -80,6 +82,11 @@ class SettingsActivity : AppCompatActivity()
 
         bTheme.setOnClickListener {
             val intent = Intent(this, ThemeActivity::class.java)
+            startActivity(intent)
+        }
+
+        bCoords.setOnClickListener {
+            val intent = Intent(this, CoordconfigActivity::class.java)
             startActivity(intent)
         }
 

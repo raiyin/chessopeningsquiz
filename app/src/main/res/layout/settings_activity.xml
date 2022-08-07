@@ -70,6 +70,23 @@
                 android:textAlignment="textStart"
                 android:padding="0dp" />
         </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/bCoord"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:background="#00000000"
+                android:fontFamily="@font/roboto"
+                android:text="@string/board_coord"
+                android:textAllCaps="false"
+                android:textAlignment="textStart"
+                android:padding="0dp" />
+        </TableRow>
     </TableLayout>
 
     <androidx.appcompat.widget.SwitchCompat

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.CoordconfigActivity"
+    android:theme="@style/Theme.ChessOpeningsQuiz"
+    android:background="?android:attr/colorBackground">
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="10dp">
+        <RadioButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/dontShowCoord"
+            android:checked="true"
+            android:id="@+id/rbDontShowCoord"/>
+        <RadioButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/showCoordInside"
+            android:id="@+id/rbShowCoordInside"/>
+        <RadioButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/showCoordOutside"
+            android:id="@+id/rbShowCoordOutside"/>
+    </RadioGroup>
+</androidx.constraintlayout.widget.ConstraintLayout>
