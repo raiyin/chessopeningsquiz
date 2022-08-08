@@ -11,11 +11,8 @@ import android.graphics.PathMeasure
 import android.widget.ListView
 import com.publicmaders.android.chessopeningsquiz.controllers.PgnParser
 import com.publicmaders.android.chessopeningsquiz.R
-import com.publicmaders.android.chessopeningsquiz.models.Settings
 import com.publicmaders.android.chessopeningsquiz.delegates.ChessDelegate
-import com.publicmaders.android.chessopeningsquiz.models.BoardState
-import com.publicmaders.android.chessopeningsquiz.models.ChessPiece
-import com.publicmaders.android.chessopeningsquiz.models.Square
+import com.publicmaders.android.chessopeningsquiz.models.*
 
 
 class TrainView(context: Context?, attrs: AttributeSet?) : View(context, attrs)
@@ -27,6 +24,7 @@ class TrainView(context: Context?, attrs: AttributeSet?) : View(context, attrs)
     private val lightColor = Color.parseColor("#b6ac9d")
     private val darkColor = Color.parseColor("#70503a")
     var openingMoves = ""
+    var coordPxSize = 20
 
     private var view: View? = null
 
@@ -81,17 +79,68 @@ class TrainView(context: Context?, attrs: AttributeSet?) : View(context, attrs)
     {
         canvas ?: return
 
-        val chessBoardSide = min(width, height) * scaleFactor
+        val chessBoardSide = min(width,
+            height) * scaleFactor - if (Settings.CoordMode == CoordinatesMode.OUTSIDE) coordPxSize else 0
         cellSide = chessBoardSide / 8f
         originX = (width - chessBoardSide) / 2f
         originY = (height - chessBoardSide) / 2f
 
         drawChessboard(canvas)
-        drawPieces(canvas)
+        drawCoordinates(canvas, Settings.CoordMode)
+        drawPieces(canvas, Settings.CoordMode)
         if (needDrawOpening)
         {
             drawPgn(canvas)
         }
+    }
+
+    private fun drawCoordinates(canvas: Canvas, coordMode: CoordinatesMode)
+    {
+        //calc( 8px + 4 * ((100vw - 320px) / 880));
+        if (coordMode == CoordinatesMode.INSIDE)
+        {
+            paint.textSize = 40f;
+            paint.setTypeface(Typeface.create(Typeface.SANS_SERIF, Typeface.BOLD));
+
+            val vertical = arrayOf('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h')
+            for (index in 0..7)
+            {
+                if (index % 2 == 0)
+                {
+                    paint.color = Color.parseColor("#f0d9b5")
+                }
+                else
+                {
+                    paint.color = Color.parseColor("#946f51")
+                }
+
+                canvas.drawText(vertical[index].toString(),
+                    index * cellSide + coordPxSize / 2,
+                    8 * cellSide - coordPxSize / 2,
+                    paint)
+            }
+
+            for (index in 1..8)
+            {
+                if (index % 2 == 1)
+                {
+                    paint.color = Color.parseColor("#f0d9b5")
+                }
+                else
+                {
+                    paint.color = Color.parseColor("#946f51")
+                }
+                canvas.drawText(index.toString(),
+                    (8 * cellSide - 1.5 * coordPxSize).toFloat(),
+                    ((index - 1) * cellSide + 1.5 * coordPxSize).toFloat(),
+                    paint)
+            }
+        }
+        else if (coordMode == CoordinatesMode.OUTSIDE)
+        {
+            canvas.drawText("1", 0f, 0f, paint)
+        }
+        canvas.drawText("1", 0f, 0f, paint)
     }
 
     fun initMovesPathsFromPgn(pgn: String)
@@ -120,7 +169,7 @@ class TrainView(context: Context?, attrs: AttributeSet?) : View(context, attrs)
             BoardState.movePiece(Square(move[0].row, move[0].col), Square(move[1].row, move[1].col))
 
             // Рокировка.
-            if(move.count()>2)
+            if (move.count() > 2)
             {
                 piece = BoardState.pieceAt(Square(move[2].row, move[2].col)) ?: return
 
@@ -136,7 +185,8 @@ class TrainView(context: Context?, attrs: AttributeSet?) : View(context, attrs)
                     path,
                     listOf(Square(move[2].row, move[2].col), Square(move[3].row, move[3].col))))
 
-                BoardState.movePiece(Square(move[2].row, move[2].col), Square(move[3].row, move[3].col))
+                BoardState.movePiece(Square(move[2].row, move[2].col),
+                    Square(move[3].row, move[3].col))
             }
         }
     }
@@ -183,7 +233,7 @@ class TrainView(context: Context?, attrs: AttributeSet?) : View(context, attrs)
         }
     }
 
-    private fun drawPieces(canvas: Canvas)
+    private fun drawPieces(canvas: Canvas, coordMode: CoordinatesMode)
     {
         for (row in 0 until 8) for (col in 0 until 8) chessDelegate?.pieceAt(Square(row, col))
             ?.let { piece ->

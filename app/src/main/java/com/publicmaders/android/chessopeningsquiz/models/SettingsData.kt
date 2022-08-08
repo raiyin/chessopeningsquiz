@@ -3,7 +3,8 @@ package com.publicmaders.android.chessopeningsquiz.models
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class SettingsData(var taskCount: Int,
-                        var pieceSpeed: Int,
-                        var appTheme: Int,
-                        var immediately: Boolean)
+data class SettingsData(var taskCount: Int = 5,
+                        var pieceSpeed: Int = 20,
+                        var appTheme: Int = 0,
+                        var immediately: Boolean = false,
+                        var coordMode: CoordinatesMode = CoordinatesMode.NO)

@@ -48,6 +48,7 @@ object Settings
         {
             setData.appTheme = value
         }
+
     var NextTaskImmediately: Boolean
         get()
         {
@@ -58,8 +59,18 @@ object Settings
             setData.immediately = value
         }
 
+    var CoordMode: CoordinatesMode
+        get()
+        {
+            return setData.coordMode
+        }
+        set(value)
+        {
+            setData.coordMode = value
+        }
+
     private var setData: SettingsData =
-        SettingsData(1, 20, AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM, false)
+        SettingsData(1, 20, AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM, false, CoordinatesMode.NO)
 
     fun load(applicationContext: Context)
     {
@@ -85,11 +96,21 @@ object Settings
             }
             else
             {
-                val tempSettings = Json.decodeFromString<SettingsData>(json)
+                var tempSettings: SettingsData
+                try
+                {
+                    tempSettings = Json.decodeFromString(json)
+                }
+                catch (e: Exception)
+                {
+                    tempSettings = SettingsData()
+                }
+
                 TasksCount = tempSettings.taskCount
                 PieceSpeed = tempSettings.pieceSpeed
                 appTheme = tempSettings.appTheme
                 NextTaskImmediately = tempSettings.immediately
+                CoordMode = tempSettings.coordMode
 
                 if (PieceSpeed < MinSpeed)
                 {
