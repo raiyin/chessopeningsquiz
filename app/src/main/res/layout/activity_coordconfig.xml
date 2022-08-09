@@ -21,10 +21,10 @@
             android:layout_height="wrap_content"
             android:text="@string/showCoordInside"
             android:id="@+id/rbShowCoordInside"/>
-        <RadioButton
+<!--        <RadioButton
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/showCoordOutside"
-            android:id="@+id/rbShowCoordOutside"/>
+            android:id="@+id/rbShowCoordOutside"/>-->
     </RadioGroup>
 </androidx.constraintlayout.widget.ConstraintLayout>

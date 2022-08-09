@@ -136,11 +136,10 @@ class TrainView(context: Context?, attrs: AttributeSet?) : View(context, attrs)
                     paint)
             }
         }
-        else if (coordMode == CoordinatesMode.OUTSIDE)
-        {
-            canvas.drawText("1", 0f, 0f, paint)
-        }
-        canvas.drawText("1", 0f, 0f, paint)
+        //else if (coordMode == CoordinatesMode.OUTSIDE)
+        //{
+        //    canvas.drawText("1", 0f, 0f, paint)
+        //}
     }
 
     fun initMovesPathsFromPgn(pgn: String)
