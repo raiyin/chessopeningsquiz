@@ -16,7 +16,7 @@
 
     <TableLayout
         android:layout_width="match_parent"
-        android:layout_height="100dp">
+        android:layout_height="120dp">
 
         <TableRow
             android:layout_width="match_parent"
@@ -24,14 +24,16 @@
 
             <LinearLayout
                 android:layout_weight="1"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:padding="20px">
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/button_first_answer"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
+                    android:layout_marginRight="10px"
                     android:layout_weight="1"
-                    android:backgroundTint="@color/answer_button_color"
+                    android:background="@drawable/button_default"
                     android:ellipsize="marquee"
                     android:marqueeRepeatLimit="1"
                     android:scrollHorizontally="true"
@@ -44,13 +46,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_weight="1"
-                    android:backgroundTint="@color/answer_button_color"
+                    android:background="@drawable/button_default"
                     android:ellipsize="marquee"
                     android:marqueeRepeatLimit="1"
                     android:scrollHorizontally="true"
                     android:singleLine="true"
                     android:tag="1"
-                    android:textAllCaps="false" />
+                    android:textAllCaps="false"
+                    android:layout_marginLeft="10px"/>
             </LinearLayout>
 
         </TableRow>
@@ -62,20 +65,23 @@
 
             <LinearLayout
                 android:layout_weight="1"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:paddingLeft="20px"
+                android:paddingRight="20px">
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/button_third_answer"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_weight="1"
-                    android:backgroundTint="@color/answer_button_color"
+                    android:background="@drawable/button_default"
                     android:textAllCaps="false"
                     android:tag="2"
                     android:singleLine="true"
                     android:scrollHorizontally="true"
                     android:ellipsize="marquee"
                     android:marqueeRepeatLimit="1"
+                    android:layout_marginRight="10px"
                     />
 
                 <androidx.appcompat.widget.AppCompatButton
@@ -83,13 +89,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_weight="1"
-                    android:backgroundTint="@color/answer_button_color"
+                    android:background="@drawable/button_default"
                     android:textAllCaps="false"
                     android:tag="3"
                     android:singleLine="true"
                     android:scrollHorizontally="true"
                     android:ellipsize="marquee"
                     android:marqueeRepeatLimit="1"
+                    android:layout_marginLeft="10px"
                     />
             </LinearLayout>
         </TableRow>
@@ -102,7 +109,6 @@
         android:layout_width="match_parent"
         android:layout_height="30dp"
         style="@android:style/Widget.ProgressBar.Horizontal"
-        android:background="@color/answer_button_color"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
         android:progress="0"
@@ -115,7 +121,7 @@
         android:layout_marginTop="30dp"
         android:layout_gravity="center_horizontal"
         android:id="@+id/button_next_quiz"
-        android:background="@drawable/my_button"
+        android:background="@drawable/button_default"
         android:fontFamily="@font/roboto"
         android:text="@string/next_quiz"/>
 

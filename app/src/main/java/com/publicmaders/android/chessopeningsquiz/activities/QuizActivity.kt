@@ -2,6 +2,7 @@ package com.publicmaders.android.chessopeningsquiz.activities
 
 import android.content.res.ColorStateList
 import android.graphics.Color
+import android.graphics.Color.*
 import android.graphics.Point
 import android.graphics.Rect
 import android.os.Bundle
@@ -176,8 +177,7 @@ class QuizActivity : AppCompatActivity(), ChessDelegate, CountDownListener
     private fun resetButtonsColor()
     {
         buttonList.forEach {
-            it.backgroundTintList =
-                ColorStateList.valueOf(resources.getColor(R.color.answer_button_color, theme))
+            it.setBackgroundResource(R.drawable.button_default)
         }
     }
 
@@ -200,12 +200,11 @@ class QuizActivity : AppCompatActivity(), ChessDelegate, CountDownListener
 
     private fun setButtonsColor(button: View, rightQuizNumber: Int)
     {
-        buttonList[rightQuizNumber].backgroundTintList =
-            ColorStateList.valueOf(Color.parseColor("#" + Integer.toHexString(R.color.rightAnswer)))
+        buttonList[rightQuizNumber].setBackgroundResource(R.drawable.button_right)
+
         if ((button.tag as String).toInt() != rightQuizNumber)
         {
-            button.backgroundTintList =
-                ColorStateList.valueOf(Color.parseColor("#" + Integer.toHexString(R.color.wrongAnswer)))
+            button.setBackgroundResource(R.drawable.button_wrong)
         }
     }
 
