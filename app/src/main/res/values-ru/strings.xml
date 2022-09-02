@@ -20,6 +20,5 @@
     <string name="dark_theme">Тёмная</string>
     <string name="dontShowCoord"><Нет></Нет></string>
     <string name="showCoordInside">Внутри доски</string>
-    <string name="showCoordOutside">Вне доски</string>
     <string name="board_coord">Координаты доски (A–H, 1–8)</string>
 </resources>

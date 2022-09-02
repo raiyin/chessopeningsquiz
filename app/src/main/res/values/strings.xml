@@ -23,6 +23,5 @@
     <string name="dark_theme">Dark</string>
     <string name="dontShowCoord">No</string>
     <string name="showCoordInside">Inside the board</string>
-    <string name="showCoordOutside">Outside the board</string>
     <string name="board_coord">Board coordinates (A-H, 1-8)</string>
 </resources>

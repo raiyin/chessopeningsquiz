@@ -39,6 +39,9 @@ class QuizActivity : AppCompatActivity(), ChessDelegate, CountDownListener
     private var countDownAnimation: CountDownAnimation? = null
     private lateinit var buttonList: List<Button>
 
+    // Для того, чтобы изменять поведение на нажатиекнопок ответа
+    private var answerDone: Boolean = false
+
 
     override fun onCreate(savedInstanceState: Bundle?)
     {
@@ -62,48 +65,88 @@ class QuizActivity : AppCompatActivity(), ChessDelegate, CountDownListener
         chessBoardView.requestFocus()
 
         bFirst.setOnClickListener {
-            val rightQuizNumber = quizManager.getCurrentTaskRightIndex()
-            setButtonsColor(it, rightQuizNumber)
-            setAnswerButtonsEnableState(false)
-            bNext.isEnabled = true
-            processAnswer(it, rightQuizNumber)
-            pbProgress.progress = (quizManager.currentTaskNumber + 1) * 100 / Settings.TasksCount
-            checkLastTask()
+            if (!answerDone)
+            {
+                val rightQuizNumber = quizManager.getCurrentTaskRightIndex()
+                setButtonsColor(it, rightQuizNumber)
+                //setAnswerButtonsEnableState(false)
+                bNext.isEnabled = true
+                processAnswer(it, rightQuizNumber)
+                pbProgress.progress =
+                    (quizManager.currentTaskNumber + 1) * 100 / Settings.TasksCount
+                checkLastTask()
+                answerDone = true
+            }
+            else
+            {
+                bFirst.isSelected = true
+            }
         }
 
         bSecond.setOnClickListener {
-            val rightQuizNumber = quizManager.getCurrentTaskRightIndex()
-            setButtonsColor(it, rightQuizNumber)
-            setAnswerButtonsEnableState(false)
-            bNext.isEnabled = true
-            processAnswer(it, rightQuizNumber)
-            pbProgress.progress = (quizManager.currentTaskNumber + 1) * 100 / Settings.TasksCount
-            checkLastTask()
+            if (!answerDone)
+            {
+                val rightQuizNumber = quizManager.getCurrentTaskRightIndex()
+                setButtonsColor(it, rightQuizNumber)
+                //setAnswerButtonsEnableState(false)
+                bNext.isEnabled = true
+                processAnswer(it, rightQuizNumber)
+                pbProgress.progress =
+                    (quizManager.currentTaskNumber + 1) * 100 / Settings.TasksCount
+                checkLastTask()
+                bSecond.isSelected = true
+                answerDone = true
+            }
+            else
+            {
+                bSecond.isSelected = true
+            }
         }
 
         bThird.setOnClickListener {
-            val rightQuizNumber = quizManager.getCurrentTaskRightIndex()
-            setButtonsColor(it, rightQuizNumber)
-            setAnswerButtonsEnableState(false)
-            bNext.isEnabled = true
-            processAnswer(it, rightQuizNumber)
-            pbProgress.progress = (quizManager.currentTaskNumber + 1) * 100 / Settings.TasksCount
-            checkLastTask()
+            if (!answerDone)
+            {
+                val rightQuizNumber = quizManager.getCurrentTaskRightIndex()
+                setButtonsColor(it, rightQuizNumber)
+                //setAnswerButtonsEnableState(false)
+                bNext.isEnabled = true
+                processAnswer(it, rightQuizNumber)
+                pbProgress.progress =
+                    (quizManager.currentTaskNumber + 1) * 100 / Settings.TasksCount
+                checkLastTask()
+                bThird.isSelected = true
+                answerDone = true
+            }
+            else
+            {
+                bThird.isSelected = true
+            }
         }
 
         bFourth.setOnClickListener {
-            val rightQuizNumber = quizManager.getCurrentTaskRightIndex()
-            setButtonsColor(it, rightQuizNumber)
-            setAnswerButtonsEnableState(false)
-            bNext.isEnabled = true
-            processAnswer(it, rightQuizNumber)
-            pbProgress.progress = (quizManager.currentTaskNumber + 1) * 100 / Settings.TasksCount
-            checkLastTask()
+            if (!answerDone)
+            {
+                val rightQuizNumber = quizManager.getCurrentTaskRightIndex()
+                setButtonsColor(it, rightQuizNumber)
+                //setAnswerButtonsEnableState(false)
+                bNext.isEnabled = true
+                processAnswer(it, rightQuizNumber)
+                pbProgress.progress =
+                    (quizManager.currentTaskNumber + 1) * 100 / Settings.TasksCount
+                checkLastTask()
+                bFourth.isSelected = true
+                answerDone = true
+            }
+            else
+            {
+                bFourth.isSelected = true
+            }
         }
 
         bNext.setOnClickListener {
             if (bNext.text == getString(R.string.start_new) || bNext.text == getString(R.string.start))
             {
+                setAnswerButtonsEnableState(false)
                 pbProgress.progress = 0
                 quizManager.resetQuiz()
                 resetButtonsColor()
@@ -116,9 +159,10 @@ class QuizActivity : AppCompatActivity(), ChessDelegate, CountDownListener
                 chessBoardView.needDrawOpening = true
                 drawOpening(quizManager.getCurrentTaskRightPgn())
                 setOptionsButtonsName()
+                setAnswerButtonsEnableState(true)
             }
-            setAnswerButtonsEnableState(true)
             bNext.isEnabled = false
+            answerDone = false
         }
 
         countDownAnimation = CountDownAnimation(tvCountDown!!)
@@ -214,6 +258,7 @@ class QuizActivity : AppCompatActivity(), ChessDelegate, CountDownListener
         chessBoardView.needDrawOpening = true
         drawOpening(quizManager.getCurrentTaskRightPgn())
         setOptionsButtonsName()
+        setAnswerButtonsEnableState(true)
         bNext.text = getString(R.string.next_quiz)
     }
 }

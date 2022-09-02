@@ -35,11 +35,12 @@
                     android:layout_weight="1"
                     android:background="@drawable/button_default"
                     android:ellipsize="marquee"
-                    android:marqueeRepeatLimit="1"
+                    android:marqueeRepeatLimit="-1"
                     android:scrollHorizontally="true"
                     android:singleLine="true"
                     android:tag="0"
-                    android:textAllCaps="false" />
+                    android:textAllCaps="false"
+                    android:padding="5dp"/>
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/button_second_answer"
@@ -48,12 +49,13 @@
                     android:layout_weight="1"
                     android:background="@drawable/button_default"
                     android:ellipsize="marquee"
-                    android:marqueeRepeatLimit="1"
+                    android:marqueeRepeatLimit="-1"
                     android:scrollHorizontally="true"
                     android:singleLine="true"
                     android:tag="1"
                     android:textAllCaps="false"
-                    android:layout_marginLeft="10px"/>
+                    android:layout_marginLeft="10px"
+                    android:padding="5dp"/>
             </LinearLayout>
 
         </TableRow>
@@ -80,8 +82,9 @@
                     android:singleLine="true"
                     android:scrollHorizontally="true"
                     android:ellipsize="marquee"
-                    android:marqueeRepeatLimit="1"
+                    android:marqueeRepeatLimit="-1"
                     android:layout_marginRight="10px"
+                    android:padding="5dp"
                     />
 
                 <androidx.appcompat.widget.AppCompatButton
@@ -95,8 +98,9 @@
                     android:singleLine="true"
                     android:scrollHorizontally="true"
                     android:ellipsize="marquee"
-                    android:marqueeRepeatLimit="1"
+                    android:marqueeRepeatLimit="-1"
                     android:layout_marginLeft="10px"
+                    android:padding="5dp"
                     />
             </LinearLayout>
         </TableRow>
