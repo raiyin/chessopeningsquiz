@@ -178,6 +178,8 @@ class QuizActivity : AppCompatActivity(), ChessDelegate, CountDownListener
             tvCountDown!!.x = (boardCenter.x - tvCountDown!!.width / 2).toFloat()
             tvCountDown!!.y = (boardCenter.y - tvCountDown!!.height / 2).toFloat()
         }
+
+        setAnswerButtonsEnableState(false)
     }
 
     private fun drawOpening(pgn: String)
