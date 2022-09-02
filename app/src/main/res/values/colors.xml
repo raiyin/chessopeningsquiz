@@ -9,4 +9,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="answer_button_color">#747679</color>
     <color name="background">#ddd</color>
+    <color name="font_color">#ff000000</color>
 </resources>

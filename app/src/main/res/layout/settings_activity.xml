@@ -22,6 +22,7 @@
                 android:layout_height="50dp"
                 android:fontFamily="@font/roboto"
                 android:gravity="center_vertical"
+                android:textColor="@color/font_color"
                 android:text="@string/quiz_count"/>
 
             <SeekBar
@@ -42,6 +43,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"
                 android:fontFamily="@font/roboto"
+                android:textColor="@color/font_color"
                 android:gravity="center_vertical"
                 android:text="@string/piece_speed" />
 
@@ -64,6 +66,7 @@
                 android:layout_weight="1"
                 android:layout_height="match_parent"
                 android:background="#00000000"
+                android:textColor="@color/font_color"
                 android:fontFamily="@font/roboto"
                 android:text="@string/app_theme"
                 android:textAllCaps="false"
@@ -82,6 +85,7 @@
                 android:layout_height="match_parent"
                 android:background="#00000000"
                 android:fontFamily="@font/roboto"
+                android:textColor="@color/font_color"
                 android:text="@string/board_coord"
                 android:textAllCaps="false"
                 android:textAlignment="textStart"
@@ -95,6 +99,7 @@
         android:layout_height="50dp"
         android:layout_margin="10dp"
         android:text="@string/next_task_now"
-        android:fontFamily="@font/roboto"/>
+        android:fontFamily="@font/roboto"
+        android:textColor="@color/font_color"/>
 
 </LinearLayout>
