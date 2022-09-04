@@ -96,7 +96,6 @@ class TrainView(context: Context?, attrs: AttributeSet?) : View(context, attrs)
 
     private fun drawCoordinates(canvas: Canvas, coordMode: CoordinatesMode)
     {
-        //calc( 8px + 4 * ((100vw - 320px) / 880));
         if (coordMode == CoordinatesMode.INSIDE)
         {
             paint.textSize = 40f;
@@ -130,7 +129,7 @@ class TrainView(context: Context?, attrs: AttributeSet?) : View(context, attrs)
                 {
                     paint.color = Color.parseColor("#946f51")
                 }
-                canvas.drawText(index.toString(),
+                canvas.drawText((8 - index + 1).toString(),
                     (8 * cellSide - 1.5 * coordPxSize).toFloat(),
                     ((index - 1) * cellSide + 1.5 * coordPxSize).toFloat(),
                     paint)
