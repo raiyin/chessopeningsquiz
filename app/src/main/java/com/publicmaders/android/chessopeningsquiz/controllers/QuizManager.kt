@@ -76,7 +76,7 @@ class QuizManager(openingManager: OpeningManager) {
     }
 
     fun getCurrentTaskOptions(): List<String> {
-        return quiz[currentTaskNumber].keys.map { it.en_name }
+        return quiz[currentTaskNumber].keys.map { it.toString() }
     }
 
     fun getCurrentTaskRightIndex(): Int {
