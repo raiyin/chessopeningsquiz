@@ -93,13 +93,4 @@
         </TableRow>
     </TableLayout>
 
-    <androidx.appcompat.widget.SwitchCompat
-        android:id="@+id/sc_nextMoveNow"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_margin="10dp"
-        android:text="@string/next_task_now"
-        android:fontFamily="@font/roboto"
-        android:textColor="@color/font_color"/>
-
 </LinearLayout>

@@ -1,18 +1,14 @@
 package com.publicmaders.android.chessopeningsquiz.models
 
 import android.content.Context
-import android.content.SharedPreferences
-import android.util.Log
 import androidx.appcompat.app.AppCompatDelegate
 import com.publicmaders.android.chessopeningsquiz.utils.Utils
-import kotlinx.serialization.Serializable
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import java.io.File
 import java.io.FileReader
 import java.io.FileWriter
-import java.util.*
 
 object Settings
 {
@@ -50,16 +46,6 @@ object Settings
             setData.appTheme = value
         }
 
-    var NextTaskImmediately: Boolean
-        get()
-        {
-            return setData.immediately
-        }
-        set(value)
-        {
-            setData.immediately = value
-        }
-
     var CoordMode: CoordinatesMode
         get()
         {
@@ -71,7 +57,7 @@ object Settings
         }
 
     private var setData: SettingsData =
-        SettingsData(1, 20, AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM, false, CoordinatesMode.NO)
+        SettingsData(1, 20, AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM, CoordinatesMode.NO)
 
     fun load(applicationContext: Context)
     {
@@ -110,7 +96,6 @@ object Settings
                 TasksCount = tempSettings.taskCount
                 PieceSpeed = tempSettings.pieceSpeed
                 appTheme = tempSettings.appTheme
-                NextTaskImmediately = tempSettings.immediately
                 CoordMode = tempSettings.coordMode
 
                 if (PieceSpeed < MinSpeed)

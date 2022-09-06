@@ -6,5 +6,4 @@ import kotlinx.serialization.Serializable
 data class SettingsData(var taskCount: Int = 5,
                         var pieceSpeed: Int = 20,
                         var appTheme: Int = 0,
-                        var immediately: Boolean = false,
                         var coordMode: CoordinatesMode = CoordinatesMode.NO)

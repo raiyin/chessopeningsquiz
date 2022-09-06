@@ -24,6 +24,8 @@ import com.publicmaders.android.chessopeningsquiz.models.ChessPiece
 import com.publicmaders.android.chessopeningsquiz.models.Settings
 import com.publicmaders.android.chessopeningsquiz.models.Square
 import com.publicmaders.android.chessopeningsquiz.views.TrainView
+import java.util.*
+import kotlin.concurrent.schedule
 
 
 class QuizActivity : AppCompatActivity(), ChessDelegate, CountDownListener
@@ -41,10 +43,10 @@ class QuizActivity : AppCompatActivity(), ChessDelegate, CountDownListener
     private var countDownAnimation: CountDownAnimation? = null
     private lateinit var buttonList: List<Button>
     private lateinit var tlControls: TableLayout
+    private lateinit var timer: Timer
 
     // Для того, чтобы изменять поведение на нажатиекнопок ответа
     private var answerDone: Boolean = false
-
 
     override fun onCreate(savedInstanceState: Bundle?)
     {
@@ -73,7 +75,6 @@ class QuizActivity : AppCompatActivity(), ChessDelegate, CountDownListener
             {
                 val rightQuizNumber = quizManager.getCurrentTaskRightIndex()
                 setButtonsColor(it, rightQuizNumber)
-                //setAnswerButtonsEnableState(false)
                 bNext.isEnabled = true
                 processAnswer(it, rightQuizNumber)
                 pbProgress.progress =
@@ -92,7 +93,6 @@ class QuizActivity : AppCompatActivity(), ChessDelegate, CountDownListener
             {
                 val rightQuizNumber = quizManager.getCurrentTaskRightIndex()
                 setButtonsColor(it, rightQuizNumber)
-                //setAnswerButtonsEnableState(false)
                 bNext.isEnabled = true
                 processAnswer(it, rightQuizNumber)
                 pbProgress.progress =
@@ -112,7 +112,6 @@ class QuizActivity : AppCompatActivity(), ChessDelegate, CountDownListener
             {
                 val rightQuizNumber = quizManager.getCurrentTaskRightIndex()
                 setButtonsColor(it, rightQuizNumber)
-                //setAnswerButtonsEnableState(false)
                 bNext.isEnabled = true
                 processAnswer(it, rightQuizNumber)
                 pbProgress.progress =
@@ -132,7 +131,6 @@ class QuizActivity : AppCompatActivity(), ChessDelegate, CountDownListener
             {
                 val rightQuizNumber = quizManager.getCurrentTaskRightIndex()
                 setButtonsColor(it, rightQuizNumber)
-                //setAnswerButtonsEnableState(false)
                 bNext.isEnabled = true
                 processAnswer(it, rightQuizNumber)
                 pbProgress.progress =
