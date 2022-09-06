@@ -8,6 +8,8 @@ import android.graphics.Rect
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.view.View.INVISIBLE
+import android.view.View.VISIBLE
 import android.view.Window
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
@@ -38,6 +40,7 @@ class QuizActivity : AppCompatActivity(), ChessDelegate, CountDownListener
     private var tvCountDown: TextView? = null
     private var countDownAnimation: CountDownAnimation? = null
     private lateinit var buttonList: List<Button>
+    private lateinit var tlControls: TableLayout
 
     // Для того, чтобы изменять поведение на нажатиекнопок ответа
     private var answerDone: Boolean = false
@@ -57,6 +60,7 @@ class QuizActivity : AppCompatActivity(), ChessDelegate, CountDownListener
         tvCountDown = findViewById<View>(R.id.tv_CountDown) as TextView
         bNext = findViewById<View>(R.id.button_next_quiz) as Button
         pbProgress = findViewById(R.id.pbProgress)
+        tlControls = findViewById(R.id.tlControls)
         quizManager = QuizManager(openingManager)
         buttonList = mutableListOf(bFirst, bSecond, bThird, bFourth)
 
@@ -144,31 +148,12 @@ class QuizActivity : AppCompatActivity(), ChessDelegate, CountDownListener
         }
 
         bNext.setOnClickListener {
-            if (bNext.text == getString(R.string.start_new) || bNext.text == getString(R.string.start))
-            {
-                setAnswerButtonsEnableState(false)
-                pbProgress.progress = 0
-                quizManager.resetQuiz()
-                resetButtonsColor()
-                countDownAnimation!!.start()
-            }
-            else
-            {
-                quizManager.incrementCurrentTaskNumber()
-                resetButtonsColor()
-                chessBoardView.needDrawOpening = true
-                drawOpening(quizManager.getCurrentTaskRightPgn())
-                setOptionsButtonsName()
-                setAnswerButtonsEnableState(true)
-            }
-            bNext.isEnabled = false
-            answerDone = false
+            bNextHandler()
         }
 
         countDownAnimation = CountDownAnimation(tvCountDown!!)
         countDownAnimation!!.setCountDownListener(this)
         bNext.text = getString(R.string.start)
-
 
         chessBoardView.post {
             val boardCenter =
@@ -180,6 +165,38 @@ class QuizActivity : AppCompatActivity(), ChessDelegate, CountDownListener
         }
 
         setAnswerButtonsEnableState(false)
+        setPrestartControlsVisible(false)
+        bNextHandler()
+    }
+
+    private fun bNextHandler()
+    {
+        if (bNext.text == getString(R.string.start_new) || bNext.text == getString(R.string.start))
+        {
+            setAnswerButtonsEnableState(false)
+            pbProgress.progress = 0
+            quizManager.resetQuiz()
+            resetButtonsColor()
+            countDownAnimation!!.start()
+        }
+        else
+        {
+            quizManager.incrementCurrentTaskNumber()
+            resetButtonsColor()
+            chessBoardView.needDrawOpening = true
+            drawOpening(quizManager.getCurrentTaskRightPgn())
+            setOptionsButtonsName()
+            setAnswerButtonsEnableState(true)
+        }
+        bNext.isEnabled = false
+        answerDone = false
+    }
+
+    private fun setPrestartControlsVisible(isVisible: Boolean)
+    {
+        bNext.visibility = if (isVisible) VISIBLE; else INVISIBLE;
+        pbProgress.visibility = if (isVisible) VISIBLE; else INVISIBLE;
+        tlControls.visibility = if (isVisible) VISIBLE; else INVISIBLE;
     }
 
     private fun drawOpening(pgn: String)
@@ -262,5 +279,6 @@ class QuizActivity : AppCompatActivity(), ChessDelegate, CountDownListener
         setOptionsButtonsName()
         setAnswerButtonsEnableState(true)
         bNext.text = getString(R.string.next_quiz)
+        setPrestartControlsVisible(true)
     }
 }
