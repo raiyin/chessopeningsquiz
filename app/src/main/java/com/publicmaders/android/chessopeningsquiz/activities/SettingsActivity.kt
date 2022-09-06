@@ -48,6 +48,7 @@ class SettingsActivity : AppCompatActivity()
         {
             override fun onStopTrackingTouch(seekBar: SeekBar)
             {
+                Toast.makeText(applicationContext, tasksCountSeekBar.progress.toString(), Toast.LENGTH_SHORT).show()
             }
 
             override fun onStartTrackingTouch(seekBar: SeekBar)
@@ -56,7 +57,6 @@ class SettingsActivity : AppCompatActivity()
 
             override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean)
             {
-                Toast.makeText(applicationContext, progress.toString(), Toast.LENGTH_SHORT).show()
                 Settings.TasksCount = progress
                 Settings.save(applicationContext)
             }
@@ -66,6 +66,7 @@ class SettingsActivity : AppCompatActivity()
         {
             override fun onStopTrackingTouch(seekBar: SeekBar)
             {
+                Toast.makeText(applicationContext, pieceSpeedSeekBar.progress.toString(), Toast.LENGTH_SHORT).show()
             }
 
             override fun onStartTrackingTouch(seekBar: SeekBar)
@@ -74,7 +75,6 @@ class SettingsActivity : AppCompatActivity()
 
             override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean)
             {
-                Toast.makeText(applicationContext, progress.toString(), Toast.LENGTH_SHORT).show()
                 Settings.PieceSpeed = pieceSpeedSeekBar.progress
                 Settings.save(applicationContext)
             }
