@@ -1,19 +1,15 @@
 package com.publicmaders.android.chessopeningsquiz.activities
 
+import com.publicmaders.android.chessopeningsquiz.controllers.ListItemAdapter
 import android.graphics.Rect
 import android.os.Build
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.util.TypedValue
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewTreeObserver.OnGlobalLayoutListener
-import android.widget.ArrayAdapter
-import android.widget.EditText
-import android.widget.ListView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.textfield.TextInputLayout
 import com.publicmaders.android.chessopeningsquiz.*
@@ -25,7 +21,7 @@ import com.publicmaders.android.chessopeningsquiz.models.ChessPiece
 import com.publicmaders.android.chessopeningsquiz.models.Opening
 import com.publicmaders.android.chessopeningsquiz.models.Square
 import com.publicmaders.android.chessopeningsquiz.views.TrainView
-import android.util.AttributeSet
+import android.widget.*
 
 
 class TrainActivity : AppCompatActivity(), ChessDelegate, OnKeyboardVisibilityListener
@@ -54,14 +50,19 @@ class TrainActivity : AppCompatActivity(), ChessDelegate, OnKeyboardVisibilityLi
         trainView.requestFocus()
         parent = trainView.parent as ViewGroup
 
-        val adapter =
-            ArrayAdapter(this, android.R.layout.simple_list_item_1, openingManager.openings)
+        //val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, openingManager.openings)
+        val adapter = ListItemAdapter(this, openingManager.openings)
         lvOpening.adapter = adapter
         lvOpening.setOnItemClickListener { _, _, position, _ ->
-            if (trainView.animStepIndex == 0 && trainView.moveIndex == 0)
+            val selectedOpening: Opening = lvOpening.getItemAtPosition(position) as Opening
+            if (selectedOpening.IsLocked())
+            {
+                Toast.makeText(this, "Необходимо приобрести полную версию программы", Toast.LENGTH_SHORT).show()
+            }
+            else if (trainView.animStepIndex == 0 && trainView.moveIndex == 0)
             {
                 trainView.needDrawOpening = true
-                drawOpening((lvOpening.getItemAtPosition(position) as Opening).en_pgn)
+                drawOpening(selectedOpening.en_pgn)
             }
         }
 
@@ -69,7 +70,7 @@ class TrainActivity : AppCompatActivity(), ChessDelegate, OnKeyboardVisibilityLi
         {
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int)
             {
-                adapter.filter.filter(s.toString())
+                adapter.filter?.filter(s.toString())
             }
 
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int)

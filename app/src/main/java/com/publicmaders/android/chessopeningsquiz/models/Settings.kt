@@ -56,8 +56,18 @@ object Settings
             setData.coordMode = value
         }
 
+    var Paid: Boolean
+        get()
+        {
+            return setData.paid
+        }
+        set(value)
+        {
+            setData.paid = value
+        }
+
     private var setData: SettingsData =
-        SettingsData(1, 20, AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM, CoordinatesMode.NO)
+        SettingsData(1, 20, AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM, CoordinatesMode.NO, false)
 
     fun load(applicationContext: Context)
     {
@@ -97,6 +107,7 @@ object Settings
                 PieceSpeed = tempSettings.pieceSpeed
                 appTheme = tempSettings.appTheme
                 CoordMode = tempSettings.coordMode
+                Paid = tempSettings.paid
 
                 if (PieceSpeed < MinSpeed)
                 {

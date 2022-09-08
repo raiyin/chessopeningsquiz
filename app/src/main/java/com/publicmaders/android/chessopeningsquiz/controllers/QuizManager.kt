@@ -28,7 +28,7 @@ class QuizManager(openingManager: OpeningManager) {
 
             for (optionIndex in 0 until 4) {
                 var openingIndex: Int = random.nextInt(0, openingManager.count())
-                while (indexList.contains(openingIndex)) {
+                while (indexList.contains(openingIndex) || this.openingManager[openingIndex].IsLocked()) {
                     openingIndex = random.nextInt(0, openingManager.count())
                 }
                 indexList.add(openingIndex)
@@ -51,7 +51,7 @@ class QuizManager(openingManager: OpeningManager) {
             for (optionIndex in 0 until 4) {
                 val indexList: MutableList<Int> = mutableListOf()
                 var openingIndex: Int = random.nextInt(0, openingManager.count())
-                while (indexList.contains(openingIndex)) {
+                while (indexList.contains(openingIndex) || this.openingManager[openingIndex].IsLocked()) {
                     openingIndex = random.nextInt(0, openingManager.count())
                 }
                 indexList.add(openingIndex)

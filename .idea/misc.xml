@@ -29,10 +29,13 @@
         <entry key="..\:/Users/Lomonosov/android/Chessopeningsquiz/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.140625" />
         <entry key="..\:/Users/Lomonosov/android/Chessopeningsquiz/app/src/main/res/xml/root_preferences.xml" value="0.33" />
         <entry key="..\:/projects/chessopeningsquiz/app/src/main/res/drawable-v24/my_button.xml" value="0.15" />
+        <entry key="..\:/projects/chessopeningsquiz/app/src/main/res/drawable/border.xml" value="0.193" />
         <entry key="..\:/projects/chessopeningsquiz/app/src/main/res/drawable/button_right.xml" value="0.1735" />
         <entry key="..\:/projects/chessopeningsquiz/app/src/main/res/drawable/button_wrong.xml" value="0.1735" />
         <entry key="..\:/projects/chessopeningsquiz/app/src/main/res/drawable/ic_chess_bb.xml" value="0.1" />
         <entry key="..\:/projects/chessopeningsquiz/app/src/main/res/drawable/ic_chess_bk.xml" value="0.112" />
+        <entry key="..\:/projects/chessopeningsquiz/app/src/main/res/drawable/ic_iconlock.xml" value="0.172" />
+        <entry key="..\:/projects/chessopeningsquiz/app/src/main/res/drawable/list_selector.xml" value="0.13" />
         <entry key="..\:/projects/chessopeningsquiz/app/src/main/res/drawable/my_button.xml" value="0.15" />
         <entry key="..\:/projects/chessopeningsquiz/app/src/main/res/drawable/textview_border.xml" value="0.157" />
         <entry key="..\:/projects/chessopeningsquiz/app/src/main/res/layout-land/activity_quiz.xml" value="0.19112627986348124" />
@@ -47,10 +50,11 @@
         <entry key="..\:/projects/chessopeningsquiz/app/src/main/res/layout/activity_main.xml" value="0.1675929884566054" />
         <entry key="..\:/projects/chessopeningsquiz/app/src/main/res/layout/activity_quiz.xml" value="0.22" />
         <entry key="..\:/projects/chessopeningsquiz/app/src/main/res/layout/activity_theme.xml" value="0.18" />
-        <entry key="..\:/projects/chessopeningsquiz/app/src/main/res/layout/activity_train.xml" value="0.15537059056678557" />
+        <entry key="..\:/projects/chessopeningsquiz/app/src/main/res/layout/activity_train.xml" value="0.25" />
         <entry key="..\:/projects/chessopeningsquiz/app/src/main/res/layout/content_boardcoord.xml" value="0.1" />
         <entry key="..\:/projects/chessopeningsquiz/app/src/main/res/layout/fragment_first.xml" value="0.1" />
         <entry key="..\:/projects/chessopeningsquiz/app/src/main/res/layout/fragment_second.xml" value="0.1" />
+        <entry key="..\:/projects/chessopeningsquiz/app/src/main/res/layout/list_item.xml" value="0.2" />
         <entry key="..\:/projects/chessopeningsquiz/app/src/main/res/layout/settings_activity.xml" value="0.20416666666666666" />
         <entry key="..\:/projects/chessopeningsquiz/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.156" />
       </map>
